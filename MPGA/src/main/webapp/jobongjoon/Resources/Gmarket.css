@@ -1,0 +1,615 @@
+button{
+    background-color: transparent;
+    cursor: pointer;
+}    
+
+@font-face{
+	font-family:"Gmarket";
+	src: url("Resources/font/GmarketSansTTFBold.ttf") format("truetype");
+}
+
+*{	
+	margin : 0; padding: 0; /*초기화*/}
+
+a{
+	text-decoration: none;
+}
+
+
+body{
+	width :  1260px;	height :2120px;  /*총 크기*/
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
+
+/*탑-------------------------------------------------------------*/
+#top{width :  1260px; 	height : 173px; /* 배너부분 크기*/}
+
+#top_inner{width :  1200px; 	height : 173px; margin-left: 30px;}
+
+#search_line{width :  1200px; height : 113px;}
+
+#head_content{width :  1200px; height : 60px;}
+
+#title_logo{
+	position: relative;
+	left : -50px;}
+
+#search{
+	width: 529px;
+	height:48px;
+	border-radius : 24px;
+	border: 2px solid #067dfd;
+	margin-top : 40px;
+	box-sizing: border-box;
+	position: relative;
+	display:inline-block;
+	vertical-align: top;
+	left: -40px;
+	background-color: transparent;
+	}
+
+#search_content{
+	position : relative;
+	left : 20px;
+	top: 7px;
+	width: 480px;
+	height:29px;
+	border: 0px;
+	font-size: 16px;
+	outline : 0;
+}
+
+#search_icon{
+	width:32px;
+	height:32px;
+	border : 0;
+	position:relative;
+	left:-100px;
+	top:-38px;
+	background-color: transparent;
+}	
+	
+#title_spam{
+	position: relative;
+	top:-15px;
+	left: -20px;
+}	
+
+#top_icons{
+	height : 80px;
+	width: 210px;
+	position: relative;
+	left: px;
+	top: -10px;
+}
+
+
+#category_all_button{
+position: relative;
+width: 224px;
+height: 60px;
+padding: 17px 0 20px;
+font-size:18px;
+font-weight: bold;
+color: #fff;
+text-align: left;
+background-color: #10af29;
+box-sizing: border-box;
+border-color: white;
+}
+
+#category_all_button:before{
+	display: inline-block;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/common/sprite__common.png) no-repeat;
+    background-size: 400px auto;
+    text-indent: -9999px;
+    content: '';
+    width: 26px;
+    height: 21px;
+    margin: -4px 11px 0 23px;
+    background-position: -252px -40px;
+    vertical-align: middle;
+}
+
+.box_service-all{
+    position : relative;
+    left: 224px;
+    top: -55px;
+    
+}
+.list_service-all{
+    margin-top: 12px;
+}
+.list-item{
+    display: inline-block;
+    margin-left: 25px;
+    vertical-align: top;
+    
+   }
+.link_service{
+	color:black;
+	font-weight: bold;	
+	display: block;
+	font-family:"Gmarket";
+    font-size: 16pt;    
+    letter-spacing: -1px;
+    line-height: 32px;
+}
+
+.box_usermenu {
+    position: relative;
+    top: -105px;
+    left: 890px;
+}
+
+.list_usermenu {
+    margin-top: 12px;
+}
+
+.link_usermenu{
+
+    display: inline-block;
+    padding: 0;
+    font-size: 14px;
+    color: #777;
+    letter-spacing: -1px;
+    line-height: 32px;
+}
+
+
+/*미드-------------------------------------------------------------*/
+
+#mid{
+	width :  1260px; 	height : 2120px; /* 배너부분 크기*/
+}
+
+#mid_top{
+	width :  1260px; 	height : 400px;
+
+}
+
+#main_inner{	
+    padding-left: 31.55px;
+    box-sizing: border-box;
+	
+}
+
+.box_category{
+    width: 223px;
+    height: 400px;
+	
+}
+
+.box_category:before{
+	content: '';
+    top: 0;
+    z-index: 10;
+    left: -25px;
+    width: 25px;
+    height: 400px;
+}
+.list_category-all{
+	
+    position: relative;
+    width: 222.5px;
+    z-index: 100;
+	
+}
+
+.list-item_1depth {
+    position: relative;
+    display: block;
+    height: 44px;
+    font-size: 15px;
+    letter-spacing: -1px;
+    color: #fff;
+    background-color: #0abb26;
+    text-indent: 24px;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.promotion_banner{
+	position: relative;	
+	top: -400px;	
+	left:220px;
+}
+
+.main_best_inner{
+	position: relative;
+    width: 1232px;
+    margin: 0 auto;
+	
+}
+
+.text_title{
+	font-size: 24px;
+    color: #222;
+    letter-spacing: -1px;
+    padding-left: 16px;
+    
+}
+
+.best_item_box{	
+    position: relative;
+    margin-top: 30px;
+}
+
+.slide_active{
+    width: 1245px;
+    height: 316px;
+	
+}
+
+.list_item{	
+    overflow: hidden;
+    text-align: center;
+    font-size: 0;
+}
+
+
+.list-item02{
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align: top;
+    
+   }
+
+.text_rank{
+	position : relative;
+	display : block;
+    left: -5px;
+    top : 10pt;
+    z-index: 30;
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    background-color: #00c01e;
+    font-family: Gmarket Sans,'Gmarket Sans',sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 48px;
+    text-align: center;
+    transform: translateZ(0);
+}
+
+.box_image{
+    overflow: hidden;
+    position: relative;
+    left: -10px;
+    top: -40px;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border:2px solid #8080805e;
+}
+
+.box_information{    
+	position: relative;
+    width: 200px;
+    top: -25px;
+}
+
+.text_name{
+	overflow: hidden;
+    height: 38px;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+.box_price{
+	margin-top: 14px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+ }
+.text_price{
+	font-size: 19px;
+}
+.text_unit{
+	margin-left: 1px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.main-market{
+	padding-top: 64px;
+    overflow: hidden;
+    min-width: 1200px;
+}
+.main_market_inner{	
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+.box_expressshop{	
+    position: relative;
+    float: left;
+    width: 574px;
+}
+.text_title{	
+    font-size: 24px;
+    color: #222;
+    letter-spacing: -1px;
+}
+.main_box_item{	
+    overflow: hidden;
+    position: relative;
+    margin-top: 18px;
+    border-radius: 10px;
+}
+.swiper-active{	
+    height: 285px;
+    width: 574px;
+}
+.sprite_homemain{
+    overflow: hidden;
+    display: inline-block;
+    background: url("img/sprite__homemain.svg") no-repeat;
+    line-height: 999px;
+    vertical-align: top;
+    
+}
+.text_banner_title{	
+	position:relative;
+	top:65px;
+	left:80px;
+    overflow: hidden;
+    width: 230px;
+    margin-top: 16px;
+    font-family: Gmarket Sans,'Gmarket Sans',sans-serif;
+    font-size: 30px;
+    color: #fff;
+    letter-spacing: -2px;
+    line-height: 39px;
+    text-align: left;
+	
+}
+
+.text_banner-sub-title{	
+	position: relative;
+	top:65pt;	
+	left:80px;
+    overflow: hidden;
+    margin-top: 11px;
+    margin-left: 2px;
+    font-size: 16px;
+    color: #fff;
+    opacity: 0.6;
+    letter-spacing: -1px;
+}
+
+.button_prev{
+	overflow: hidden;
+    position: absolute;
+    top: 100px;
+    width: 66px;
+    height: auto;
+    bottom: 0;
+    z-index: 10;
+    margin: 0;
+    line-height: 999px;
+	border : 0;
+}
+
+.button_next{
+	border:0;
+	overflow: hidden;
+    position: absolute;
+    top: 100px;
+    left:515px;
+    width: 66px;
+    height: auto;
+    bottom: 0;
+    z-index: 10;
+    margin: 0;
+    line-height: 999px;
+}
+
+.text_tag{	
+    height: 18px;
+    padding: 0 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 17px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.link_more-bottom{
+    display: block;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 52px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 27px;
+    background-color: #fafafa;
+    color: #444;
+    line-height: 51px;
+    text-align: center;	
+    
+}
+.text-service{	
+    display: block;
+    overflow: hidden;
+    height: 20px;
+    margin-top: 9px;
+    font-size: 14px;
+    color: #222;
+    text-align: center;
+}
+
+
+/*바텀-------------------------------------------------------------*/
+
+#bot{
+	width :  1260px; 	height : 454.53px;
+    background-color: #fafafa;
+    border-top: 1px solid #e2e2e2;
+	 /* 배너부분 크기*/
+}
+.list-item_footer-utility{
+	position:relative;
+	top:15px;
+    padding-left: 25px;
+    display: inline-block;
+    position: relative;
+    padding-right: 25px;
+}
+
+.link_footer-utility{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #5e636d;
+	
+}
+
+#box_bot{	
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+.box_sellermenu{
+	position: absolute;
+    right: 0;
+    top: 9px;
+}
+
+#button_sellermenu{
+    height: 34px;
+    border: solid 1px #ececec;
+    background-color: #ffffff;
+    border-radius: 3px;
+    line-height: 14px;
+    font-size: 14px;
+    color: #5e636d;
+    letter-spacing: -1px;
+}
+
+.box_company-info{
+	overflow: hidden;
+    padding: 13px 0 19px;
+    border-top: 1px solid #ececec;	
+}
+
+.box_company-detail-info{
+    float: left;
+    width: 620px;
+	
+}
+
+.text_company-title{	
+    position: relative;
+    display: inline-block;
+    padding-right: 19px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #5e636d;
+}
+
+.text_content{
+    margin-top: 5px;
+    font-size: 13px;
+    line-height: 23px;
+    letter-spacing: -0.5px;
+    color: #757c8a;
+}
+.box_cscenter-info{	
+    float: left;
+    width: 580px;	
+}
+
+.box_legal-info{
+	
+    padding: 9px 0 18px;
+    border-top: 1px solid #ececec;
+}
+.list_legal-info{
+	
+    overflow: hidden;
+    width: 750px;
+    font-size: 0;
+}
+
+.list-item_legal-info{
+	
+    display: inline-block;
+    margin-right: 30px;
+    padding-top: 7px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #94989f;
+    letter-spacing: -0.5px;
+    vertical-align: top;
+}
+.link_legal-info{
+	
+    font-size: 13px;
+    line-height: 20px;
+    color: #94989f;
+    letter-spacing: -0.5px;
+	
+}
+.button_legal-info{
+	
+    font-size: 13px;
+    line-height: 20px;
+    color: #94989f;
+    letter-spacing: -0.5px;
+    border : 0pt;
+}
+.box_footer-notice{
+	
+    padding: 16px 0 85px;
+    border-top: 1px solid #ececec;
+}
+.text_notice{
+	
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #94989f;
+}
+.button_notice{
+    margin-left: 8px;
+    margin-top: -1px;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #94989f;
+    border: 0;
+    text-decoration: underline;
+    vertical-align: top;
+	
+}
+
+.text_emphasis{
+font-weight: normal;
+    color: #5e636d;
+	
+}
+
+.text_copyright{
+    font-size: 12px;
+    line-height: 20px;
+    color: #94989f;
+	
+	
+}

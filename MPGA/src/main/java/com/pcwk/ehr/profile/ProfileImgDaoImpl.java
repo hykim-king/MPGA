@@ -35,7 +35,6 @@ public class ProfileImgDaoImpl implements ProfileImgDao {
 	public ProfileImgDaoImpl() {
 	}
 
-	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);

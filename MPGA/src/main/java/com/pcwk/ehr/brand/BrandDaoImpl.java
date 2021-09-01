@@ -36,13 +36,13 @@ public class BrandDaoImpl implements brandDao {
 	public BrandDaoImpl() {
 	}
 	
-	@Override
+	
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	@Override
+	
 	@SuppressWarnings({ "deprecation" })
 	public List<BrandVO> getAll() {
 		List<BrandVO> list = new ArrayList<BrandVO>();
@@ -75,7 +75,6 @@ public class BrandDaoImpl implements brandDao {
 	 * @throws SQLException
 	 */
 	
-	@Override
 	@SuppressWarnings("deprecation")
 	public int getCount() throws ClassNotFoundException, SQLException {
 		int cnt = 0;
@@ -104,8 +103,7 @@ public class BrandDaoImpl implements brandDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	
-	@Override
+
 	@SuppressWarnings("deprecation")
 	public BrandVO doSelectOne(BrandVO inVO) throws ClassNotFoundException, SQLException {
 		BrandVO outVO = null;
@@ -144,7 +142,6 @@ public class BrandDaoImpl implements brandDao {
 	 * @throws SQLException
 	 */
 	
-	@Override
 	public int doInsert(final BrandVO brand) throws ClassNotFoundException, SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
@@ -177,7 +174,6 @@ public class BrandDaoImpl implements brandDao {
 	 * @throws SQLException
 	 */
 	
-	@Override
 	public int doDelete(BrandVO brand) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
@@ -203,7 +199,6 @@ public class BrandDaoImpl implements brandDao {
 	 * @throws SQLException
 	 */
 	
-	@Override
 	public int doUpdate(BrandVO brand) throws SQLException {
         int flag = 0;
         
@@ -237,7 +232,6 @@ public class BrandDaoImpl implements brandDao {
 	}
 	
 	
-	@Override
 	public List<?> doRetrieve(BrandVO brand) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;

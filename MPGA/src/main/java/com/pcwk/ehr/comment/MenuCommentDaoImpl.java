@@ -2,11 +2,9 @@ package com.pcwk.ehr.comment;
 
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
-
 public class MenuCommentDaoImpl {
 
-	final Logger LOG = Logger.getLogger(getClass());
+	final Logger LOG = Logger.
 	
 	public int doInsert(final CommentVO comment)throws SQLException {
 	int flag = 0;
@@ -26,8 +24,7 @@ public class MenuCommentDaoImpl {
 					  comment.getRegDt()
 					};
 	LOG.debug("args=" + args);
-	
-	
+
 	return flag;
 	
 	}

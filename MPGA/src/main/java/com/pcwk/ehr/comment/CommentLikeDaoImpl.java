@@ -41,7 +41,7 @@ public class CommentLikeDaoImpl {
 		CommentLikeVO outVO = null;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("  ");
+		sb.append("SELECT COUNT(*)cnt FROM comment_like");
 		return outVO;
 	}
 	

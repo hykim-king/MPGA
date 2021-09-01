@@ -2,10 +2,10 @@ package com.pcwk.ehr.profile;
 
 public class ProfileImgVO {
 
-	private int seq;
-	private String proImgPath;
-	private String modDt;
-	private int regNum;
+	private int seq;			//프로필 순번
+	private String proImgPath;	//프로필이미지경로
+	private String modDt;		//수정날짜
+	private int regNum;			//등록자
 	
 	public ProfileImgVO() {}
 

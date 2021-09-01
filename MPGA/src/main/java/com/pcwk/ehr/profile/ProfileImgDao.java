@@ -22,6 +22,6 @@ public interface ProfileImgDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	int doInsert(ProfileImgVO img) throws SQLException;
+	int doMerge(ProfileImgVO img) throws SQLException;
 
 }

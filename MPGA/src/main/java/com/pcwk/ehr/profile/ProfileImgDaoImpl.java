@@ -44,7 +44,7 @@ public class ProfileImgDaoImpl implements ProfileImgDao {
 	 * 프로필 이미지 리스트
 	 * @return
 	 */
-	@Override
+	
 	@SuppressWarnings({ "deprecation" })
 	public List<ProfileImgVO> getAll() {
 		List<ProfileImgVO> list = new ArrayList<ProfileImgVO>();
@@ -75,9 +75,9 @@ public class ProfileImgDaoImpl implements ProfileImgDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	@Override
+	
 	@SuppressWarnings({ "deprecation" })
-	public int doInsert(ProfileImgVO img) throws SQLException {
+	public int doMerge(ProfileImgVO img) throws SQLException {
 		int flag = 0;
 		
 		StringBuilder sb = new StringBuilder();	

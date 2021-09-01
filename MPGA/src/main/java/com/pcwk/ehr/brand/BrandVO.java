@@ -1,6 +1,6 @@
 package com.pcwk.ehr.brand;
 
-public class brandVO {
+public class BrandVO {
 
 	private String bCode;		//브랜드 번호
 	private String bLogoImg;	//브랜드 로고
@@ -10,9 +10,9 @@ public class brandVO {
 	private String modDt;		//수정날짜
 	private int regNum;			//등록자
 	
-	public brandVO() {}
+	public BrandVO() {}
 
-	public brandVO(String bCode, String bLogoImg, String bUrl, String bItr, String bName, String modDt, int regNum) {
+	public BrandVO(String bCode, String bLogoImg, String bUrl, String bItr, String bName, String modDt, int regNum) {
 		super();
 		this.bCode = bCode;
 		this.bLogoImg = bLogoImg;

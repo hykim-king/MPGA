@@ -1,6 +1,6 @@
 package com.pcwk.ehr.comment;
 
-public class CommentVO {
+public class MenuCommentVO {
 	
 	private int seq;			//순번
 	private String menuNum;		//메뉴번호
@@ -8,9 +8,9 @@ public class CommentVO {
 	private String contents;	//내용
 	private String regDt;		//등록일
 	
-	public CommentVO() {}
+	public MenuCommentVO() {}
 
-	public CommentVO(int seq, String menuNum, int memberNum, String contents, String regDt) {
+	public MenuCommentVO(int seq, String menuNum, int memberNum, String contents, String regDt) {
 		super();
 		this.seq = seq;
 		this.menuNum = menuNum;

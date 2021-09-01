@@ -1,15 +1,15 @@
 package com.pcwk.ehr.profile;
 
-public class ProfileImg {
+public class ProfileImgVO {
 
 	private int seq;
 	private String proImgPath;
 	private String modDt;
 	private int regNum;
 	
-	public ProfileImg() {}
+	public ProfileImgVO() {}
 
-	public ProfileImg(int seq, String proImgPath, String modDt, int regNum) {
+	public ProfileImgVO(int seq, String proImgPath, String modDt, int regNum) {
 		super();
 		this.seq = seq;
 		this.proImgPath = proImgPath;

@@ -2,7 +2,9 @@ package com.pcwk.ehr.comment;
 
 import java.sql.SQLException;
 
-public class MenuCommentDao {
+import org.apache.log4j.Logger;
+
+public class MenuCommentDaoImpl {
 
 	final Logger LOG = Logger.getLogger(getClass());
 	
@@ -17,7 +19,7 @@ public class MenuCommentDao {
 	LOG.debug("param=" + comment.toString());
 	LOG.debug("=======================================");
 	
-	Object[] args = { comment.getseq(),
+	Object[] args = { comment.getSeq(),
 				   	  comment.getMenuNum(),
 					  comment.getMemberNum(),
 					  comment.getContents(),

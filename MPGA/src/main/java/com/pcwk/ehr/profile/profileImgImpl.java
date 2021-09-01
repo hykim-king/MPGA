@@ -11,8 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pcwk.ehr.comment.CommentLikeVO;
-
 public class profileImgImpl {
 
 	final static Logger LOG = Logger.getLogger(profileImgImpl.class);

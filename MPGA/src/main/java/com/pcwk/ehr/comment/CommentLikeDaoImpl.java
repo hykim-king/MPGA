@@ -13,6 +13,8 @@ public class CommentLikeDaoImpl {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	//등록!
 	public int doSelectOne(final CommentLikeVO commentLike)throws SQLException {
 	int flag = 0;
 	
@@ -37,12 +39,18 @@ public class CommentLikeDaoImpl {
 	
 	}
 	
+	//카운트!
 	public CommentLikeVO doReadCnt (CommentLikeVO inVO) {
 		CommentLikeVO outVO = null;
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT COUNT(*)cnt FROM comment_like");
 		return outVO;
+	}
+	
+	public CommentLikeVO doDelete (CommentLikeVO commentLike) {
+		
+		
 	}
 	
 	

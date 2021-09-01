@@ -11,9 +11,9 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-public class profileImgImpl {
+public class ProfileImgDaoImpl implements ProfileImgDao {
 
-	final static Logger LOG = Logger.getLogger(profileImgImpl.class);
+	final static Logger LOG = Logger.getLogger(ProfileImgDaoImpl.class);
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 
@@ -32,9 +32,10 @@ public class profileImgImpl {
 		}
 	};
 
-	public profileImgImpl() {
+	public ProfileImgDaoImpl() {
 	}
 
+	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -43,6 +44,7 @@ public class profileImgImpl {
 	 * 프로필 이미지 리스트
 	 * @return
 	 */
+	@Override
 	@SuppressWarnings({ "deprecation" })
 	public List<ProfileImgVO> getAll() {
 		List<ProfileImgVO> list = new ArrayList<ProfileImgVO>();
@@ -73,6 +75,7 @@ public class profileImgImpl {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
+	@Override
 	@SuppressWarnings({ "deprecation" })
 	public int doInsert(ProfileImgVO img) throws SQLException {
 		int flag = 0;

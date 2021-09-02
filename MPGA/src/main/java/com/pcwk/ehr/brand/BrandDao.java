@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-public interface brandDao {
+public interface BrandDao {
 
 	void setDataSource(DataSource dataSource);
 

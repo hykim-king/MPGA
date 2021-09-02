@@ -7,13 +7,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 public class ProfileImgDaoImpl implements ProfileImgDao {
 
-	final static Logger LOG = Logger.getLogger(ProfileImgDaoImpl.class);
+	final Logger  LOG = LoggerFactory.getLogger(getClass());
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 

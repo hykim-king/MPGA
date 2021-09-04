@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<style type="text/css">
+body, header, h1, h2, a, div, ul, li, form, input, button, span {
+    margin: 0; 
+    padding: 0;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 75px;
+	padding: 1rem;
+	color: white;
+	background: teal;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+body {
+	padding-top: 75px;
+	background: #EEE;
+}
+.main_list {
+       float: left;
+       margin-left: 20px;
+}
+ul{
+	list-style:none;
+}
+
+ .main_container {
+	margin: 10%;
+	padding: 5px;
+}	
+ .brand_box {
+ 	width:100px;
+ 	height: 100px;
+ 	border: 1px solid #000;
+ 	display: inline-block;
+}
+
+.brand_container{
+	background: #FFFFFF;
+}
+.event_banner {
+	background: #FFFFF1;
+}
+</style>
+<meta charset="UTF-8">
+<title>메인페이지</title>
+</head>
+<body>
+	<header>
+		<h1><a href="#" class="moveToMain">청바치</a></h1>
+		<div class="search-group">
+					<form action="." class="sreach_bar">
+						<input type="search" class="search_control" name="address_input" autocomplete="off" placeholder="검색항목을 입력하세요">
+						<span id="search_button_info" class="search_button_info">
+							<button type="button" class="search_button">검색</button>
+						</span>
+					</form>
+				</div>
+		<div id="topMenu" class="topMenu">
+			<ul>
+				<li class="main_list"><a href="#">로그인</a></li>
+				<li class="main_list"><a href="#">회원가입</a></li>
+				<li class="main_list"><a href="#">마이페이지</a></li>
+				<li class="main_list"><a href="#">공지사항</a></li>
+			</ul>
+		</div>
+	</header>
+	<div id="main_container" class="main_container">
+		<h2></h2>
+			<div id="search_main" class="search _main" >
+				<div id="brand_container" class="brand_container">
+					<ul class="brand_list">
+						<li class="brand_box">
+							<div class="brand_Frm">
+								<a class="thumnail" href="#">
+									<div class="brand_name">굽네치킨</div>
+									<img src="#">
+									<button type="button" class="select_button">
+										<span class="btn_text">찜</span>
+									</button>
+								</a>
+							</div>
+						</li>
+						<li class="brand_box">
+							<div class="brand_Frm">
+								<a class="thumnail" href="#">
+									<div class="brand_name">교촌치킨</div>
+									<img src="#">
+									<button type="button" class="select_button">
+										<span class="btn_text">찜</span>
+									</button>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div id="event_banner" class="event_banner">
+					<a href="#">이벤트 (CSS로 오른쪽에 보낼것임)
+						<img src="#">
+					</a>
+				</div>
+			</div>
+	</div>
+</body>
+</html>

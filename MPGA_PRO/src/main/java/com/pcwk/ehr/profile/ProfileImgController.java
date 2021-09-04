@@ -30,7 +30,7 @@ public class ProfileImgController {
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 
-		return "profileImg/profile";
+		return "profileImg/profile_mng";
 	}
 
 	public String doInsert(final ProfileImgVO img) throws ClassNotFoundException, SQLException {

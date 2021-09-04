@@ -4,20 +4,21 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.pcwk.ehr.member.domain.UserVO;
 
 public class MenuCommentDaoImpl {
 
-	final Logger LOG = Logger.getLogger(getClass());
+	final Logger LOG = LoggerFactory.getLogger(getClass());
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
 	
 	//등록!
-	public int doInsert(final CommentVO comment)throws SQLException {
+	public int doInsert(final CommentLikeVO comment)throws SQLException {
 	int flag = 0;
 	
 	StringBuilder sb=new StringBuilder(100);
@@ -42,8 +43,8 @@ public class MenuCommentDaoImpl {
 	}
 	
 	//셀렉트원!
-	public CommentVO SelectOne (CommentVO inVO) {
-		CommentVO outVO = null;
+	public CommentLikeVO SelectOne (CommentLikeVO inVO) {
+		CommentLikeVO outVO = null;
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("  ");
@@ -53,7 +54,7 @@ public class MenuCommentDaoImpl {
 	}
 	
 	//수정! (다시 수정해야함)
-	public int doUpdate (CommentVO comment) throws SQLException {
+	public int doUpdate (CommentLikeVO comment) throws SQLException {
         int flag = 0;
         
         StringBuilder sb = new StringBuilder();
@@ -75,7 +76,7 @@ public class MenuCommentDaoImpl {
 	}
 	
 	//삭제! 
-	public int doDelete(CommentVO comment) throws SQLException {
+	public int doDelete(CommentLikeVO comment) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
 		sb.append(" DELETE FROM menu_comment \n");

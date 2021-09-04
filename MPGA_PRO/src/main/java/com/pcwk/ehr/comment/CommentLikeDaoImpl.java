@@ -4,12 +4,13 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class CommentLikeDaoImpl {
 
-	final Logger LOG = Logger.getLogger(getClass());
+	final Logger LOG = LoggerFactory.getLogger(getClass());
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
@@ -49,6 +50,8 @@ public class CommentLikeDaoImpl {
 	}
 	
 	public CommentLikeVO doDelete (CommentLikeVO commentLike) {
+		
+		return commentLike;
 		
 		
 	}

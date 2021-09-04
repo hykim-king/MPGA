@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class CommentLikeDaoImpl {
+public class CommentLikeDaoImpl implements CommentLikeDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 	private DataSource dataSource;
@@ -16,6 +16,7 @@ public class CommentLikeDaoImpl {
 	
 	
 	//등록!
+	@Override
 	public int doSelectOne(final CommentLikeVO commentLike)throws SQLException {
 	int flag = 0;
 	
@@ -41,6 +42,7 @@ public class CommentLikeDaoImpl {
 	}
 	
 	//카운트!
+	@Override
 	public CommentLikeVO doReadCnt (CommentLikeVO inVO) {
 		CommentLikeVO outVO = null;
 		
@@ -49,6 +51,7 @@ public class CommentLikeDaoImpl {
 		return outVO;
 	}
 	
+	@Override
 	public CommentLikeVO doDelete (CommentLikeVO commentLike) {
 		
 		return commentLike;

@@ -11,8 +11,7 @@ public interface ProfileImgService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int add(ProfileImgVO img) throws ClassNotFoundException, SQLException;
-		
+	
 	public ProfileImgVO doSelectOne(ProfileImgVO inVO) throws ClassNotFoundException, SQLException;
 	
 	public int doInsert(final ProfileImgVO img) throws ClassNotFoundException, SQLException;

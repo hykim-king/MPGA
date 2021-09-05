@@ -1,5 +1,7 @@
-#### MakeProgramGreatAgain(MPGA)조의 Project  
+#### MakeProgramGreatAgain(MPGA)조
 
+### 00. 목적
++  Spring framework를 사용하여 front/back develope을 아우르는 구현 
 
 
 ### 01. 프로젝트 기획서  

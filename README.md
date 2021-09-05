@@ -1,22 +1,23 @@
 
+---  
+### 02. 프로젝트 기획서
+[PROJECT](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT")  
+---    
 ### 03. WBS
 ![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  
-
+---  
+### 04. 요구사항 정의서
 ![WANT](https://github.com/hykim-king/MPGA/blob/main/WANT.png "WANT")  
-
+---  
+### 05. EXERD
 ![EXERD](https://github.com/hykim-king/MPGA/blob/main/EXERD.png "EXERD")  
 
-[PROJECT](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT")  
+
 
 ### 8. 글자효과주기(**,*,__ 사용)  
 **SPRING**을 만끽하세요.  
 *봄바람*을 만끽하세요.  
 __봄바람__을 만끽하세요.  
-
-
-### 7. 하이퍼링크  [링크텍스트] (링크URL "설명문구")  
-[링크텍스트](링크URL "설명문구")  
-[다음카페](https://cafe.daum.net/pcwk "RPA CAFE")  
 
 
 ### 6. 가로선(---또는 ***사용)  

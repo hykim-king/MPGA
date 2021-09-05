@@ -1,8 +1,8 @@
 #### MakeProgramGreatAgain(MPGA)조의 Project  
 
 ---  
-### 02. 프로젝트 기획서
-[PROJECT](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT")  
+### 02. 프로젝트 기획서  
+[PROJECT.pdf](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT.pdf")  
 ---  
 ### 03. WBS
 ![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  

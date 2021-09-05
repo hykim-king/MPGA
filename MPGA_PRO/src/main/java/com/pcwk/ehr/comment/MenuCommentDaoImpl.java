@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.pcwk.ehr.member.domain.UserVO;
+import com.pcwk.ehr.comment.MenuCommentVO;
 
 public class MenuCommentDaoImpl implements MenuCommentDao {
 
@@ -19,7 +19,7 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 	
 	//등록!
 	@Override
-	public int doInsert(final CommentLikeVO comment)throws SQLException {
+	public int doInsert(final MenuCommentVO comment)throws SQLException {
 	int flag = 0;
 	
 	StringBuilder sb=new StringBuilder(100);
@@ -45,8 +45,8 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 	
 	//셀렉트원!
 	@Override
-	public CommentLikeVO SelectOne (CommentLikeVO inVO) {
-		CommentLikeVO outVO = null;
+	public MenuCommentVO SelectOne (MenuCommentVO inVO) {
+		MenuCommentVO outVO = null;
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("  ");
@@ -57,7 +57,7 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 	
 	//수정! (다시 수정해야함)
 	@Override
-	public int doUpdate (CommentLikeVO comment) throws SQLException {
+	public int doUpdate (MenuCommentVO comment) throws SQLException {
         int flag = 0;
         
         StringBuilder sb = new StringBuilder();
@@ -75,12 +75,13 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 						  comment.getRegDt(),
 						  comment.getSeq()
 		};
+		return flag;
 		
 	}
 	
 	//삭제! 
 	@Override
-	public int doDelete(CommentLikeVO comment) throws SQLException {
+	public int doDelete(MenuCommentVO comment) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
 		sb.append(" DELETE FROM menu_comment \n");

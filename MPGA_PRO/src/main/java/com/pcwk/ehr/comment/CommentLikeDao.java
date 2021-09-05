@@ -8,8 +8,8 @@ public interface CommentLikeDao {
 	int doSelectOne(CommentLikeVO commentLike) throws SQLException;
 
 	//카운트!
-	CommentLikeVO doReadCnt(CommentLikeVO inVO);
+	CommentLikeVO doReadCnt(CommentLikeVO inVO) throws SQLException;
 
-	CommentLikeVO doDelete(CommentLikeVO commentLike);
+	CommentLikeVO doDelete(CommentLikeVO commentLike) throws SQLException;
 
 }

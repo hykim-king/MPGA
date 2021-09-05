@@ -1,16 +1,18 @@
 #### MakeProgramGreatAgain(MPGA)조
 
 ### 00. 목적
-+  Spring framework를 사용하여 front/back develope을 아우르는 구현 
++ 풀스택 개발자로써 자바를 베이스로하여 웹사이트 제작.   
++ jsp, bootstrap을 이용하여 프론트엔드 수행 및 스프링 프레임워크 및 SQL를 이용한 벡엔드 제작.  
 
 
 ### 01. 프로젝트 기획서  
 [PROJECT.pdf](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT.pdf")  
 
 ### 02. 프로그램 개요  
-1. 
+1. 전반적인 업무에 대한 이해가 필요..  
 2. 
 3. 
+4. 
 
 ### 03. WBS
 ![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  

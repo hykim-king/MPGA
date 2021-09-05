@@ -3,13 +3,18 @@
 ### 00. 프로젝트 목표
 + OracleDB와 DBMS를 사용하여 데이터 구성하고 관리함.
 + JAVA기반의 프레임워크 SpringMVC와 jsp, bootstrap을 사용하여 FULL-STACK 개발자로서의 역량을 개발함.
-+ GITHUB를 통해 형상관리기능을 사용하여 직무수행에 도움을 줌.
++ GITHUB를 통해 형상관리기능을 사용하여 자료를 관리함.
 
 
 ### 01. 프로젝트 기획서  
 [PROJECT.pdf](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT.pdf")  
 
 ### 02. 개발환경
+BACK-END  SPRING, JAVA, ORACLE DATABASE
+FRONT-END  JQUERY, SERVLETS&JSP, BOOTSTRAP
+WEB-SERVER APACHE TOMCAT
+VERSION-CONTROL-SYSTEM GITHUB
+COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 
 ### 03. WBS  
 ![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  

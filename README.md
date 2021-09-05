@@ -1,14 +1,9 @@
-# MPGA
-PCWK Spring Project
-# PCWK.MARKDOWN
-### 10. 표
-|번호|아이디|이름|레벨|이메일|등록일|
-|:-----|:-----|:-----|:-----|:-----|:-----|
-|1     |kim   |김    |1     |exemail@email.com|20210826|
+
+### 03. WBS
+![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  
 
 
-### 9. 이미지 넣기(! [텍스트] (URL "설명")
-![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")
+
 ### 8. 글자효과주기(**,*,__ 사용)  
 **SPRING**을 만끽하세요.  
 *봄바람*을 만끽하세요.  
@@ -75,3 +70,8 @@ __봄바람__을 만끽하세요.
 ### 1. 문단 구분을 위한 개행 (스페이스바 2번)  
 문단을 작성하세요.  
 여름이 가고 가을이 오고있습니다.  
+### 10. 표
+|번호|아이디|이름|레벨|이메일|등록일|
+|:-----|:-----|:-----|:-----|:-----|:-----|
+|1     |kim   |김    |1     |exemail@email.com|20210826|
+

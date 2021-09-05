@@ -8,7 +8,7 @@ PCWK Spring Project
 
 
 ### 9. 이미지 넣기(! [텍스트] (URL "설명")
-![요구사항 정의서](https://github.com/hykim-king/MPGA/blob/main/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EC%A0%95%EC%9D%98%EC%84%9C.png,요구사항 정의서)
+![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")
 ### 8. 글자효과주기(**,*,__ 사용)  
 **SPRING**을 만끽하세요.  
 *봄바람*을 만끽하세요.  

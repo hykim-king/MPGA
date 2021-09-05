@@ -17,11 +17,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserDao userDao;
-	
-    //mail
-	@Autowired
-	@Qualifier("dummyMailSender")  
-	private MailSender mailSender;
 
 	public UserServiceImpl() {
 	}

@@ -36,6 +36,96 @@
         <property name="dataSource" ref="dataSource" />
     </bean>	
 		
+<<<<<<< HEAD
+<!-- 트랜잭션 -->
+    <!-- 트랜잭션 advice -->
+    <!-- 
+        tx:method : 트랙잭션 적용 메소드, 트랜잭션 미적용 메서드
+        name      : 트랜잭션 적용 메소드, 트랜잭션 미적용 메서드
+        read-only : 읽기전용 지정 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="up*" read-only="false"/>
+            <tx:method name="do*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <!-- aop설정 -->
+    <!-- 
+    * com.pcwk.ehr.*ServiceImpl.*(..)
+    모든 리턴형,
+    com.pcwk.ehr로 시작하는 패키지
+    *ServiceImpl : 로 끝나는 클래스만
+    * : 모든메서드
+    (..) : 모든 파라메터
+     -->
+     
+     <aop:config>
+        <aop:pointcut expression="execution(* com.pcwk.ehr.*ServiceImpl.*(..))" id="txPointcut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+     </aop:config>
+    
+    
+    <!-- 트랜잭션 Manager -->
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- properties read -->   
+    <context:property-placeholder 
+        location="classpath:/resource/config/database.properties" />
+        
+    <!-- DBCP -->
+    <!-- DataSource구형 class  SimpleDriverDataSource-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url"             value="${jdbc.url}"/>
+        <property name="username"        value="${jdbc.username}"/>
+        <property name="password"        value="${jdbc.password}"/>
+        <!-- 최대 접속 허용 갯수 -->
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <!-- 여분으로 남겨질 Connection -->
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <!-- DB연결 대기 시간 -->
+        <property name="maxWait" value="${jdbc.maxWait}" />
+        <!-- Connection 잘못 관리되어 버려진 연결 찾아 재활용 -->
+        <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+        <!-- 버려진 연결로 인식할 기본 시간 -->
+        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+    </bean>
+    
+    
+    <!--4. JavaMailSenderImpl: 전송가능한 mail설정 -->
+    <bean id="mailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.naver.com" />
+        <property name="port" value="465" />
+        <property name="username" value="jamesol@naver.com" />
+        <property name="password" value="" />
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.host">smtp.naver.com</prop>
+                <prop key="mail.smtp.port">465</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+                <prop key="mail.smtp.ssl.enable">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.naver.com</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+    
+    <!-- JdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+
+</beans>
+=======
 	<!-- DBCP -->
     <!-- DataSource구형 class  SimpleDriverDataSource-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -61,3 +151,4 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>	
 </beans>
+>>>>>>> refs/remotes/origin/main

@@ -21,7 +21,7 @@ import com.pcwk.ehr.M_Rank;
 public class MyPageDaoImpl implements MyPageDao {
 	
 	final Logger LOG = LoggerFactory.getLogger(getClass());
-
+	
 	private DataSource dataSource;
 	
 	@Autowired
@@ -35,8 +35,7 @@ public class MyPageDaoImpl implements MyPageDao {
 
 			tmpVO.setProfileImg(rs.getString("pro_img_path"));
 			tmpVO.setNickName(rs.getString("nickname"));
-			// 2021/08/25 추가컬럼
-			tmpVO.setRank(M_Rank.valueOf(rs.getString("u_rank")));
+			// 2021/08/25 추가컬럼.
 			tmpVO.setSelectDate(rs.getString("select_date"));
 			tmpVO.setcLike(rs.getString("c_like")); 
 			
@@ -47,25 +46,68 @@ public class MyPageDaoImpl implements MyPageDao {
 	public MyPageDaoImpl() {
 		super();
 	}
-
+	
 	@SuppressWarnings({ "deprecation" })
-	public MyPageVO doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+	public MyPageVO doSelectOneProfileImg(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		MyPageVO outVO = null;
+		
+		StringBuilder sb = new StringBuilder(50);
+		sb.append(" SELECT pro_img_path,	                                   \n");
+		sb.append(" FROM   profile_img                                          \n");
+		sb.append(" WHERE  seq = ?                                         \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+		
+		//어떤 내용으로 사용되는지 알아보기.
+		Object[] args = { inVO.getNickName() };
+		LOG.debug("args=" + args);
+		LOG.debug("=========================================");
+		outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
+
+		LOG.debug("=========================================");
+		LOG.debug("outVO=\n" + outVO.toString());
+		LOG.debug("=========================================");
+		
+		return outVO;	
+		
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public MyPageVO doSelectOnePersonal(MyPageVO inVO) throws ClassNotFoundException, SQLException {
 		MyPageVO outVO = null;
 
 		// 2.
 		StringBuilder sb = new StringBuilder(50);
-		sb.append(" SELECT u_id,	                                     \n");
-		sb.append("        name,                                         \n");
-		sb.append(" 	   passwd,                                       \n");
-		// 2021/08/25 추가컬럼                                           
-		sb.append(" 	   u_level,                                      \n");
-		sb.append(" 	   login,                                        \n");
-		sb.append(" 	   recommend,                                    \n");
-		// 2021/08/30 추가컬럼: email,reg_dt
-		sb.append(" 	   email,                                        \n");
-		sb.append(" 	   TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') reg_dt  \n");
-		sb.append(" FROM hr_member                                       \n");
-		sb.append(" WHERE u_id = ?                                       \n");
+		sb.append(" SELECT nickname,	                                   \n");
+		sb.append("		   m_rank 										   \n");
+		sb.append(" FROM   member                                          \n");
+		sb.append(" WHERE  member_num = ?                                         \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+		
+		//어떤 내용으로 사용되는지 알아보기.
+		Object[] args = { inVO.getNickName() };
+		LOG.debug("args=" + args);
+		LOG.debug("=========================================");
+		outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
+
+		LOG.debug("=========================================");
+		LOG.debug("outVO=\n" + outVO.toString());
+		LOG.debug("=========================================");
+
+		return outVO;
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public MyPageVO doSelectOneSelect(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		MyPageVO outVO = null;
+
+		// 2.
+		StringBuilder sb = new StringBuilder(50);
+		sb.append(" SELECT select_date,	                            \n");
+		sb.append(" FROM   menu_select                              \n");		
+		sb.append(" WHERE  member_num = ?                           \n");
+		sb.append(" 	   menu_num   = ? 				   			\n");
 		LOG.debug("=========================================");
 		LOG.debug("sql=\n" + sb.toString());
 
@@ -80,30 +122,127 @@ public class MyPageDaoImpl implements MyPageDao {
 
 		return outVO;
 	}
-
+	
 	@SuppressWarnings({ "deprecation" })
-	public int doUpdate(MyPageVO myPage) throws SQLException {
+	public MyPageVO doSelectOneComment(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		MyPageVO outVO = null;
+
+		// 2.
+		StringBuilder sb = new StringBuilder(50);
+		sb.append(" SELECT contents,	                            \n");
+		sb.append(" FROM   menu_comment                         \n");		
+		sb.append(" WHERE  menu_num = ?                         \n");
+		sb.append(" 	   seq	      = ? 				   	    \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+
+		Object[] args = { inVO.getNickName() };
+		LOG.debug("args=" + args);
+		LOG.debug("=========================================");
+		outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
+
+		LOG.debug("=========================================");
+		LOG.debug("outVO=\n" + outVO.toString());
+		LOG.debug("=========================================");
+
+		return outVO;
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public int doUpdateProfileImg(MyPageVO myPage) throws SQLException {
 		int flag = 0;
         
         StringBuilder sb = new StringBuilder();
-        sb.append(" UPDATE hr_member           \n");
+        sb.append(" UPDATE profile_img         \n");
         sb.append(" SET                        \n");
-        sb.append("     profileImg = ?,        \n");
-        sb.append("     nickName   = ?,        \n");
-        sb.append("     rank   	   = ?,        \n");
-        sb.append("     selectDate = sysdate,  \n");
-        sb.append("     cLike 	   = ?,        \n");
+        sb.append("     profileImg = ?        \n");
         //2021/08/30 추가 컬럼:email,reg_dt
-        sb.append(" WHERE u_id = ?             \n");
+        sb.append(" WHERE seq = ?             \n");
 		LOG.debug("=========================================");
 		LOG.debug("sql=\n" + sb.toString());
 		LOG.debug("param=" + myPage.toString());
 		LOG.debug("=========================================");		
-		Object[] args = { myPage.getProfileImg(), 
+		Object[] args = { myPage.getProfileImg() };
+				          
+		
+		flag = this.jdbcTemplate.update(sb.toString(), args);
+		
+		LOG.debug("flag=" + flag);
+		return flag;
+		
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public int doUpdatePersonal(MyPageVO myPage) throws SQLException {
+		int flag = 0;
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(" UPDATE member              \n");
+        sb.append(" SET                        \n");
+        sb.append("     nickName   = ?,        \n");
+        sb.append("     rank   	   = ?         \n");
+        //2021/08/30 추가 컬럼:email,reg_dt
+        sb.append(" WHERE member_num = ?       \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+		LOG.debug("param=" + myPage.toString());
+		LOG.debug("=========================================");		
+		Object[] args = { 
 				          myPage.getNickName(), 
 				          myPage.getRank(),
-				          myPage.getSelectDate(),
-				          myPage.getcLike()  };		
+				        };		
+		
+		flag = this.jdbcTemplate.update(sb.toString(), args);
+		
+		LOG.debug("flag=" + flag);
+		return flag;
+		
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public int doUpdateSelect(MyPageVO myPage) throws SQLException {
+		int flag = 0;
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(" UPDATE menu_select         \n");
+        sb.append(" SET                        \n");
+        sb.append("     selectDate = sysdate,  \n");
+        //2021/08/30 추가 컬럼:email,reg_dt
+        sb.append(" WHERE member_num = ?       \n");
+        sb.append("       menu_num   = ?       \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+		LOG.debug("param=" + myPage.toString());
+		LOG.debug("=========================================");		
+		Object[] args = { 
+				          myPage.getSelectDate()
+				        };		
+		
+		flag = this.jdbcTemplate.update(sb.toString(), args);
+		
+		LOG.debug("flag=" + flag);
+		return flag;
+		
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public int doUpdateComment(MyPageVO myPage) throws SQLException {
+		int flag = 0;
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(" UPDATE comment_like        \n");
+        sb.append(" SET                        \n");
+        sb.append("     cLike 	   = ?,        \n");
+        //2021/08/30 추가 컬럼:email,reg_dt
+        sb.append(" WHERE member_num = ?       \n");
+        sb.append(" 	  c_like = ?           \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+		LOG.debug("param=" + myPage.toString());
+		LOG.debug("=========================================");		
+		Object[] args = { 
+				          myPage.getcLike()  
+				        };		
 		
 		flag = this.jdbcTemplate.update(sb.toString(), args);
 		
@@ -116,6 +255,30 @@ public class MyPageDaoImpl implements MyPageDao {
 	public List<?> doRetrieve(MyPageVO myPage) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public MyPageVO doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int doUpdate(MyPageVO myPage) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doInsert(MyPageVO myPageVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doDelete(MyPageVO myPageVO) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

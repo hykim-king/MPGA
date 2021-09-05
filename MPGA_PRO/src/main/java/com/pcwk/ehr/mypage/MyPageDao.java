@@ -13,6 +13,10 @@ public interface MyPageDao {
 	
 	int doUpdate (MyPageVO myPage) throws SQLException;
 	
-	List<?> doRetrieve(MyPageVO myPage) throws SQLException; 
+	List<?> doRetrieve(MyPageVO myPage) throws SQLException;
+
+	int doInsert(MyPageVO myPageVO);
+
+	int doDelete(MyPageVO myPageVO); 
 
 }

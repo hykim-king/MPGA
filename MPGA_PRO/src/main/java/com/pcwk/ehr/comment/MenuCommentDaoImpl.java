@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.pcwk.ehr.member.domain.UserVO;
 
-public class MenuCommentDaoImpl {
+public class MenuCommentDaoImpl implements MenuCommentDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 	private DataSource dataSource;
@@ -18,6 +18,7 @@ public class MenuCommentDaoImpl {
 	
 	
 	//등록!
+	@Override
 	public int doInsert(final CommentLikeVO comment)throws SQLException {
 	int flag = 0;
 	
@@ -43,6 +44,7 @@ public class MenuCommentDaoImpl {
 	}
 	
 	//셀렉트원!
+	@Override
 	public CommentLikeVO SelectOne (CommentLikeVO inVO) {
 		CommentLikeVO outVO = null;
 		
@@ -54,6 +56,7 @@ public class MenuCommentDaoImpl {
 	}
 	
 	//수정! (다시 수정해야함)
+	@Override
 	public int doUpdate (CommentLikeVO comment) throws SQLException {
         int flag = 0;
         
@@ -76,6 +79,7 @@ public class MenuCommentDaoImpl {
 	}
 	
 	//삭제! 
+	@Override
 	public int doDelete(CommentLikeVO comment) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();

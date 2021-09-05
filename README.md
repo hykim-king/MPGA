@@ -2,7 +2,7 @@
 ### 03. WBS
 ![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  
 
-
+![요구사항 정의서](https://github.com/hykim-king/MPGA/blob/main/요구사항 정의서.png "요구사항 정의서")
 
 ### 8. 글자효과주기(**,*,__ 사용)  
 **SPRING**을 만끽하세요.  

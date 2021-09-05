@@ -1,9 +1,9 @@
 #### MakeProgramGreatAgain(MPGA)조
 
 ### 00. 프로젝트 목표
-+ DBMS를 사용하여 데이터 구성하고 관리함
-+ JAVA기반의 프레임워크 SpringMVC와 jsp, bootstrap을 사용하여 FULL-STACK 개발자로서의 역량을 개발함
-+ GITHUB를 사용하여 형상관리
++ OracleDB와 DBMS를 사용하여 데이터 구성하고 관리함.
++ JAVA기반의 프레임워크 SpringMVC와 jsp, bootstrap을 사용하여 FULL-STACK 개발자로서의 역량을 개발함.
++ GITHUB를 통해 형상관리기능을 사용하여 직무수행에 도움을 줌.
 
 
 ### 01. 프로젝트 기획서  

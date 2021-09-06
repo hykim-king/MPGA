@@ -1,7 +1,8 @@
 #### MakeProgramGreatAgain(MPGA)조
 
-### 00. 목적
-+  Spring framework를 사용하여 front/back develope을 아우르는 구현 
+### 00. 프로젝트 목표
++ OracleDataBase를 활용하여 DB를 구성한다.
++ Spring MVC패턴으로 Back-End/jsp, Bootstrap로 Front-End를 개발하여 Full-stack 개발 기술을 습득한다.
 
 
 ### 01. 프로젝트 기획서  

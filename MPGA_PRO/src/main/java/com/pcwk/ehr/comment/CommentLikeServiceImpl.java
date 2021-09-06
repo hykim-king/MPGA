@@ -13,19 +13,27 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 		
 	}
 
-	int doSelectOne(CommentLikeVO commentLike) throws SQLException{
+	public int doSelectOne(CommentLikeVO commentLike) throws SQLException{
 		return commentlikedao.doSelectOne(commentLike);
 		
 	}
+	public int  doInsert(CommentLikeVO commentLike) throws SQLException {
+		return commentlikedao.doDelete(commentLike);
+	}
 
 	//카운트!
-	CommentLikeVO doReadCnt(CommentLikeVO inVO) throws SQLException {
+	public CommentLikeVO doReadCnt(CommentLikeVO inVO) throws SQLException {
 		return commentlikedao.doReadCnt(inVO);
 		
 	}
-
-	CommentLikeVO doDelete(CommentLikeVO commentLike) throws SQLException {
+	 public int doDelete(CommentLikeVO commentLike) throws SQLException {
 		return commentlikedao.doDelete(commentLike);
 		
+	}
+
+	@Override
+	public int doUpdate(CommentLikeVO img) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

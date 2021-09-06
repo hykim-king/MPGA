@@ -14,7 +14,7 @@ public class CommentLikeController {
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	CommentLikeServiceImpl brand;
+	CommentLikeService service;
 	
 	public CommentLikeController () {
 	}
@@ -26,26 +26,23 @@ public class CommentLikeController {
 		LOG.debug("=param=" + inVO);
 		LOG.debug("=====================================");
 
-		CommentLikeVO outVO = CommentLikeVO.doSelectOne(inVO);
+		CommentLikeVO outVO = service.doSelectOne(inVO);
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 
-		return "brand/brand_mng";
+		return "CommentLike/CommentLike_mng";
 	}
 
-	public String doInsert(BrandVO brand) throws ClassNotFoundException, SQLException {
+	public String doInsert(CommentLikeVO comment) throws ClassNotFoundException, SQLException {
 		return "";
 	}
 
-	public String doDelete(BrandVO brand) throws SQLException {
+	public String doDelete(CommentLikeVO comment) throws SQLException {
 		return "";
 	}
 
-	public String doUpdate(BrandVO brand) throws SQLException {
+	public String doUpdate(CommentLikeVO comment) throws SQLException {
 		return "";
 	}
 	
-	public String doRetrieve(BrandVO brand) throws SQLException{
-		return "";
-	}	
 }

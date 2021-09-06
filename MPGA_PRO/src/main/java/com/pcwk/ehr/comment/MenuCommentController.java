@@ -30,7 +30,7 @@ public class MenuCommentController {
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 
-		return "MenuComment/Menu_Comment";
+		return "MenuComment/MenuComment_mng";
 	}
 
 	public String doInsert(final MenuCommentVO comment) throws ClassNotFoundException, SQLException {

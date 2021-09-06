@@ -7,7 +7,7 @@ import com.pcwk.ehr.member.UserVO;
 
 public interface MyPageService {
 	
-	MyPageVO deSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException;
+	MyPageVO doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException;
 	
 	int doUpdate(MyPageVO myPageVO) throws SQLException;
 	

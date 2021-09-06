@@ -1,9 +1,6 @@
 package com.pcwk.ehr.comment;
 
 import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.DataSource;
 
 public interface CommentLikeDao {
 
@@ -11,12 +8,8 @@ public interface CommentLikeDao {
 	int doSelectOne(CommentLikeVO commentLike) throws SQLException;
 
 	//카운트!
-	CommentLikeVO doReadCnt(CommentLikeVO inVO) throws SQLException;
+	CommentLikeVO doReadCnt(CommentLikeVO inVO);
 
-	int doDelete(CommentLikeVO commentLike) throws SQLException;
-
-	void setDataSource(DataSource dataSource);
-
-	List<CommentLikeVO> getAll();
+	CommentLikeVO doDelete(CommentLikeVO commentLike);
 
 }

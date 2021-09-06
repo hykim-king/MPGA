@@ -55,7 +55,6 @@ public class CommentLikeVO {
 		return "CommentLikeVO [memberNum=" + memberNum + ", seq=" + seq + ", cLike=" + cLike + ", cLikeDate="
 				+ cLikeDate + ", toString()=" + super.toString() + "]";
 	}
-
 	
 	
 	

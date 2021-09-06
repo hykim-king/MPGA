@@ -1,9 +1,6 @@
 package com.pcwk.ehr.comment;
 
 import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.DataSource;
 
 public interface MenuCommentDao {
 
@@ -18,9 +15,5 @@ public interface MenuCommentDao {
 
 	//삭제! 
 	int doDelete(MenuCommentVO comment) throws SQLException;
-
-	void setDataSource(DataSource dataSource);
-
-	List<MenuCommentVO> getAll();
 
 }

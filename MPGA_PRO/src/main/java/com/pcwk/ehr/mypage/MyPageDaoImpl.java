@@ -52,8 +52,8 @@ public class MyPageDaoImpl implements MyPageDao {
 		MyPageVO outVO = null;
 		
 		StringBuilder sb = new StringBuilder(50);
-		sb.append(" SELECT pro_img_path,	                               \n");
-		sb.append(" FROM   profile_img                                     \n");
+		sb.append(" SELECT pro_img_path,	                                   \n");
+		sb.append(" FROM   profile_img                                          \n");
 		sb.append(" WHERE  seq = ?                                         \n");
 		LOG.debug("=========================================");
 		LOG.debug("sql=\n" + sb.toString());

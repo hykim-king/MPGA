@@ -1,6 +1,7 @@
 package com.pcwk.ehr.profile;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class ProfileImgController {
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 
-		return "profileImg/profileImg_mng";
+		return "profileImg/profile_mng";
 	}
 
 	public String doInsert(final ProfileImgVO img) throws ClassNotFoundException, SQLException {

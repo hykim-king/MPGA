@@ -1,4 +1,4 @@
-package com.pcwk.ehr;
+package com.pcwk.ehr.brand;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -31,18 +31,18 @@ import com.pcwk.ehr.member.domain.UserVO;
 @RunWith(SpringJUnit4ClassRunner.class) //JUnit기능 스프링 프레임으로 확장
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                                   "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"}) ///applicationContext.xml 설정파일 read
-public class JUserDaoTest02 {
+public class JBrandDaoTest {
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	ApplicationContext context;
 	
 	@Autowired
-	UserDao dao;
+	BrandDao dao;
 	
-	UserVO user01;
-	UserVO user02;
-	UserVO user03;
+	BrandVO brand01;
+	BrandVO brand02;
+	BrandVO brand03;
 	
 	
 	@Before
@@ -59,9 +59,9 @@ public class JUserDaoTest02 {
 		//public UserVO(String uId, String name, String passwd, Level level, int login, int recommend) {
 		//	public UserVO(String uId, String name, String passwd, Level level, int login, int recommend, String email,
 		//  String regDt) {
-		user01 = new UserVO("pcwk_01", "이상무01", "1234_1",Level.BASIC,1,0,"jamesol@naver.com","");
-		user02 = new UserVO("pcwk_02", "이상무02", "1234_2",Level.SILVER,51,0,"jamesol@naver.com","");
-		user03 = new UserVO("pcwk_03", "이상무03", "1234_3",Level.GOLD,71,31,"jamesol@naver.com","");	
+		brand01 = new BrandVO("pcwk_01", "이상무01", "1234_1",Level.BASIC,1,0,"jamesol@naver.com","");
+		brand02 = new BrandVO("pcwk_02", "이상무02", "1234_2",Level.SILVER,51,0,"jamesol@naver.com","");
+		brand03 = new BrandVO("pcwk_03", "이상무03", "1234_3",Level.GOLD,71,31,"jamesol@naver.com","");	
 		
 		LOG.debug("=========================");
 		LOG.debug("=context="+context);
@@ -88,20 +88,20 @@ public class JUserDaoTest02 {
 		
 		
 		//2.
-		flag = dao.doInsert(user01);
+		flag = dao.doInsert(brand01);
 		assertThat(flag, is(1));
 		
 		//3. VO 데이터 수정 + update
-		user01.setName(user01.getName()+"_U");
-		user01.setPasswd(user01.getPasswd()+"_U");
-		user01.setLevel(Level.SILVER);
-		user01.setLogin(99);
-		user01.setRecommend(10);
-		//email
-		user01.setEmail(user01.getEmail()+"U");
+		brand01.setbCode(brand01.getbCode()+"_U");
+		brand01.setbLogoImg();
+		brand01.setbUrl("/src/main/webapp/webapp/img/pro_img/PROIMG2.png");
+		brand01.setbItr(99);
+		brand01.setbName(brand01.getbName()+"_U");
+		brand01.setModDt();
+		brand01.setRegNum(10);
 		
 		//3.1
-		flag = dao.doUpdate(user01);
+		flag = dao.doUpdate(brand01);
 		assertThat(flag, is(1));
 		
 		//4. 변경된 데이터 조회
@@ -172,6 +172,7 @@ public class JUserDaoTest02 {
 	
 	
 	@Test(expected = EmptyResultDataAccessException.class)
+	@Ignore
 	public void getFailure() throws ClassNotFoundException, SQLException {
 		LOG.debug("=========================");
 		LOG.debug("=getFailure()=");
@@ -184,6 +185,7 @@ public class JUserDaoTest02 {
 	}
 
 	@Test
+	//@Ignore
 	public void doDelete() throws SQLException, ClassNotFoundException {
 		//1.기존 데이터 삭제
 		//2.데이터 입력

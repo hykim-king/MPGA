@@ -23,7 +23,7 @@ public class MenuCommentController {
 	public String doSelectOne(MenuCommentVO inVO, Model model) throws ClassNotFoundException, SQLException {
 		LOG.debug("=====================================");
 		LOG.debug("=doSelectOne=");
-		LOG.debug("=param=" + inVO);
+		LOG.debug("=param=" + inVO); 
 		LOG.debug("=====================================");
 
 		MenuCommentVO outVO = service.doSelectOne(inVO);

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public interface CommentLikeService {
 
 	
-	public int doSelectOne(CommentLikeVO inVO) throws ClassNotFoundException, SQLException;
+	public CommentLikeVO doSelectOne(CommentLikeVO inVO) throws ClassNotFoundException, SQLException;
 	
     public int doInsert(CommentLikeVO Commentlike) throws ClassNotFoundException, SQLException;
 	

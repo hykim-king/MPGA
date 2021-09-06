@@ -13,7 +13,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 		
 	}
 
-	public int doSelectOne(CommentLikeVO commentLike) throws SQLException{
+	public CommentLikeVO doSelectOne(CommentLikeVO commentLike) throws SQLException{
 		return commentlikedao.doSelectOne(commentLike);
 		
 	}

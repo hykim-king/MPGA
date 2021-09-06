@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public interface CommentLikeDao {
 
 	//등록!
-	int doSelectOne(CommentLikeVO commentLike) throws SQLException;
+	CommentLikeVO doSelectOne(CommentLikeVO commentLike) throws SQLException;
 
 	//카운트!
 	CommentLikeVO doReadCnt(CommentLikeVO inVO);

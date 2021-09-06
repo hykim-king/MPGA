@@ -1,5 +1,6 @@
 package com.pcwk.ehr.comment;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -7,6 +8,9 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import com.pcwk.ehr.member.UserVO;
 
 public class CommentLikeDaoImpl implements CommentLikeDao {
 
@@ -14,11 +18,24 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
+	RowMapper<CommentLikeVO> rowMapper = new RowMapper<CommentLikeVO>() {
+
+		public CommentLikeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			CommentLikeVO tmpVO = new CommentLikeVO();
+
+			tmpVO.setcLike(rs.getString("u_id"));
+			tmpVO.setcLikeDate(rs.getString("memberNum"));
+			
+			return tmpVO;
+		}
+
+	};
+	
 	
 	//등록!
 	@Override
-	public int doSelectOne(final CommentLikeVO commentLike)throws SQLException {
-	int flag = 0;
+	public CommentLikeVO doSelectOne(final CommentLikeVO commentLike)throws SQLException {
+	CommentLikeVO outVO = null;
 	
 	StringBuilder sb=new StringBuilder(100);
 	sb.append(" INSERT INTO comment_like(member_num,seq,c_like,c_like_date) \n");
@@ -35,9 +52,9 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 					  commentLike.getcLikeDate()
 					};
 	LOG.debug("args=" + args);
-	flag = this.jdbcTemplate.update(sb.toString(), args);
-	LOG.debug("flag=" + flag);
-	return flag;
+	outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
+	LOG.debug("outVO=" + outVO);
+	return outVO;
 	
 	}
 	
@@ -52,11 +69,18 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	}
 	
 	@Override
-	public CommentLikeVO doDelete (CommentLikeVO commentLike) {
+	public int doDelete (CommentLikeVO commentLike) {
 		
-		return commentLike;
-		
-		
+		return 0;
+			
+	}
+
+	
+
+	@Override
+	public int doInsert(CommentLikeVO commentLike) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

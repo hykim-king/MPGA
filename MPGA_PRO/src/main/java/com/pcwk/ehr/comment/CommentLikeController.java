@@ -15,7 +15,7 @@ public class CommentLikeController {
 
 	@Autowired
 	CommentLikeService service;
-	
+	     
 	public CommentLikeController () {
 	}
 	

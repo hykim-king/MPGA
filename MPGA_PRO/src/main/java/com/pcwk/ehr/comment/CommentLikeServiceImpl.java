@@ -18,7 +18,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 		
 	}
 	public int  doInsert(CommentLikeVO commentLike) throws SQLException {
-		return commentlikedao.doDelete(commentLike);
+		return commentlikedao.doInsert(commentLike);
 	}
 
 	//카운트!

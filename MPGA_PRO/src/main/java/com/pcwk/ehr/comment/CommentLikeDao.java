@@ -10,6 +10,8 @@ public interface CommentLikeDao {
 	//카운트!
 	CommentLikeVO doReadCnt(CommentLikeVO inVO);
 
-	CommentLikeVO doDelete(CommentLikeVO commentLike);
+	int doDelete(CommentLikeVO commentLike);
+
+	int doInsert(CommentLikeVO commentLike);
 
 }

@@ -5,12 +5,12 @@ import java.sql.SQLException;
 public interface CommentLikeService {
 
 	
-	public CommentLikeVO doSelectOne(CommentLikeVO inVO) throws ClassNotFoundException, SQLException;
+	public int doSelectOne(CommentLikeVO inVO) throws ClassNotFoundException, SQLException;
 	
-    public int doInsert(CommentLikeVO img) throws ClassNotFoundException, SQLException;
+    public int doInsert(CommentLikeVO Commentlike) throws ClassNotFoundException, SQLException;
 	
-    public int doDelete(CommentLikeVO img) throws SQLException;
+    public int doDelete(CommentLikeVO Commentlike) throws SQLException;
 	
-    public int doUpdate(CommentLikeVO img) throws SQLException;
+    public int doUpdate(CommentLikeVO Commentlike) throws SQLException;
 	
 }

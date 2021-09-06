@@ -1,17 +1,18 @@
 #### MakeProgramGreatAgain(MPGA)조
 
-### 00. 프로젝트 목표
-+ OracleDataBase를 활용하여 DB를 구성한다.
-+ Spring MVC패턴으로 Back-End/jsp, Bootstrap로 Front-End를 개발하여 Full-stack 개발 기술을 습득한다.
+### 00. 프로젝트 목표  
++ OracleDataBase를 활용하여 DB를 개발한다.  
++ Spring MVC패턴으로 Back-End/jsp, Bootstrap로 Front-End를 개발하여 Full-stack 개발 기술을 습득한다.  
++ Github로 형상관리를 경험해보고 직무수행에 필요한 능력을 기른다.  
 
 
 ### 01. 프로젝트 기획서  
 [PROJECT.pdf](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT.pdf")  
 
-### 02. 프로그램 개요  
-1. 
-2. 
-3. 
+### 02. 개발환경  
+1. FRONT-END : HTML, JS, CSS, Bootstrap, jQuery
+2. BACK-END : JAVA, Servlet&jsp, SpringFrameWork, OracleSQLDeveloper
+3. 협업 : Slack, GitHub, Zoom
 
 ### 03. WBS
 ![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  

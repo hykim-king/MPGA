@@ -61,9 +61,9 @@ public class MenuCommentVO {
 
 	@Override
 	public String toString() {
-		return "CommentVO [seq=" + seq + ", menuNum=" + menuNum + ", memberNum=" + memberNum + ", contents=" + contents
-				+ ", regDt=" + regDt + ", toString()=" + super.toString() + "]";
+		return "MenuCommentVO [seq=" + seq + ", menuNum=" + menuNum + ", memberNum=" + memberNum + ", contents="
+				+ contents + ", regDt=" + regDt + ", toString()=" + super.toString() + "]";
 	}
 	
-	
+
 }

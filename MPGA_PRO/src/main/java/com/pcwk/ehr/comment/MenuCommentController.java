@@ -19,7 +19,7 @@ public class MenuCommentController {
 	public MenuCommentController() {
 	}
 
-	@RequestMapping(value = "profileImg/doSelectOne.do", method = RequestMethod.GET)
+	@RequestMapping(value = "MenuComment/doSelectOne.do", method = RequestMethod.GET)
 	public String doSelectOne(MenuCommentVO inVO, Model model) throws ClassNotFoundException, SQLException {
 		LOG.debug("=====================================");
 		LOG.debug("=doSelectOne=");
@@ -30,7 +30,7 @@ public class MenuCommentController {
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 
-		return "profileImg/profile_mng";
+		return "MenuComment/Menu_Comment";
 	}
 
 	public String doInsert(final MenuCommentVO comment) throws ClassNotFoundException, SQLException {

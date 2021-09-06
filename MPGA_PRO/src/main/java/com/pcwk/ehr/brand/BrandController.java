@@ -1,4 +1,4 @@
-package com.pcwk.ehr.comment;
+package com.pcwk.ehr.brand;
 
 import java.sql.SQLException;
 
@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-public class CommentLikeController {
+public class BrandController {
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	CommentLikeServiceImpl brand;
+	BrandServiceImpl brand;
 	
-	public CommentLikeController () {
+	public BrandController () {
 	}
 	
-	@RequestMapping(value = "CommentLike/doSelectOne.do", method = RequestMethod.GET)
-	public String doSelectOne(CommentLikeVO inVO, Model model) throws ClassNotFoundException, SQLException {
+	@RequestMapping(value = "brand/doSelectOne.do", method = RequestMethod.GET)
+	public String doSelectOne(BrandVO inVO, Model model) throws ClassNotFoundException, SQLException {
 		LOG.debug("=====================================");
 		LOG.debug("=doSelectOne=");
 		LOG.debug("=param=" + inVO);
 		LOG.debug("=====================================");
 
-		CommentLikeVO outVO = CommentLikeVO.doSelectOne(inVO);
+		BrandVO outVO = brand.doSelectOne(inVO);
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 

@@ -19,7 +19,7 @@ public class MyServiceImpl implements MyPageService {
 	MyPageDao myPageDao;
 
 	@Override
-	public MyPageVO deSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+	public MyPageVO doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
 		
 		return myPageDao.doSelectOne(inVO);
 	}

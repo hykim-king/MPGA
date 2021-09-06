@@ -1,6 +1,8 @@
 package com.pcwk.ehr.member;
 
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.M_Rank;
+import com.pcwk.ehr.M_Rank.Rank;
 
 public class UserVO extends DTO {
 	
@@ -15,11 +17,12 @@ public class UserVO extends DTO {
 	private String sex;
 	private String modDt;
 	private int regNum;
+	private String mRank;
 	
 	public UserVO() {}
 
 	public UserVO(int memberNum, int seq, String id, String nickName, String phoneNum, String email, String pw,
-			String birthday, String sex, String modDt, int regNum) {
+			String birthday, String sex, String modDt, int regNum, String mRank) {
 		super();
 		this.memberNum = memberNum;
 		this.seq = seq;
@@ -32,6 +35,7 @@ public class UserVO extends DTO {
 		this.sex = sex;
 		this.modDt = modDt;
 		this.regNum = regNum;
+		this.mRank = mRank;
 	}
 
 	public int getMemberNum() {
@@ -122,12 +126,30 @@ public class UserVO extends DTO {
 		this.regNum = regNum;
 	}
 
+	public String getmRank() {
+		return mRank;
+	}
+
+	public void setmRank(String rank) {
+		this.mRank = rank;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVO [memberNum=" + memberNum + ", seq=" + seq + ", id=" + id + ", nickName=" + nickName
 				+ ", phoneNum=" + phoneNum + ", email=" + email + ", pw=" + pw + ", birthday=" + birthday + ", sex="
-				+ sex + ", modDt=" + modDt + ", regNum=" + regNum + ", toString()=" + super.toString() + "]";
+				+ sex + ", modDt=" + modDt + ", regNum=" + regNum + ", mRank=" + mRank + ", toString()="
+				+ super.toString() + "]";
 	}
+
+	public void setmRank(Rank valueOf) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	
 	
 	
 

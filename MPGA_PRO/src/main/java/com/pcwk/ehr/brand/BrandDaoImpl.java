@@ -1,5 +1,7 @@
 package com.pcwk.ehr.brand;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 
 public class BrandDaoImpl implements BrandDao {
@@ -28,7 +31,7 @@ public class BrandDaoImpl implements BrandDao {
 			tmpVO.setbItr(rs.getString("b_itr"));
 			tmpVO.setbName(rs.getString("b_name"));
 			tmpVO.setModDt(rs.getString("mod_dt"));
-			tmpVO.setRegNum(rs.getInt("reg_num"));
+			tmpVO.setRegNum(rs.getString("reg_num"));
 
 			return tmpVO;
 		}
@@ -178,7 +181,7 @@ public class BrandDaoImpl implements BrandDao {
 	public int doDelete(BrandVO brand) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
-		sb.append(" DELETE FROM hr_member \n");
+		sb.append(" DELETE FROM brand	  \n");
 		sb.append(" WHERE u_id = ?        \n");
 		LOG.debug("=========================================");
 		LOG.debug("sql=\n" + sb.toString());
@@ -192,7 +195,28 @@ public class BrandDaoImpl implements BrandDao {
 		return flag;
 	}
 	
-	
+	/**
+	 * 브랜드 전체삭제
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public void deleteAll() throws SQLException {
+
+		jdbcTemplate.update(new PreparedStatementCreator() {
+
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				StringBuilder sb = new StringBuilder();
+				sb.append(" DELETE FROM brand  \n");
+				LOG.debug("=========================================");
+				LOG.debug("sql=\n" + sb.toString());
+				LOG.debug("=========================================");
+
+				return con.prepareStatement(sb.toString());
+			}
+		});
+
+	}
 	/**
 	 * 브랜드 수정
 	 * @param brand
@@ -204,7 +228,7 @@ public class BrandDaoImpl implements BrandDao {
         int flag = 0;
         
         StringBuilder sb = new StringBuilder();
-        sb.append(" UPDATE hr_member       \n");
+        sb.append(" UPDATE brand	       \n");
         sb.append(" SET               	   \n");
         sb.append("     name      = ?,	   \n");
         sb.append("     passwd    = ?,     \n");

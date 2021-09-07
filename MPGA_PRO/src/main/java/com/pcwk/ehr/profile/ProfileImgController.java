@@ -14,7 +14,7 @@ public class ProfileImgController {
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	ProfileImgService service;
+	ProfileImgDao dao;
 
 	public ProfileImgController() {
 	}
@@ -26,7 +26,7 @@ public class ProfileImgController {
 		LOG.debug("=param=" + inVO);
 		LOG.debug("=====================================");
 
-		ProfileImgVO outVO = service.doSelectOne(inVO);
+		ProfileImgVO outVO = dao.doSelectOne(inVO);
 		LOG.debug("=outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 

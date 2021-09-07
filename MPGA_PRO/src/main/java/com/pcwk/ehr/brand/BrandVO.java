@@ -8,11 +8,11 @@ public class BrandVO {
 	private String bItr;		//브랜드 소개
 	private String bName;		//브랜드 이름
 	private String modDt;		//수정날짜
-	private int regNum;			//등록자
+	private String regNum;			//등록자
 	
 	public BrandVO() {}
 
-	public BrandVO(String bCode, String bLogoImg, String bUrl, String bItr, String bName, String modDt, int regNum) {
+	public BrandVO(String bCode, String bLogoImg, String bUrl, String bItr, String bName, String modDt, String regNum) {
 		super();
 		this.bCode = bCode;
 		this.bLogoImg = bLogoImg;
@@ -71,11 +71,11 @@ public class BrandVO {
 		this.modDt = modDt;
 	}
 
-	public int getRegNum() {
+	public String getRegNum() {
 		return regNum;
 	}
 
-	public void setRegNum(int regNum) {
+	public void setRegNum(String regNum) {
 		this.regNum = regNum;
 	}
 

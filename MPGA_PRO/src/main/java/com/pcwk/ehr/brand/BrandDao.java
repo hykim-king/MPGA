@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.pcwk.ehr.selectedmenu.SelectedMenuVO;
+
 public interface BrandDao {
 
 	List<BrandVO> getAll();
@@ -64,8 +66,13 @@ public interface BrandDao {
 
 	int doUpdate(BrandVO brand) throws SQLException;
 
+	
+	
+	
 	List<?> doRetrieve(BrandVO brand) throws SQLException;
 
 	void setDataSource(DataSource dataSource);
+
+	int doInsert(SelectedMenuVO select);
 
 }

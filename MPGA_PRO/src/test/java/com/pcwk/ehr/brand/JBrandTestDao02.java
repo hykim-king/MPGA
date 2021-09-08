@@ -22,7 +22,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.brand.BrandDaoImpl;
 import com.pcwk.ehr.brand.BrandVO;
 
@@ -47,7 +46,6 @@ public class JBrandTestDao02 {
 	BrandVO brand02;
 	BrandVO brand03;
 
-	SearchVO  searchVO;
 	
 	@Before
 	
@@ -59,12 +57,7 @@ public class JBrandTestDao02 {
 	}
 	
 	@Test
-	public void doRetrieve() throws SQLException { 
-
-	}
-	
-	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException, ClassNotFoundException {
 		//브랜드 삭제
 		dao.doDelete(brand01);
@@ -90,7 +83,7 @@ public class JBrandTestDao02 {
 		brand01.setbItr(brand01.getbItr()+"_U");
 		brand01.setbName(brand01.getbName() + "_U");
 		brand01.setModDt(brand01.getModDt()+"_U");
-		brand01.setRegNum(brand01.getRegNum()+"_U");
+		brand01.setRegNum(10);
 		
 		
 		flag = dao.doUpdate(brand01);
@@ -138,7 +131,7 @@ public class JBrandTestDao02 {
 	}
 
 	@Test
-	// @Ignore
+	 //@Ignore
 	public void doDelete() throws SQLException, ClassNotFoundException {
 		int flag = 0;
 		
@@ -163,6 +156,7 @@ public class JBrandTestDao02 {
 	
 	// 1/1000초
 	@Test(timeout = 20000)
+	//@Ignore
 	public void addAndGet() {
 
 		try {

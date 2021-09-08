@@ -1,4 +1,4 @@
-package com.pcwk.ehr.comment;
+package com.pcwk.ehr.commentlike;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

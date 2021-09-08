@@ -22,20 +22,74 @@ public class MyPageController {
 	public MyPageController() {}
 	
 	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET)
-	public String doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+	public String doSelectOneProfileImg(MyPageVO inVO) throws ClassNotFoundException, SQLException {
 		LOG.debug("=============================");
 		LOG.debug("=doSelectOne=");
 		LOG.debug("=param=" + inVO);
 		LOG.debug("=============================");
 
-		MyPageVO outVO = service.doSelectOne(inVO);
+		MyPageVO outVO = service.doSelectOneProfileImg(inVO);
 		LOG.debug("=outVO=" + outVO);
 		return "member/member_mng";
 		
-		
+		 
 	}
 	
-	public String doUpdate(MyPageVO myPageVO) throws SQLException {
+	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET)
+	public String doSelectOnePersonal(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		LOG.debug("=============================");
+		LOG.debug("=doSelectOne=");
+		LOG.debug("=param=" + inVO);
+		LOG.debug("=============================");
+
+		MyPageVO outVO = service.doSelectOnePersonal(inVO);
+		LOG.debug("=outVO=" + outVO);
+		return "member/member_mng";
+		
+		 
+	}
+	
+	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET)
+	public String doSelectOneSelect(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		LOG.debug("=============================");
+		LOG.debug("=doSelectOne=");
+		LOG.debug("=param=" + inVO);
+		LOG.debug("=============================");
+
+		MyPageVO outVO = service.doSelectOneSelect(inVO);
+		LOG.debug("=outVO=" + outVO);
+		return "member/member_mng";
+		
+		 
+	}
+	
+	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET)
+	public String doSelectOneComment(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		LOG.debug("=============================");
+		LOG.debug("=doSelectOne=");
+		LOG.debug("=param=" + inVO);
+		LOG.debug("=============================");
+
+		MyPageVO outVO = service.doSelectOneComment(inVO);
+		LOG.debug("=outVO=" + outVO);
+		return "member/member_mng";
+		
+		 
+	}
+	
+	public String doUpdateProfileImg(MyPageVO myPageVO) throws SQLException {
+		return null;
+	}
+	
+	public String doUpdatePersonal(MyPageVO myPageVO) throws SQLException {
+		return null;
+	}
+	
+	public String doUpdateSelect(MyPageVO myPageVO) throws SQLException {
+		return null;
+	}
+	
+	public String doUpdateComment(MyPageVO myPageVO) throws SQLException {
 		return null;
 	}
 	

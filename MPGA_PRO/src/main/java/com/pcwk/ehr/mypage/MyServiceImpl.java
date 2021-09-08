@@ -19,15 +19,48 @@ public class MyServiceImpl implements MyPageService {
 	MyPageDao myPageDao;
 
 	@Override
-	public MyPageVO doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+	public MyPageVO doSelectOneProfileImg(MyPageVO inVO) throws ClassNotFoundException, SQLException {
 		
-		return myPageDao.doSelectOne(inVO);
+		return myPageDao.doSelectOneProfileImg(inVO);
+	}
+	
+	@Override
+	public MyPageVO doSelectOnePersonal(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		
+		return myPageDao.doSelectOnePersonal(inVO);
+	}
+	
+	@Override
+	public MyPageVO doSelectOneSelect(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		
+		return myPageDao.doSelectOneSelect(inVO);
+	}
+	
+	@Override
+	public MyPageVO doSelectOneComment(MyPageVO inVO) throws ClassNotFoundException, SQLException {
+		
+		return myPageDao.doSelectOneComment(inVO);
 	}
 
 	@Override
-	public int doUpdate(MyPageVO myPageVO) throws SQLException {
+	public int doUpdateProfileImg(MyPageVO myPageVO) throws SQLException {
 		
-		return myPageDao.doUpdate(myPageVO);
+		return myPageDao.doUpdateProfileImg(myPageVO);
+	}
+	@Override
+	public int doUpdatePersonal(MyPageVO myPageVO) throws SQLException {
+		
+		return myPageDao.doUpdatePersonal(myPageVO);
+	}
+	@Override
+	public int doUpdateSelect(MyPageVO myPageVO) throws SQLException {
+		
+		return myPageDao.doUpdateSelect(myPageVO);
+	}
+	@Override
+	public int doUpdateComment(MyPageVO myPageVO) throws SQLException {
+		
+		return myPageDao.doUpdateComment(myPageVO);
 	}
 
 	@Override
@@ -52,5 +85,7 @@ public class MyServiceImpl implements MyPageService {
 		
 		return myPageDao.doDelete(myPageVO);
 	}
+
+
 
 }	

@@ -22,6 +22,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.brand.BrandDaoImpl;
 import com.pcwk.ehr.brand.BrandVO;
 
@@ -40,11 +41,13 @@ public class JBrandTestDao02 {
 	ApplicationContext context;
 
 	@Autowired
-	private BrandDaoImpl dao;
+	BrandDao dao;
 
 	BrandVO brand01;
 	BrandVO brand02;
 	BrandVO brand03;
+
+	SearchVO  searchVO;
 	
 	@Before
 	

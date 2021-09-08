@@ -9,17 +9,25 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 
 public class BrandDaoImpl implements BrandDao {
 	final Logger  LOG = LoggerFactory.getLogger(getClass());
-	private DataSource dataSource;
+	
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	SqlSessionTemplate   sqlSessionTemplate;
 
+	final String NAMESPACE = "com.pcwk.ehr.brand";
+	
 	RowMapper<BrandVO> rowMapper = new RowMapper<BrandVO>() {
 
 		public BrandVO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -31,22 +39,18 @@ public class BrandDaoImpl implements BrandDao {
 			tmpVO.setbItr(rs.getString("b_itr"));
 			tmpVO.setbName(rs.getString("b_name"));
 			tmpVO.setModDt(rs.getString("mod_dt"));
-			tmpVO.setRegNum(rs.getString("reg_num"));
+			tmpVO.setRegNum(rs.getInt("reg_num"));
 
 			return tmpVO;
 		}
 	};
 
+	
 	public BrandDaoImpl() {
 	}
 	
 	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-	
-	
+	@Override
 	@SuppressWarnings({ "deprecation" })
 	public List<BrandVO> getAll() {
 		List<BrandVO> list = new ArrayList<BrandVO>();
@@ -79,6 +83,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws SQLException
 	 */
 	
+	@Override
 	@SuppressWarnings("deprecation")
 	public int getCount() throws ClassNotFoundException, SQLException {
 		int cnt = 0;
@@ -108,6 +113,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws SQLException
 	 */
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public BrandVO doSelectOne(BrandVO inVO) throws ClassNotFoundException, SQLException {
 		BrandVO outVO = null;
@@ -146,6 +152,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws SQLException
 	 */
 	
+	@Override
 	public int doInsert(final BrandVO brand) throws ClassNotFoundException, SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
@@ -178,6 +185,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws SQLException
 	 */
 	
+	@Override
 	public int doDelete(BrandVO brand) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
@@ -201,6 +209,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
+	@Override
 	public void deleteAll() throws SQLException {
 
 		jdbcTemplate.update(new PreparedStatementCreator() {
@@ -224,6 +233,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws SQLException
 	 */
 	
+	@Override
 	public int doUpdate(BrandVO brand) throws SQLException {
         int flag = 0;
         
@@ -257,9 +267,17 @@ public class BrandDaoImpl implements BrandDao {
 	}
 	
 	
+	@Override
 	public List<?> doRetrieve(BrandVO brand) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

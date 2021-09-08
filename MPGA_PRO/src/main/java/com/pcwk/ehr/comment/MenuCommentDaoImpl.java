@@ -20,15 +20,15 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 	RowMapper<MenuCommentVO> rowMapper = new RowMapper<MenuCommentVO>() {
 		
 		public MenuCommentVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MenuCommentVO commentVO = new MenuCommentVO();
+			MenuCommentVO tmpVO = new MenuCommentVO();
 			
-			commentVO.setSeq(rs.getInt("seq"));
-			commentVO.setMemberNum(rs.getInt("member_num"));
-			commentVO.setMenuNum(rs.getString("menu_num"));
-			commentVO.setContents(rs.getString("contents"));
-			commentVO.setRegDt(rs.getString("reg_dt"));
+			tmpVO.setSeq(rs.getInt("seq"));
+			tmpVO.setMemberNum(rs.getInt("member_num"));
+			tmpVO.setMenuNum(rs.getString("menu_num"));
+			tmpVO.setContents(rs.getString("contents"));
+			tmpVO.setRegDt(rs.getString("reg_dt"));
 
-			return commentVO;
+			return tmpVO;
 
 		}
 	};

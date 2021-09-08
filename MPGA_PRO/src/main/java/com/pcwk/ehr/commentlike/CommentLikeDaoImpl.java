@@ -2,6 +2,8 @@ package com.pcwk.ehr.commentlike;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -11,11 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.pcwk.ehr.member.UserVO;
+import com.pcwk.ehr.profile.ProfileImgVO;
 
 public class CommentLikeDaoImpl implements CommentLikeDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
 	RowMapper<CommentLikeVO> rowMapper = new RowMapper<CommentLikeVO>() {
@@ -23,16 +25,49 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 		public CommentLikeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			CommentLikeVO tmpVO = new CommentLikeVO();
 
-			tmpVO.setcLike(rs.getString("u_id"));
-			tmpVO.setcLikeDate(rs.getString("memberNum"));
+			tmpVO.setcLike(rs.getString("member_Num"));
+			tmpVO.setSeq(rs.getInt("seq"));
+			tmpVO.setcLike(rs.getString("cLike"));
+			tmpVO.setcLikeDate(rs.getString("cLikeDate"));
 			
 			return tmpVO;
 		}
 
 	};
 	
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	
+	@Override
+	@SuppressWarnings({ "deprecation" })
+	public List<CommentLikeVO> getAll() {
+		List<CommentLikeVO> list = new ArrayList<CommentLikeVO>();
+		StringBuilder sb = new StringBuilder(100);
+		sb.append("SELECT 	seq,					 	  				 \n");
+		sb.append(" 		member_Num,				 					 \n");
+		sb.append("			mod_dt,										 \n");
+		sb.append(" 		c_like					 					 \n");
+		sb.append("FROM		c_like_date	 								 \n");
+		sb.append("ORDER BY seq											 \n");
+		LOG.debug("=====================================");
+		LOG.debug("sql=\n" + sb.toString());
+
+		Object[] args = {};
+		list = this.jdbcTemplate.query(sb.toString(), args, rowMapper);
+
+		for (CommentLikeVO vo : list) {
+			LOG.debug("vo" + vo);
+		}
+
+		return list;
+	}
+	
 	
 	//등록!
+	@SuppressWarnings("deprecation")
 	@Override
 	public CommentLikeVO doSelectOne(final CommentLikeVO commentLike)throws SQLException {
 	CommentLikeVO outVO = null;
@@ -69,9 +104,21 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	}
 	
 	@Override
-	public int doDelete (CommentLikeVO commentLike) {
+	public int doDelete(CommentLikeVO commentLike) throws SQLException {
+		int flag = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append(" DELETE FROM comment_like 						 	 \n");
+		sb.append(" WHERE seq = ?      								     \n");
+		LOG.debug("=========================================");
+		LOG.debug("sql=\n" + sb.toString());
+		LOG.debug("param=" + commentLike.toString());
+		LOG.debug("=========================================");
+		Object[] args = { commentLike.getSeq()};
+		LOG.debug("args=" + args);
+		flag = this.jdbcTemplate.update(sb.toString(), args);		
+		LOG.debug("flag=" + flag);
 		
-		return 0;
+		return flag;
 			
 	}
 

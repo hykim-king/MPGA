@@ -28,8 +28,7 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 		LOG.debug("param=" + comment.toString());
 		LOG.debug("=======================================");
 
-		Object[] args = { comment.getSeq(), comment.getMenuNum(), comment.getMemberNum(), comment.getContents(),
-				comment.getRegDt() };
+		Object[] args = { comment.getSeq(), comment.getMenuNum(), comment.getMemberNum(), comment.getContents()};
 		LOG.debug("args=" + args);
 		this.jdbcTemplate.update(sb.toString(), args);
 		LOG.debug("flag=" + flag);
@@ -65,7 +64,6 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 		Object[] args = { comment.getContents(), comment.getMemberNum(), comment.getMenuNum(), comment.getRegDt(),
 				comment.getSeq() };
 		return flag;
-
 	}
 
 	// 삭제!
@@ -84,7 +82,5 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 		flag = this.jdbcTemplate.update(sb.toString(), args);
 		LOG.debug("flag=" + flag);
 		return flag;
-
 	}
-
 }

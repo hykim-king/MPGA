@@ -1,7 +1,7 @@
 package com.pcwk.ehr;
 
 
-public class M_Rank {
+public class M_Rank{
 	public enum Rank {
 		//BASIC(1),SILVER(2),GOLD(3)
 		GOLD(3,null),SILVER(2,GOLD),BASIC(1,SILVER);

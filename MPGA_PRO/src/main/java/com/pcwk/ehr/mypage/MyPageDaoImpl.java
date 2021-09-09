@@ -52,8 +52,8 @@ public class MyPageDaoImpl implements MyPageDao {
 		MyPageVO outVO = null;
 		
 		StringBuilder sb = new StringBuilder(50);
-		sb.append(" SELECT pro_img_path,	                                   \n");
-		sb.append(" FROM   profile_img                                          \n");
+		sb.append(" SELECT pro_img_path,	                               \n");
+		sb.append(" FROM   profile_img                                     \n");
 		sb.append(" WHERE  seq = ?                                         \n");
 		LOG.debug("=========================================");
 		LOG.debug("sql=\n" + sb.toString());
@@ -81,7 +81,7 @@ public class MyPageDaoImpl implements MyPageDao {
 		sb.append(" SELECT nickname,	                                   \n");
 		sb.append("		   m_rank 										   \n");
 		sb.append(" FROM   member                                          \n");
-		sb.append(" WHERE  member_num = ?                                         \n");
+		sb.append(" WHERE  member_num = ?                                  \n");
 		LOG.debug("=========================================");
 		LOG.debug("sql=\n" + sb.toString());
 		
@@ -257,26 +257,16 @@ public class MyPageDaoImpl implements MyPageDao {
 		return null;
 	}
 
-	@Override
-	public MyPageVO doSelectOne(MyPageVO inVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
-	public int doUpdate(MyPageVO myPage) throws SQLException {
+	public int doDelete(MyPageVO myPageVO) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int doInsert(MyPageVO myPageVO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int doDelete(MyPageVO myPageVO) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

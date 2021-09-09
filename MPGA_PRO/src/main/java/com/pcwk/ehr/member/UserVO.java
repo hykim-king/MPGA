@@ -1,7 +1,9 @@
 package com.pcwk.ehr.member;
 
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.M_Rank;
+
+import java.util.logging.Level;
+
 import com.pcwk.ehr.M_Rank.Rank;
 
 public class UserVO extends DTO {
@@ -17,12 +19,12 @@ public class UserVO extends DTO {
 	private String sex;
 	private String modDt;
 	private int regNum;
-	private String mRank;
+	private Level mRank;
 	
 	public UserVO() {}
 
 	public UserVO(int memberNum, int seq, String id, String nickName, String phoneNum, String email, String pw,
-			String birthday, String sex, String modDt, int regNum, String mRank) {
+			String birthday, String sex, String modDt, int regNum, Rank rank) {
 		super();
 		this.memberNum = memberNum;
 		this.seq = seq;
@@ -126,11 +128,11 @@ public class UserVO extends DTO {
 		this.regNum = regNum;
 	}
 
-	public String getmRank() {
+	public Level getmRank() {
 		return mRank;
 	}
 
-	public void setmRank(String rank) {
+	public void setmRank(Level rank) {
 		this.mRank = rank;
 	}
 

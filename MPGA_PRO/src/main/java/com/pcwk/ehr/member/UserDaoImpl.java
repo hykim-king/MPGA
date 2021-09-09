@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 		int flag = 0;
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(" INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM) \n");
+		sb.append(" INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM, ) \n");
 		sb.append(" VALUES (?,?,?,?,?,?,?,?,?,sysdate,?) \n");
 
 		Object[] args = { user.getMemberNum(), user.getSeq(), user.getId(), user.getNickName(), user.getPhoneNum(),

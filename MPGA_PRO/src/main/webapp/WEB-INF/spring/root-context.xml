@@ -12,6 +12,20 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
     
+    
+    <!-- mybatis설정:db처리 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactoryBean" />
+    </bean>
+    
+    <!-- mybatis 환경설정 -->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:mapper/**/*.xml" />
+        <property name="dataSource" ref="dataSource" />
+    </bean> 
+
+    
     <context:property-placeholder
        location="classpath:/resource/config/database.properties"
     />

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.comment">
+
+    <delete id="doDelete" parameterType="MenuCommentVO">
+        DELETE FROM menu_comment
+        WHERE seq = #{seq}
+    </delete>
+    
+    <insert id="doInsert" parameterType="MenuCommentVO">
+        INSERT INTO menu_comment(seq,menu_num,member_num,contents,reg_dt)
+        VALUES (#{seq},#{menuNum},#{memberNum},#{contents},sysdate)
+    </insert>
+</mapper>   

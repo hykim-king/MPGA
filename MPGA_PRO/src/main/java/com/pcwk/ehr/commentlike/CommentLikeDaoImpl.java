@@ -7,8 +7,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -18,7 +20,12 @@ import com.pcwk.ehr.profile.ProfileImgVO;
 public class CommentLikeDaoImpl implements CommentLikeDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	SqlSessionTemplate sqlsessiontemplate;
+	final String NAMESPACE = "com.pcwk.ehr.commentlike";
 	
 	RowMapper<CommentLikeVO> rowMapper = new RowMapper<CommentLikeVO>() {
 
@@ -69,26 +76,19 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	//등록!
 	@SuppressWarnings("deprecation")
 	@Override
-	public CommentLikeVO doSelectOne(final CommentLikeVO commentLike)throws SQLException {
+	public CommentLikeVO doSelectOne(CommentLikeVO inVO)throws SQLException {
 	CommentLikeVO outVO = null;
+
+	String statement = NAMESPACE + ".doSelectOne";
+
+	LOG.debug("=========================================");
+	LOG.debug("inVO=" + inVO.toString());
+	LOG.debug("statement=" + statement);
+	LOG.debug("=========================================");
 	
-	StringBuilder sb=new StringBuilder(100);
-	sb.append(" INSERT INTO comment_like(member_num,seq,c_like,c_like_date) \n");
-	sb.append(" VALUES (?,?,?,sysdate)						  			    \n");
-	LOG.debug("=======================================");
-	LOG.debug("sql=\n" + sb.toString());
-	LOG.debug("param=" + commentLike.toString());
-	LOG.debug("=======================================");
-	
-	Object[] args = { commentLike.getSeq(),
-					  commentLike.getMemberNum(),
-					  commentLike.getSeq(),
-					  commentLike.getcLike(),
-					  commentLike.getcLikeDate()
-					};
-	LOG.debug("args=" + args);
-	outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
+	outVO = this.sqlsessiontemplate.selectOne(statement, inVO);
 	LOG.debug("outVO=" + outVO);
+
 	return outVO;
 	
 	}
@@ -107,17 +107,14 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	public int doDelete(CommentLikeVO commentLike) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
-		sb.append(" DELETE FROM comment_like 						 	 \n");
-		sb.append(" WHERE seq = ?      								     \n");
 		LOG.debug("=========================================");
-		LOG.debug("sql=\n" + sb.toString());
 		LOG.debug("param=" + commentLike.toString());
 		LOG.debug("=========================================");
-		Object[] args = { commentLike.getSeq()};
-		LOG.debug("args=" + args);
-		flag = this.jdbcTemplate.update(sb.toString(), args);		
-		LOG.debug("flag=" + flag);
+	
+		String statement = NAMESPACE + ".doDelete";
+		flag = this.sqlsessiontemplate.delete(statement, commentLike);
 		
+		LOG.debug("flag=" + flag);
 		return flag;
 			
 	}
@@ -125,9 +122,19 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	
 
 	@Override
-	public int doInsert(CommentLikeVO commentLike) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int doInsert(CommentLikeVO commentLike) throws SQLException {
+		int flag = 0;
+
+		LOG.debug("=======================================");
+		LOG.debug("param=" + commentLike.toString());
+		LOG.debug("=======================================");
+
+		String statement = NAMESPACE + ".doInsert";
+		
+		flag = this.sqlsessiontemplate.insert(statement, commentLike);
+				
+		LOG.debug("flag=" + flag);
+		return flag;
 	}
 	
 	

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.menuinfo.commentlike">
+    <resultMap type="CommentLikeVO" id="CommentLikeVOMap">
+        <id property="seq"          column="seq"/>
+        <id property="memberNum"      column="member_num"/>
+        <id property="cLike"    column="c_like"/>
+        <id property="cLikeDate"     column="c_like_dt"/> 
+    </resultMap>
+
+
+    <select id="doSelectOne" parameterType="CommentLikeVO" resultType="CommentLikeVOMap">
+        SELECT seq,
+               member_num,
+               c_like
+               c_like_dt
+               FROM comment_like
+               WHERE seq = #{seq}
+    </select>
+    
+    <delete id="doDelete" parameterType="CommentLikeVO">
+        DELETE FROM comment_like
+        WHERE seq = #{seq}
+    </delete>
+    
+    <insert id="doInsert" parameterType="CommentLikeVO">
+        INSERT INTO comment_like(seq,member_num,c_like,c_like_dt)
+        VALUES (#{seq},#{memberNum},#{cLike},#{cLikeDate})
+    </insert>
+
+</mapper>

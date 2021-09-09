@@ -7,15 +7,23 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 public class MenuCommentDaoImpl implements MenuCommentDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	SqlSessionTemplate sqlsessiontemplate;
+	final String NAMESPACE = "com.pcwk.ehr.comment";
 	
 	RowMapper<MenuCommentVO> rowMapper = new RowMapper<MenuCommentVO>() {
 		
@@ -69,20 +77,17 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 
 	// 등록!
 
-	public int doInsert(final MenuCommentVO comment) throws SQLException {
+	public int doInsert(MenuCommentVO comment) throws SQLException {
 		int flag = 0;
 
-		StringBuilder sb = new StringBuilder(100);
-		sb.append(" INSERT INTO menu_comment(seq,menu_num,member_num,contents,reg_dt) \n");
-		sb.append(" VALUES (?,?,?,?,sysdate)						  				  \n");
 		LOG.debug("=======================================");
-		LOG.debug("sql=\n" + sb.toString());
 		LOG.debug("param=" + comment.toString());
 		LOG.debug("=======================================");
 
-		Object[] args = { comment.getSeq(), comment.getMenuNum(), comment.getMemberNum(), comment.getContents()};
-		LOG.debug("args=" + args);
-		this.jdbcTemplate.update(sb.toString(), args);
+		String statement = NAMESPACE + ".doInsert";
+		
+		flag = this.sqlsessiontemplate.insert(statement, comment);
+				
 		LOG.debug("flag=" + flag);
 		return flag;
 
@@ -90,28 +95,19 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 
 	// 셀렉트원!
 	@Override
+	@SuppressWarnings("deprecation")
 	public MenuCommentVO doSelectOne(MenuCommentVO inVO) throws ClassNotFoundException, SQLException {
 		MenuCommentVO outVO = null;
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append(" SELECT seq,                                     	 \n");
-		sb.append("        menu_num,                                 	 \n");
-		sb.append(" 	   TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') reg_dt, \n");
-		sb.append(" 	   member_num,									 \n");
-		sb.append(" 	   contents										 \n");
-		sb.append(" FROM menu_comment                                    \n");
-		sb.append(" WHERE seq = ?                                        \n");
-		LOG.debug("=========================================");
-		LOG.debug("sql=\n" + sb.toString());
-
-		Object[] args = { inVO.getSeq() };
-		LOG.debug("args=" + args);
-		LOG.debug("=========================================");
-		outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
+		String statement = NAMESPACE + ".doSelectOne";
 
 		LOG.debug("=========================================");
-		LOG.debug("outVO=\n" + outVO.toString());
+		LOG.debug("inVO=" + inVO.toString());
+		LOG.debug("statement=" + statement);
 		LOG.debug("=========================================");
+		
+		outVO = this.sqlsessiontemplate.selectOne(statement, inVO);
+		LOG.debug("outVO=" + outVO);
 
 		return outVO;
 
@@ -121,23 +117,14 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 	@Override
 	public int doUpdate(MenuCommentVO comment) throws SQLException {
 		int flag = 0;
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(" UPDATE menu_comment          \n");
-		sb.append(" SET     					 \n");
-		sb.append("   seq     		=?,		     \n");
-		sb.append("   menu_num		=?,		 	 \n");
-		sb.append("   member_num		=?,		 \n");
-		sb.append("   contents		=?,		 	 \n");
-		sb.append("   reg_dt		=sysdate	 \n");
+	
 		LOG.debug("=========================================");
-		LOG.debug("sql=\n" + sb.toString());
 		LOG.debug("param=" + comment.toString());
 		LOG.debug("=========================================");
-		Object[] args = { comment.getContents(), comment.getMemberNum(), comment.getMenuNum(), comment.getRegDt(),
-				comment.getSeq() };
-		LOG.debug("args=" + args);
-		flag = this.jdbcTemplate.update(sb.toString(), args);
+		
+		String statement = NAMESPACE + ".doUpdate";
+		flag = this.sqlsessiontemplate.update(statement, comment);
+		
 		LOG.debug("flag=" + flag);
 		return flag;
 	}
@@ -146,16 +133,14 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 	@Override
 	public int doDelete(MenuCommentVO comment) throws SQLException {
 		int flag = 0;
-		StringBuilder sb = new StringBuilder();
-		sb.append(" DELETE FROM menu_comment \n");
-		sb.append(" WHERE seq = ?           \n");
+		
 		LOG.debug("=========================================");
-		LOG.debug("sql=\n" + sb.toString());
 		LOG.debug("param=" + comment.toString());
 		LOG.debug("=========================================");
-		Object[] args = { comment.getSeq() };
-		LOG.debug("args=" + args);
-		flag = this.jdbcTemplate.update(sb.toString(), args);
+		
+		String statement = NAMESPACE + ".doDelete";
+		flag = this.sqlsessiontemplate.delete(statement, comment);
+		
 		LOG.debug("flag=" + flag);
 		return flag;
 	}

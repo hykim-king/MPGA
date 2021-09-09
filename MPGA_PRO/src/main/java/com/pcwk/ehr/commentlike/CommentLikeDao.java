@@ -15,7 +15,7 @@ public interface CommentLikeDao {
 
 	int doDelete(CommentLikeVO commentLike) throws SQLException;
 
-	int doInsert(CommentLikeVO commentLike);
+	int doInsert(CommentLikeVO commentLike) throws SQLException;
 
 	void setDataSource(DataSource dataSource);
 

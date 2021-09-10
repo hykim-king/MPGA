@@ -23,6 +23,7 @@ public class BrandVO {
 		this.regNum = regNum;
 	}
 
+	
 	public String getbCode() {
 		return bCode;
 	}

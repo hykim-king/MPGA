@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.brand">
+    <!-- resultmap 
+         column Alias TO VO
+    -->
+    <resultMap type="BrandVO" id="brandResultMap">
+     <id       property="bCode"           column="b_code"/>
+     <result   property="bLogoImg"        column="b_logo_img"/>
+     <result   property="bUrl"            column="b_url"/>
+     <result   property="bItr"            column="b_itr"/> 
+     <result   property="bName"           column="b_name"/>
+     <result   property="modDt"           column="mod_dt"/>
+     <result   property="regNum"          column="reg_num"/>
+    </resultMap>
+
+
+    <delete id="doDelete" parameterType="BrandVO">
+	       DELETE FROM BRAND
+	       WHERE b_code = #{bCode}
+    </delete>
+
+
+    <insert id="doInsert" parameterType="BrandVO">
+	       INSERT INTO BRAND(b_code,b_logo_img,b_url,b_itr,b_name,mod_dt,reg_num)
+	       VALUES (#{bCode},#{bLogoImg},#{bUrl},#{bItr},#{bName},sysdate,#{regNum})   
+    </insert>
+
+
+    <select id="doSelectOne" parameterType="BrandVO"  resultMap="brandResultMap">
+	       SELECT b_code,
+	              b_logo_img,
+	              b_url,   
+	              b_itr,
+	              b_name,
+	              TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') mod_dt,  
+	              reg_num
+	       FROM BRAND
+	       WHERE b_code  <![CDATA[ = ]]> #{bCode}
+    </select>
+
+
+    <update id="doUpdate" parameterType="BrandVO">
+	       UPDATE BRAND
+	       SET   b_code        = #{bCode},
+		         b_logo_img    = #{bLogoImg},
+		         b_url         = #{bUrl},
+		         b_itr         = #{bItr},
+		         b_name        = #{bName},
+		         mod_dt        = sysdate,
+		         reg_num       = #{regNum}
+	       WHERE b_code        = #{bCode} 
+    </update> 
+    
+    
+    <delete id="deleteAll">
+            DELETE FROM BRAND
+    </delete>
+    
+    
+    <select id="getCount" resultType="int">
+            SELECT COUNT(*) cnt FROM BRAND
+    </select>
+    
+    
+    <select id="getAll"  resultMap="brandResultMap">
+		    SELECT b_code,
+		           b_logo_img,
+		           b_url,
+		           b_itr,
+		           b_name,
+                   TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') mod_dt,
+		           reg_num
+		    FROM BRAND
+		    ORDER BY b_code              
+    </select>
+        <sql id="searchCondition">
+        <where>
+            <choose>
+                <when test=" '10' == searchDiv">
+                     u_id  LIKE #{searchWord} ||'%'
+                </when>
+                <when test=" '20' == searchDiv">
+                     name  LIKE #{searchWord} ||'%'
+                </when> 
+                <when test=" '30' == searchDiv">
+                     email  LIKE #{searchWord} ||'%'
+                </when>                               
+            </choose>
+        </where>
+    </sql>
+    
+    <select id="doRetrieve" parameterType="SearchVO" resultType="BrandVO">
+        SELECT A.* , B.*
+        FROM(
+                SELECT t2.rnum          as num,
+                       t2.b_code        as "bCode",
+                       t2.b_logo_img    as "bLogoImg",
+                       t2.b_url         as "bUrl",
+                       t2.b_itr         as "bItr",
+                       t2.b_name        as "bName",
+                       t2.reg_num       as "bNregNumame",
+                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.mod_dt,'YYYYMMDD')
+                                                          ,TO_CHAR(t2.mod_dt,'HH24:MI')
+                                                          ,TO_CHAR(t2.mod_dt,'YYYY/MM/DD') ) modDt
+                FROM(
+                    SELECT rownum rnum,t1.*
+                    FROM(
+                        SELECT *
+                        FROM BRAND
+                        <include refid="searchCondition"/>
+                        ORDER BY reg_dt desc
+                    )t1
+                )t2
+                WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  
+                               AND #{pageSize}*(#{pageNum} -1) + #{pageSize}
+            )A
+            CROSS JOIN
+            (
+                SELECT COUNT(*) totalCnt       
+                FROM BRAND
+                <include refid="searchCondition"/>
+            )B   
+    </select>
+    
+
+
+</mapper>

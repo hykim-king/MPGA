@@ -16,15 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.selectedmenu.SelectedMenuVO;
+import com.pcwk.ehr.SearchVO;
 
+@Repository
 public class BrandDaoImpl implements BrandDao {
 	final Logger  LOG = LoggerFactory.getLogger(getClass());
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+		
 	@Autowired
 	SqlSessionTemplate   sqlSessionTemplate;
 
@@ -32,7 +31,14 @@ public class BrandDaoImpl implements BrandDao {
 	
 	public BrandDaoImpl() {}	
 	
-	 
+	
+	
+	/**
+	 * 브랜드 전체 조회
+	 * @return list
+	 */
+	
+	@Override
 	@SuppressWarnings({ "deprecation" })
 	public List<BrandVO> getAll() {
 		List<BrandVO> list = new ArrayList<BrandVO>();
@@ -46,8 +52,30 @@ public class BrandDaoImpl implements BrandDao {
 		return list;
 	}
 	
+	/**
+	 * 브랜드 검색
+	 * @param searchVO
+	 * @return list
+	 * @throws SQLException
+	 */
 	
-	
+	@Override
+	public List<?> doRetrieve(SearchVO searchVO) throws SQLException {
+		List<BrandVO>   list = new ArrayList<BrandVO>();
+		
+		String statement = this.NAMESPACE +".doRetrieve";
+		LOG.debug("=========================================");
+		LOG.debug("statement" + statement);
+		LOG.debug("searchVO" + searchVO);
+		LOG.debug("=========================================");		
+		
+		list = this.sqlSessionTemplate.selectList(statement, searchVO);
+		
+		for (BrandVO vo : list) {
+			LOG.debug("vo:" + vo);
+		}		
+		return list;
+	}
 	
 	
 	/**
@@ -56,6 +84,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public int getCount() throws ClassNotFoundException, SQLException {
 		int cnt = 0;
@@ -81,6 +110,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public BrandVO doSelectOne(BrandVO inVO) throws ClassNotFoundException, SQLException {
 		BrandVO outVO = null;
@@ -97,6 +127,22 @@ public class BrandDaoImpl implements BrandDao {
 		LOG.debug("outVO=" + outVO);
 		return outVO;
 	}
+		
+	
+	
+	/**
+	 * 브랜드 전체삭제
+	 * @throws SQLException
+	 */
+	@Override
+	public void deleteAll() throws SQLException {
+		//NAMESPACE +"."+id
+		String statement = NAMESPACE + ".deleteAll";
+		int flag = sqlSessionTemplate.delete(statement);
+		LOG.debug("=========================================");
+		LOG.debug("flag=" + flag);
+		LOG.debug("=========================================");		
+	}
 	
 	
 	
@@ -109,6 +155,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
+	@Override
 	public int doInsert(final BrandVO brand) throws ClassNotFoundException, SQLException {
 		int flag = 0;
 		LOG.debug("=========================================");
@@ -117,7 +164,7 @@ public class BrandDaoImpl implements BrandDao {
 
 		String statement = NAMESPACE + ".doInsert";
 		
-		flag = sqlSessionTemplate.update(statement, brand);
+		flag = sqlSessionTemplate.insert(statement, brand);
 		LOG.debug("flag=" + flag);
 
 		return flag;
@@ -133,6 +180,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @return :성공(1)/실패(0)
 	 * @throws SQLException
 	 */
+	@Override
 	public int doDelete(BrandVO brand) throws SQLException {
 		int flag = 0;
 		LOG.debug("=========================================");
@@ -151,22 +199,6 @@ public class BrandDaoImpl implements BrandDao {
 	
 	
 	
-	/**
-	 * 브랜드 전체삭제
-	 * @throws SQLException
-	 */
-	public void deleteAll() throws SQLException {
-		//NAMESPACE +"."+id
-		String statement = NAMESPACE + ".deleteAll";
-		int flag = sqlSessionTemplate.delete(statement);
-		LOG.debug("=========================================");
-		LOG.debug("flag=" + flag);
-		LOG.debug("=========================================");		
-	}
-	
-	
-	
-	
 	
 	/**
 	 * 브랜드 수정
@@ -174,6 +206,7 @@ public class BrandDaoImpl implements BrandDao {
 	 * @return :성공(1)/실패(0)
 	 * @throws SQLException
 	 */ 
+	
 	public int doUpdate(BrandVO brand) throws SQLException {
         int flag = 0;
         
@@ -189,24 +222,4 @@ public class BrandDaoImpl implements BrandDao {
 		return flag;
 	}
 
-
-	@Override
-	public List<?> doRetrieve(BrandVO brand) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void setDataSource(DataSource dataSource) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public int doInsert(SelectedMenuVO select) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

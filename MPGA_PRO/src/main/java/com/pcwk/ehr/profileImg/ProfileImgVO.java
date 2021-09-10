@@ -1,6 +1,8 @@
 package com.pcwk.ehr.profileImg;
 
-public class ProfileImgVO {
+import com.pcwk.ehr.cmn.DTO;
+
+public class ProfileImgVO extends DTO{
 
 	private int seq;			//프로필 순번
 	private String proImgPath;	//프로필이미지경로

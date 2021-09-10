@@ -1,6 +1,8 @@
 package com.pcwk.ehr.brand;
 
-public class BrandVO {
+import com.pcwk.ehr.cmn.DTO;
+
+public class BrandVO extends DTO {
 
 	private String bCode;		//브랜드 번호
 	private String bLogoImg;	//브랜드 로고

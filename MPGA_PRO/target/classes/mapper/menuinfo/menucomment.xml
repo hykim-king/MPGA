@@ -12,4 +12,4 @@
         INSERT INTO menu_comment(seq,menu_num,member_num,contents,reg_dt)
         VALUES (#{seq},#{menuNum},#{memberNum},#{contents},sysdate)
     </insert>
-</mapper>   
+</mapper>     

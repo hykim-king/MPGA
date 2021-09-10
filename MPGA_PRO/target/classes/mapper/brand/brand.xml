@@ -110,7 +110,7 @@
                         SELECT *
                         FROM BRAND
                         <include refid="searchCondition"/>
-                        ORDER BY reg_dt desc
+                        ORDER BY mod_dt desc
                     )t1
                 )t2
                 WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  

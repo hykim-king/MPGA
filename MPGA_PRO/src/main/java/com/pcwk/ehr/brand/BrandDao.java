@@ -32,7 +32,7 @@ public interface BrandDao {
 	int getCount() throws ClassNotFoundException, SQLException;
 
 	/**
-	 * 브랜드 조회
+	 * 브랜드 단건 조회
 	 * @param inVO
 	 * @return brandVO
 	 * @throws ClassNotFoundException

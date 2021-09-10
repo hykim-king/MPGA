@@ -105,7 +105,7 @@ public class ProfileImgDaoImpl implements ProfileImgDao {
 	
 	
 	/**
-	 * 프로필 조회
+	 * 프로필 단건 조회
 	 * @param inVO
 	 * @return UserVO
 	 * @throws ClassNotFoundException

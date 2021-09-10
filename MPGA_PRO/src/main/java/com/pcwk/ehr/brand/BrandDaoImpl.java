@@ -53,7 +53,7 @@ public class BrandDaoImpl implements BrandDao {
 	}
 	
 	/**
-	 * 브랜드 검색
+	 * 브랜드 단건 조회
 	 * @param searchVO
 	 * @return list
 	 * @throws SQLException

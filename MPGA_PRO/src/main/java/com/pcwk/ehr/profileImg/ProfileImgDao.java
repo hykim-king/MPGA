@@ -30,7 +30,7 @@ public interface ProfileImgDao {
 	int getCount() throws ClassNotFoundException, SQLException;
 
 	/**
-	 * 프로필 조회
+	 * 프로필 단건 조회
 	 * @param inVO
 	 * @return UserVO
 	 * @throws ClassNotFoundException

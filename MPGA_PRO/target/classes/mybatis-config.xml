@@ -11,5 +11,6 @@
         <typeAlias type="com.pcwk.ehr.brand.BrandVO" alias="BrandVO"/>
         <typeAlias type="com.pcwk.ehr.comment.MenuCommentVO" alias="MenuCommentVO"/>
         <typeAlias type="com.pcwk.ehr.commentlike.CommentLikeVO" alias="CommentLikeVO"/>
+        <typeAlias type="com.pcwk.ehr.profileImg.ProfileImgVO" alias="ProfileImgVO"/>
     </typeAliases>
 </configuration>  

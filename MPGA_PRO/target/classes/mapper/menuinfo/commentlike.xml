@@ -8,12 +8,21 @@
         <id property="cLike"    column="c_like"/>
         <id property="cLikeDate"     column="c_like_dt"/> 
     </resultMap>
+    
+    <select id="getAll" resultMap="commentLikeResultMap">
+        SELECT  seq,
+                member_Num,
+                c_like_dt,
+                c_like
+        FROM    comment_like
+        ORDER   BY seq
+    </select>
 
 
     <select id="doSelectOne" parameterType="CommentLikeVO" resultType="CommentLikeVOMap">
         SELECT seq,
                member_num,
-               c_like
+               c_like,
                c_like_dt
                FROM comment_like
                WHERE seq = #{seq}

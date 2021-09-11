@@ -9,6 +9,16 @@
         <id property="memberNum"    column="member_num"/>
         <id property="contents"     column="contents"/> 
     </resultMap>
+    
+    <select id="getAll" resultMap="commentResultMap">
+        SELECT  seq,
+                member_num,
+                menu_num,
+                contents,
+                reg_dt
+        FROM    menu_comment
+        ORDER   BY seq
+    </select>
 
     <delete id="doDelete" parameterType="MenuCommentVO">
         DELETE FROM menu_comment

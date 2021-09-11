@@ -21,9 +21,11 @@
     </resultMap>
     
     <update id="doRankingSystem" parameterType="com.pcwk.ehr.member.UserVO">
-        SELECT COUNT(t2.c_like) COUNTLIKE
-        FROM member t1, comment_like t2
-        WHERE t1.member_num = t2.member_num
+	    INSERT INTO MEMBER 
+	    SELECT COUNTLIKE
+	    FROM(SELECT COUNT(t2.c_like) COUNTLIKE
+	         FROM member t1, comment_like t2
+	         WHERE t1.member_num = t2.member_num)
     </update>
     
     <!-- delete -->
@@ -34,7 +36,7 @@
     
     <!-- insert -->
     <insert id="doInsert" parameterType="com.pcwk.ehr.member.UserVO">
-        INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM, M_RANK )
+        INSERT INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM, M_RANK )
         VALUES (#{memberNum},#{seq},#{id},#{nickName},#{phoneNum},#{email},#{pw},#{birthday},#{sex},sysdate,#{regNum},#{Rank})
     </insert>
     

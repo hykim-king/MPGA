@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 
-import com.pcwk.ehr.Level;
+
 import com.pcwk.ehr.Rank;
 import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.commentlike.CommentLikeVO;
 import com.pcwk.ehr.member.UserDao;
-import com.pcwk.ehr.member.domain.UserVO;
+import com.pcwk.ehr.member.UserVO;
 
 public class UserServiceImpl implements UserService {
 	
@@ -39,15 +39,14 @@ public class UserServiceImpl implements UserService {
 		return flag;
 	}
 	
-	private Boolean canUpgradeLevel(CommentLikeVO like) {
-		UserVO user = new UserVO();
+	private Boolean canUpgradeRank(UserVO user) {
 		Rank currentLevel = user.getRank();
 
 		switch (currentLevel) {
 		case BASIC:
-			return (like.getcLike() >= MIN_CLIKECOUNT_FOR_SILVER);
+			return (user.getCountLike() >= MIN_CLIKECOUNT_FOR_SILVER);
 		case SILVER:
-			return (like.getcLike() >= MIN_CLIKECOUNT_FOR_GOLD);
+			return (user.getCountLike() >= MIN_CLIKECOUNT_FOR_GOLD);
 		case GOLD:
 			return false;
 		default:
@@ -64,7 +63,7 @@ public class UserServiceImpl implements UserService {
 //		  }
 		 
 
-		user.upgradeLevel();
+		user.upgradeRank();
 		this.userDao.doUpdate(user);
 	}
 

@@ -21,11 +21,12 @@ public class UserVO extends DTO {
 	private String modDt;
 	private int regNum;
 	private Rank rank;
+	private int countLike;
 	
 	public UserVO() {}
 
 	public UserVO(int memberNum, int seq, String id, String nickName, String phoneNum, String email, String pw,
-			String birthday, String sex, String modDt, int regNum, Rank rank) {
+			String birthday, String sex, String modDt, int regNum, Rank rank, int countLike) {
 		super();
 		this.memberNum = memberNum;
 		this.seq = seq;
@@ -39,6 +40,15 @@ public class UserVO extends DTO {
 		this.modDt = modDt;
 		this.regNum = regNum;
 		this.rank = rank;
+		this.countLike = countLike;
+	}
+
+	public int getCountLike() {
+		return countLike;
+	}
+
+	public void setCountLike(int countLike) {
+		this.countLike = countLike;
 	}
 
 	public int getMemberNum() {
@@ -141,12 +151,12 @@ public class UserVO extends DTO {
 	public String toString() {
 		return "UserVO [memberNum=" + memberNum + ", seq=" + seq + ", id=" + id + ", nickName=" + nickName
 				+ ", phoneNum=" + phoneNum + ", email=" + email + ", pw=" + pw + ", birthday=" + birthday + ", sex="
-				+ sex + ", modDt=" + modDt + ", regNum=" + regNum + ", rank=" + rank + ", toString()="
+				+ sex + ", modDt=" + modDt + ", regNum=" + regNum + ", rank=" + rank + ", countLike=" + countLike + ", toString()="
 				+ super.toString() + "]";
 	}
 
 	
-	public void upgradeLevel() {
+	public void upgradeRank() {
 		Rank nextRank = this.rank.nextRank();
 		if (null == nextRank) {
 			throw new IllegalArgumentException(this.rank + "은 업그레이드가 불가능 합니다.");

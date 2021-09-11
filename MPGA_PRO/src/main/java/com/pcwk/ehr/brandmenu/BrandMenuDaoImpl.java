@@ -37,7 +37,7 @@ public class BrandMenuDaoImpl implements BrandMenuDao {
 	/**
 	 * 내 브랜드 별점 목록
 	 * @param searchMineVO
-	 * @return
+	 * @return list
 	 * @throws SQLException
 	 */
 	public List<?> menuScoreList(SearchMineVO searchMineVO) throws SQLException {		

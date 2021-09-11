@@ -1,4 +1,4 @@
-package com.pcwk.ehr.selectedmenu;
+package com.pcwk.ehr.menuselect;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,20 +16,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import com.pcwk.ehr.selectedmenu.SelectedMenuVO;
+
+import com.pcwk.ehr.menuselect.MenuSelectVO;
 
 @Repository
-public class SelectedMenuDaoImpl implements SelectedMenuDao {
+public class MenuSelectDaoImpl implements MenuSelectDao {
 
-	final static org.slf4j.Logger LOG = LoggerFactory.getLogger(SelectedMenuDaoImpl.class);
+	final static org.slf4j.Logger LOG = LoggerFactory.getLogger(MenuSelectDaoImpl.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	RowMapper<SelectedMenuVO> rowMapper = new RowMapper<SelectedMenuVO>() {
+	RowMapper<MenuSelectVO> rowMapper = new RowMapper<MenuSelectVO>() {
 
-		public SelectedMenuVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			SelectedMenuVO tmpVO = new SelectedMenuVO();
+		public MenuSelectVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			MenuSelectVO tmpVO = new MenuSelectVO();
 
 			tmpVO.setMemberNum(rs.getInt("memberNum"));
 			tmpVO.setMenuNum(rs.getString("menuNum"));
@@ -38,12 +39,12 @@ public class SelectedMenuDaoImpl implements SelectedMenuDao {
 		}
 	};
 
-	public SelectedMenuDaoImpl() {}
+	public MenuSelectDaoImpl() {}
 	
 	// 메뉴찜 테이블을 최신순으로 리스트로 뽑아낸다.
 		@SuppressWarnings({ "deprecation" })
-		public List<SelectedMenuVO> getAll(SelectedMenuVO select) {
-			List<SelectedMenuVO> list = new ArrayList<SelectedMenuVO>();
+		public List<MenuSelectVO> getAll(MenuSelectVO select) {
+			List<MenuSelectVO> list = new ArrayList<MenuSelectVO>();
 			StringBuilder sb = new StringBuilder(100);
 			sb.append(" SELECT menu_num,     \n");
 			sb.append(" 	   TO_CHAR(selectDt,'YYYY/MM/DD HH24MISS') selectDt  \n");
@@ -56,7 +57,7 @@ public class SelectedMenuDaoImpl implements SelectedMenuDao {
 			Object[] args = {select.getMenuNum()};
 			list = this.jdbcTemplate.query(sb.toString(), args, rowMapper);
 
-			for (SelectedMenuVO vo : list) {
+			for (MenuSelectVO vo : list) {
 				LOG.debug("vo:" + vo);
 			}
 
@@ -71,7 +72,7 @@ public class SelectedMenuDaoImpl implements SelectedMenuDao {
 		 * @throws ClassNotFoundException
 		 * @throws SQLException
 		 */
-		public int doInsert(final SelectedMenuVO select) throws ClassNotFoundException, SQLException {
+		public int doInsert(final MenuSelectVO select) throws ClassNotFoundException, SQLException {
 			int flag = 0;
 			StringBuilder sb = new StringBuilder();
 			sb.append(" INSERT INTO menu_select (memberNum,menuNum,selectDt) \n");
@@ -93,7 +94,7 @@ public class SelectedMenuDaoImpl implements SelectedMenuDao {
 		 * 찜 취소
 		 * WHERE memberNum = ? , menuNum = ? 특정 회원이 특정 메뉴의 찜을 취소한다
 		 */
-		public int doDelete(SelectedMenuVO select) throws SQLException {
+		public int doDelete(MenuSelectVO select) throws SQLException {
 			int flag = 0;
 			StringBuilder sb = new StringBuilder();
 			sb.append(" DELETE FROM menu_select \n");

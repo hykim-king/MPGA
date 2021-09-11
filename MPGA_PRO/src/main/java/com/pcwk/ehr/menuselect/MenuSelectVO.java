@@ -1,8 +1,8 @@
-package com.pcwk.ehr.selectedmenu;
+package com.pcwk.ehr.menuselect;
 
-public class SelectedMenuVO {
+public class MenuSelectVO {
 	
-	public SelectedMenuVO() {
+	public MenuSelectVO() {
 	}
 
 	private int memberNum; // 회원번호

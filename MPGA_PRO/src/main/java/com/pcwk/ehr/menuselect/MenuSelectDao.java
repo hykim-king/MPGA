@@ -1,12 +1,12 @@
-package com.pcwk.ehr.selectedmenu;
+package com.pcwk.ehr.menuselect;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface SelectedMenuDao {
+public interface MenuSelectDao {
 
 	// 메뉴찜 테이블을 최신순으로 리스트로 뽑아낸다.
-	List<SelectedMenuVO> getAll(SelectedMenuVO select);
+	List<MenuSelectVO> getAll(MenuSelectVO select);
 
 	/**
 	 * 찜 등록
@@ -16,12 +16,12 @@ public interface SelectedMenuDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	int doInsert(SelectedMenuVO select) throws ClassNotFoundException, SQLException;
+	int doInsert(MenuSelectVO select) throws ClassNotFoundException, SQLException;
 
 	/*
 	 * 찜 취소
 	 * WHERE memberNum = ? , menuNum = ? 특정 회원이 특정 메뉴의 찜을 취소한다
 	 */
-	int doDelete(SelectedMenuVO select) throws SQLException;
+	int doDelete(MenuSelectVO select) throws SQLException;
 
 }

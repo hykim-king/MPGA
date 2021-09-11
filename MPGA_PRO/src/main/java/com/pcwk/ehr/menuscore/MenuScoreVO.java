@@ -1,15 +1,15 @@
-package com.pcwk.ehr.menugrade;
+package com.pcwk.ehr.menuscore;
 
-public class MenuGradeVO {
+public class MenuScoreVO {
 	
 	private int memberNum;	    //회원번호
 	private String menuNum;		//메뉴번호
 	private int score;		    //별점
 	private String scoreDt;		//별점 준 날짜
 	
-	public MenuGradeVO() {}
+	public MenuScoreVO() {}
 	
-	public MenuGradeVO(int memberNum, String menuNum, int score, String scoreDt) {
+	public MenuScoreVO(int memberNum, String menuNum, int score, String scoreDt) {
 		super();
 		this.memberNum = memberNum;
 		this.menuNum = menuNum;

@@ -1,11 +1,11 @@
-package com.pcwk.ehr.menugrade;
+package com.pcwk.ehr.menuscore;
 
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
-import com.pcwk.ehr.menugrade.MenuGradeVO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,17 +18,19 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-public class MenuGradeDaoImpl implements MenuGradeDao {
+import com.pcwk.ehr.menuscore.MenuScoreVO;
 
-	final static org.slf4j.Logger LOG = LoggerFactory.getLogger(MenuGradeDaoImpl.class);
+public class MenuScoreDaoImpl implements MenuScoreDao {
+
+	final static org.slf4j.Logger LOG = LoggerFactory.getLogger(MenuScoreDaoImpl.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	RowMapper<MenuGradeVO> rowMapper = new RowMapper<MenuGradeVO>() {
+	RowMapper<MenuScoreVO> rowMapper = new RowMapper<MenuScoreVO>() {
 
-		public MenuGradeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MenuGradeVO tmpVO = new MenuGradeVO();
+		public MenuScoreVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			MenuScoreVO tmpVO = new MenuScoreVO();
 
 			tmpVO.setMemberNum(rs.getInt("member_num"));
 			tmpVO.setMenuNum(rs.getString("menu_num"));
@@ -38,13 +40,13 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 		}
 	};
 	
-	public MenuGradeDaoImpl() {}
+	public MenuScoreDaoImpl() {}
 
 	
 	// 메뉴 별점테이블을 최신순으로 리스트로 뽑아낸다.
 	@SuppressWarnings({ "deprecation" })
-	public List<MenuGradeVO> getAll(MenuGradeVO grade) {
-		List<MenuGradeVO> list = new ArrayList<MenuGradeVO>();
+	public List<MenuScoreVO> getAll(MenuScoreVO grade) {
+		List<MenuScoreVO> list = new ArrayList<MenuScoreVO>();
 		StringBuilder sb = new StringBuilder(100);
 		sb.append(" SELECT member_num,     \n");
 		sb.append("        menu_num,     \n");
@@ -59,7 +61,7 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 		Object[] args = {grade.getMenuNum()};
 		list = this.jdbcTemplate.query(sb.toString(), args, rowMapper);
 
-		for (MenuGradeVO vo : list) {
+		for (MenuScoreVO vo : list) {
 			LOG.debug("vo:" + vo);
 		}
 
@@ -76,7 +78,7 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 	 * @throws SQLException
 	 */
 	@SuppressWarnings("deprecation")
-	public   int getAvg(MenuGradeVO grade) throws ClassNotFoundException, SQLException {
+	public   int getAvg(MenuScoreVO grade) throws ClassNotFoundException, SQLException {
 		int avg_score= 0;
 		StringBuilder sb = new StringBuilder(100);
 		sb.append(" SELECT TRUNC(AVG(score),1) AS avg_score,     \n");
@@ -105,7 +107,7 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 	 * @throws SQLException
 	 */
 	@SuppressWarnings("deprecation")
-	public int getCount(MenuGradeVO grade) throws ClassNotFoundException, SQLException {
+	public int getCount(MenuScoreVO grade) throws ClassNotFoundException, SQLException {
 		int cnt = 0;
 		
 		StringBuilder sb = new StringBuilder(100);
@@ -159,7 +161,7 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public int doInsert(final MenuGradeVO grade) throws ClassNotFoundException, SQLException {
+	public int doInsert(final MenuScoreVO grade) throws ClassNotFoundException, SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
 		sb.append(" INSERT INTO menu_score (memberNum,menuNum,score,scoreDt) \n");
@@ -180,7 +182,7 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 	/*
 	 * WHERE memberNum = ? , menuNum = ? 특정 회원이 특정 메뉴에서 별점을 취소한다
 	 */
-	public int doDelete(MenuGradeVO grade) throws SQLException {
+	public int doDelete(MenuScoreVO grade) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
 		sb.append(" DELETE FROM menu_score \n");
@@ -200,7 +202,7 @@ public class MenuGradeDaoImpl implements MenuGradeDao {
 	 * WHERE memberNum = ? 특정회원을 찾아 score = ? 별점을 변경한다
 	 * 별점 변경
 	 */
-	public int doUpdate(MenuGradeVO grade) throws SQLException {
+	public int doUpdate(MenuScoreVO grade) throws SQLException {
         int flag = 0;
         
         StringBuilder sb = new StringBuilder();

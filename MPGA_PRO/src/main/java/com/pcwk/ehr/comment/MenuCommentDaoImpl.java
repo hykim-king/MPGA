@@ -14,59 +14,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.pcwk.ehr.commentlike.CommentLikeVO;
+
 public class MenuCommentDaoImpl implements MenuCommentDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
 	SqlSessionTemplate sqlsessiontemplate;
-	final String NAMESPACE = "com.pcwk.ehr.comment";
 	
-	RowMapper<MenuCommentVO> rowMapper = new RowMapper<MenuCommentVO>() {
-		
-		public MenuCommentVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MenuCommentVO tmpVO = new MenuCommentVO();
-			
-			tmpVO.setSeq(rs.getInt("seq"));
-			tmpVO.setMemberNum(rs.getInt("member_num"));
-			tmpVO.setMenuNum(rs.getString("menu_num"));
-			tmpVO.setContents(rs.getString("contents"));
-			tmpVO.setRegDt(rs.getString("reg_dt"));
-
-			return tmpVO;
-
-		}
-	};
+	final String NAMESPACE = "com.pcwk.ehr.comment";
 
 	public MenuCommentDaoImpl() {
 	
 	}
 	
-	@Override
-	public void setDataSource(DataSource dataSource) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}
 	
 	@Override
 	@SuppressWarnings({ "deprecation" })
 	public List<MenuCommentVO> getAll() {
 		List<MenuCommentVO> list = new ArrayList<MenuCommentVO>();
-		StringBuilder sb = new StringBuilder(100);
-		sb.append("SELECT 	seq,					 	  				 \n");
-		sb.append(" 		member_num,			 					 	 \n");
-		sb.append("			menu_num,									 \n");
-		sb.append(" 		contents					 				 \n");
-		sb.append(" 		reg_dt					 					 \n");
-		sb.append("FROM		menu_comment	 							 \n");
-		sb.append("ORDER BY seq											 \n");
-		LOG.debug("=====================================");
-		LOG.debug("sql=\n" + sb.toString());
 
-		Object[] args = {};
-		list = this.jdbcTemplate.query(sb.toString(), args, rowMapper);
+		String statement = NAMESPACE + ".getAll";
+
+		list = this.sqlsessiontemplate.selectList(statement);
 
 		for (MenuCommentVO vo : list) {
 			LOG.debug("vo" + vo);
@@ -144,6 +115,14 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 		LOG.debug("flag=" + flag);
 		return flag;
 	}
+
+
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	@Override
 	public MenuCommentVO SelectOne(MenuCommentVO inVO) {

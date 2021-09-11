@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.pcwk.ehr.member.UserVO;
-import com.pcwk.ehr.profile.ProfileImgVO;
+import com.pcwk.ehr.commentlike.CommentLikeVO;
 
 public class CommentLikeDaoImpl implements CommentLikeDao {
 
@@ -25,45 +25,23 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlsessiontemplate;
+	
 	final String NAMESPACE = "com.pcwk.ehr.commentlike";
-	
-	RowMapper<CommentLikeVO> rowMapper = new RowMapper<CommentLikeVO>() {
 
-		public CommentLikeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			CommentLikeVO tmpVO = new CommentLikeVO();
-
-			tmpVO.setcLike(rs.getString("member_Num"));
-			tmpVO.setSeq(rs.getInt("seq"));
-			tmpVO.setcLike(rs.getString("cLike"));
-			tmpVO.setcLikeDate(rs.getString("cLikeDate"));
+	public CommentLikeDaoImpl() {
 			
-			return tmpVO;
-		}
-
-	};
-	
-	@Override
-	public void setDataSource(DataSource dataSource) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+	
 	
 	
 	@Override
 	@SuppressWarnings({ "deprecation" })
 	public List<CommentLikeVO> getAll() {
 		List<CommentLikeVO> list = new ArrayList<CommentLikeVO>();
-		StringBuilder sb = new StringBuilder(100);
-		sb.append("SELECT 	seq,					 	  				 \n");
-		sb.append(" 		member_Num,				 					 \n");
-		sb.append("			mod_dt,										 \n");
-		sb.append(" 		c_like					 					 \n");
-		sb.append("FROM		c_like_date	 								 \n");
-		sb.append("ORDER BY seq											 \n");
-		LOG.debug("=====================================");
-		LOG.debug("sql=\n" + sb.toString());
 
-		Object[] args = {};
-		list = this.jdbcTemplate.query(sb.toString(), args, rowMapper);
+		String statement = NAMESPACE + ".getAll";
+
+		list = this.sqlsessiontemplate.selectList(statement);
 
 		for (CommentLikeVO vo : list) {
 			LOG.debug("vo" + vo);
@@ -135,6 +113,14 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 				
 		LOG.debug("flag=" + flag);
 		return flag;
+	}
+
+
+
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

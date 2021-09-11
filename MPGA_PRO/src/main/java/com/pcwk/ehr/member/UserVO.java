@@ -1,10 +1,11 @@
 package com.pcwk.ehr.member;
 
+import com.pcwk.ehr.Rank;
 import com.pcwk.ehr.cmn.DTO;
 
 import java.util.logging.Level;
 
-import com.pcwk.ehr.M_Rank.Rank;
+
 
 public class UserVO extends DTO {
 	
@@ -19,7 +20,7 @@ public class UserVO extends DTO {
 	private String sex;
 	private String modDt;
 	private int regNum;
-	private Level mRank;
+	private Rank rank;
 	
 	public UserVO() {}
 
@@ -37,7 +38,7 @@ public class UserVO extends DTO {
 		this.sex = sex;
 		this.modDt = modDt;
 		this.regNum = regNum;
-		this.mRank = mRank;
+		this.rank = rank;
 	}
 
 	public int getMemberNum() {
@@ -128,30 +129,32 @@ public class UserVO extends DTO {
 		this.regNum = regNum;
 	}
 
-	public Level getmRank() {
-		return mRank;
+	public Rank getRank() {
+		return rank;
 	}
 
-	public void setmRank(Level rank) {
-		this.mRank = rank;
+	public void setRank(Rank rank) {
+		this.rank = rank;
 	}
 
 	@Override
 	public String toString() {
 		return "UserVO [memberNum=" + memberNum + ", seq=" + seq + ", id=" + id + ", nickName=" + nickName
 				+ ", phoneNum=" + phoneNum + ", email=" + email + ", pw=" + pw + ", birthday=" + birthday + ", sex="
-				+ sex + ", modDt=" + modDt + ", regNum=" + regNum + ", mRank=" + mRank + ", toString()="
+				+ sex + ", modDt=" + modDt + ", regNum=" + regNum + ", rank=" + rank + ", toString()="
 				+ super.toString() + "]";
 	}
 
-	public void setmRank(Rank valueOf) {
-		// TODO Auto-generated method stub
-		
+	
+	public void upgradeLevel() {
+		Rank nextRank = this.rank.nextRank();
+		if (null == nextRank) {
+			throw new IllegalArgumentException(this.rank + "은 업그레이드가 불가능 합니다.");
+		} else {
+			this.rank = nextRank;
+		}
+
 	}
-
-	
-
-	
 	
 	
 

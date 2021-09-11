@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 
+import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.member.UserDao;
 
 public class UserServiceImpl implements UserService {
@@ -58,9 +59,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<?> doRetrieve(UserVO user) throws SQLException {
+	public List<?> doRetrieve(SearchVO search) throws SQLException {
 		
-		return userDao.doRetrieve(user);
+		return userDao.doRetrieve(search);
 	}
 
 }

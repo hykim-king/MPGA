@@ -3,6 +3,7 @@ package com.pcwk.ehr.member;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.member.UserVO;
 
 public interface UserService {
@@ -33,6 +34,6 @@ public interface UserService {
 	
 	public int doUpdate(UserVO user) throws SQLException;
 	
-	public List<?> doRetrieve(UserVO user) throws SQLException;
+	public List<?> doRetrieve(SearchVO search) throws SQLException;
 
 }

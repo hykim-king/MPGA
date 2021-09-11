@@ -37,5 +37,9 @@
         INSERT INTO comment_like(seq,member_num,c_like,c_like_dt)
         VALUES (#{seq},#{memberNum},#{cLike},#{cLikeDate})
     </insert>
+    
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) cnt FROM comment_like
+    </select>
 
 </mapper>

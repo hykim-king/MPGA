@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 		List<UserVO> list = userDao.getAll();
 		// 1.1.
 		for (UserVO user : list) {
-			if (canUpgradeLevel(user) == true) {
+			if (canUpgradeRank(user) == true) {
 				upgradeRank(user);
 				
 			}

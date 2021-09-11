@@ -20,6 +20,12 @@
      <result   property="Rank"       column="M_RANK"/>
     </resultMap>
     
+    <update id="doRankingSystem" parameterType="com.pcwk.ehr.member.UserVO">
+        SELECT COUNT(t2.c_like) COUNTLIKE
+        FROM member t1, comment_like t2
+        WHERE t1.member_num = t2.member_num
+    </update>
+    
     <!-- delete -->
     <delete id="doDelete" parameterType="com.pcwk.ehr.member.UserVO">
         DELETE FROM member
@@ -51,8 +57,9 @@
     </select>
     
     <update id="doUpdate" parameterType="UserVO">
-       UPDATE member
+       UPDATE hr_member
        SET
+            MEMBER_NUM = #{memberNum},
             SEQ        = #{seq},
             ID         = #{id},   
             NICKNAME   = #{nickName},

@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 
+import com.pcwk.ehr.Level;
+import com.pcwk.ehr.Rank;
 import com.pcwk.ehr.SearchVO;
+import com.pcwk.ehr.commentlike.CommentLikeVO;
 import com.pcwk.ehr.member.UserDao;
+import com.pcwk.ehr.member.domain.UserVO;
 
 public class UserServiceImpl implements UserService {
 	
@@ -24,13 +28,57 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int add(UserVO user) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		UserVO inVO = user;
+		if (null == inVO.getRank()) {
+			inVO.setRank(Rank.BASIC);
+		}
+
+		flag = userDao.doInsert(inVO);
+
+		return flag;
+	}
+	
+	private Boolean canUpgradeLevel(CommentLikeVO like) {
+		UserVO user = new UserVO();
+		Rank currentLevel = user.getRank();
+
+		switch (currentLevel) {
+		case BASIC:
+			return (like.getcLike() >= MIN_CLIKECOUNT_FOR_SILVER);
+		case SILVER:
+			return (like.getcLike() >= MIN_CLIKECOUNT_FOR_GOLD);
+		case GOLD:
+			return false;
+		default:
+			throw new IllegalArgumentException("Unknown Level:" + currentLevel);
+		}
+
+	}
+	
+	protected void upgradeRank(UserVO user) throws SQLException {
+
+		
+//		  if("pcwk_04".equals(user.getuId())) { //사용자 정의 예외 발생 throw new
+//		   throw new TestUserServiceException("트랜잭션 테스트:"+user.getuId()); 
+//		  }
+		 
+
+		user.upgradeLevel();
+		this.userDao.doUpdate(user);
 	}
 
 	@Override
-	public void upgradeLevels() throws Exception {
-		// TODO Auto-generated method stub
+	public void upgradeRanks() throws Exception {
+		// 1.
+		List<UserVO> list = userDao.getAll();
+		// 1.1.
+		for (UserVO user : list) {
+			if (canUpgradeLevel(user) == true) {
+				upgradeRank(user);
+				
+			}
+		} 
 		
 	}
 

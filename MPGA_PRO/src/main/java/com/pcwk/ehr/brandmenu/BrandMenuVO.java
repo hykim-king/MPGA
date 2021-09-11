@@ -13,8 +13,8 @@ public class BrandMenuVO {
 	
 	public BrandMenuVO() {}
 
-	public BrandMenuVO(String menuNum, String bCode, String menuName, String menuInfo, String menuImg, String menuRegDate,
-			String modDt, int regNum) {
+	public BrandMenuVO(String menuNum, String bCode, String menuName, String menuInfo, String menuImg,
+			String menuRegDate, String modDt, int regNum) {
 		super();
 		this.menuNum = menuNum;
 		this.bCode = bCode;
@@ -66,11 +66,11 @@ public class BrandMenuVO {
 		this.menuImg = menuImg;
 	}
 
-	public String getMenuRegdate() {
+	public String getMenuRegDate() {
 		return menuRegDate;
 	}
 
-	public void setMenuRegdate(String menuRegDate) {
+	public void setMenuRegDate(String menuRegDate) {
 		this.menuRegDate = menuRegDate;
 	}
 
@@ -93,8 +93,8 @@ public class BrandMenuVO {
 	@Override
 	public String toString() {
 		return "BrandMenuVO [menuNum=" + menuNum + ", bCode=" + bCode + ", menuName=" + menuName + ", menuInfo="
-				+ menuInfo + ", menuImg=" + menuImg + ", menuRegDate=" + menuRegDate + ", modDt=" + modDt
-				+ ", regNum=" + regNum + ", toString()=" + super.toString() + "]";
+				+ menuInfo + ", menuImg=" + menuImg + ", menuRegDate=" + menuRegDate + ", modDt=" + modDt + ", regNum="
+				+ regNum + ", toString()=" + super.toString() + "]";
 	}
 
 

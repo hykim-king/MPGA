@@ -31,7 +31,7 @@ import com.pcwk.ehr.brandmenu.BrandMenuDao;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" }) /// applicationContext.xml 설정파일 read
 
-public class JBrandTestDao {
+public class JBrandMenuTestDao {
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -48,16 +48,16 @@ public class JBrandTestDao {
 
 	@Before
 	public void setUp() throws Exception {
-		brandmenu01 = new BrandMenuVO("M_01_01", "MENU_01", "양념치킨", "허니콤보", "Rd", "",  "",10);
-		brandmenu02 = new BrandMenuVO("M_01_02", "MENU_02", "간장치킨", "투움바치킨", "FFF", "", "", 20);
-		brandmenu03 = new BrandMenuVO("M_01_03", "MENU_03", "후라이드치킨", "치킨맛이에요", "DDD", "", "", 30);
-
+		brandmenu01 = new BrandMenuVO("M_01_01", "B_01_01", "양념치킨", "달달해요", "Rd", "",  "",10);
+		brandmenu02 = new BrandMenuVO("M_01_02", "B_01_02", "간장치킨", "짜요", "FFF", "", "", 20);
+		brandmenu03 = new BrandMenuVO("M_01_03", "B_01_03", "후라이드치킨", "치킨맛이에요", "DDD", "", "", 30);
+	
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
 	
 	@Test 
 	@Ignore

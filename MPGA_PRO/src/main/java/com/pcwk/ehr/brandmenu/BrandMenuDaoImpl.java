@@ -15,8 +15,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.SearchMineVO;
 import com.pcwk.ehr.SearchVO;
-import com.pcwk.ehr.brand.BrandVO;
+import com.pcwk.ehr.menuscore.MenuScoreVO;
+import com.pcwk.ehr.menuselect.MenuSelectVO;
 
 @Repository
 public class BrandMenuDaoImpl implements BrandMenuDao {
@@ -31,14 +33,70 @@ public class BrandMenuDaoImpl implements BrandMenuDao {
 	public BrandMenuDaoImpl() {}	
 	
 	
+	
+	/**
+	 * 내 브랜드 별점 목록
+	 * @param searchMineVO
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<?> menuScoreList(SearchMineVO searchMineVO) throws SQLException {		
+		List<MenuScoreVO>   list = new ArrayList<MenuScoreVO>();
+
+		String statement = this.NAMESPACE+".getMenuScoreList";                                  
+		
+		LOG.debug("========================");
+		LOG.debug("param: " + statement);
+		LOG.debug("statement: " + searchMineVO);
+		LOG.debug("========================");
+		
+		list = this.sqlSessionTemplate.selectList(statement, searchMineVO);
+		
+		for (MenuScoreVO vo : list) {
+			LOG.debug("vo:" + vo);
+		}		
+		return list;
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 내 브랜드 메뉴 찜목록
+	 * @param searchMineVO
+	 * @return list
+	 * @throws SQLException
+	 */
+	
+	public List<?> doRetrieveSelect(SearchMineVO searchMineVO) throws SQLException {		
+		List<MenuSelectVO>   list = new ArrayList<MenuSelectVO>();
+
+		String statement = this.NAMESPACE+".doRetrieveMine";                                
+		
+		LOG.debug("========================");
+		LOG.debug("param: " + statement);
+		LOG.debug("statement: " + searchMineVO);
+		LOG.debug("========================");
+		
+		list = this.sqlSessionTemplate.selectList(statement, searchMineVO);
+		
+		for (MenuSelectVO vo : list) {
+			LOG.debug("vo:" + vo);
+		}		
+		return list;
+	}
+	
+		
+		
+
+		
 	/**
 	 * 브랜드 메뉴 전체 조회
 	 * @return list
 	 */
-	
-	
 	@Override
-	@SuppressWarnings({ "deprecation" })
+	@SuppressWarnings("deprecation")
 	public List<BrandMenuVO> getAll() {
 		List<BrandMenuVO> list = new ArrayList<BrandMenuVO>();
 		
@@ -50,6 +108,9 @@ public class BrandMenuDaoImpl implements BrandMenuDao {
 		}
 		return list;
 	}
+	
+	
+	
 	
 	
 	/**
@@ -105,7 +166,7 @@ public class BrandMenuDaoImpl implements BrandMenuDao {
 
 	
 	/**
-	 * 브랜드 메뉴 조회
+	 * 브랜드 메뉴 단건 조회
 	 * @param inVO
 	 * @return brandMenuVO
 	 * @throws ClassNotFoundException
@@ -132,7 +193,7 @@ public class BrandMenuDaoImpl implements BrandMenuDao {
 	
 	
 	/**
-	 * 브랜드 전체삭제
+	 * 브랜드 메뉴 전체삭제
 	 * @throws SQLException
 	 */
 	@Override

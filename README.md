@@ -33,7 +33,7 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 ![EXERD](https://github.com/hykim-king/MPGA/blob/main/EXERD.png "EXERD")  
  
 
-### 06. 조원 /조장  
+### 06. 팀 소개  
 > 조장: 김동현  
 > 조원: 강석화, 김소연, 김정훈, 김혜수, 조봉준  
 

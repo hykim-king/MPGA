@@ -34,6 +34,9 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
  
 
 ### 06. 팀 소개  
+![TEAM](MPGA_PRO/src/main/webapp/resources/redmee/리드미.png)  
+
+
 > 조장: 김동현  
 > 조원: 강석화, 김소연, 김정훈, 김혜수, 조봉준  
 

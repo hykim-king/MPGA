@@ -1,6 +1,6 @@
 package com.pcwk.ehr;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.DTO;
 
 public class SearchVO extends DTO {
 

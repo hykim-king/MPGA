@@ -129,4 +129,18 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Object getCount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

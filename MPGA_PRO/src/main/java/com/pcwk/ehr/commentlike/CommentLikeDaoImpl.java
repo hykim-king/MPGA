@@ -122,6 +122,22 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public Object getCount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

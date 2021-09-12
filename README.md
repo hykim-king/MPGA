@@ -26,7 +26,7 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 
 
 ### 04. 요구사항 정의서  
-![WANT](MPGA_PRO/src/main/webapp/resources/redmee/WBS.PNG)  
+![WANT](MPGA_PRO/src/main/webapp/resources/redmee/요구사항정의서1.PNG)  
 
 
 ### 05. EXERD  

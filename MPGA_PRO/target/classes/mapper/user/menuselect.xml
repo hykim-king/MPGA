@@ -24,10 +24,10 @@
 		DELETE FROM menu_select
 		WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum} , MENU_NUM <![CDATA[=]]> #{menuNum}
 	</delete>
-
+    
 	<select id="menuSelectRead" parameterType="MenuSelectVO" resultMap="menuselectResultMap">
        SELECT MENU_NUM,
-              TO_CHAR(SELECT_DT,'YYYY/MM/DD HH24MISS') SELECT_DT
+              SELECT_DT
        FROM menu_select
        ORDER BY SELECT_DT DESC
        WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum}

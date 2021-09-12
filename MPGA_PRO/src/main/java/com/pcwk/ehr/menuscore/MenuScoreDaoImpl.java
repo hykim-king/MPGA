@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
 import com.pcwk.ehr.menuscore.MenuScoreVO;
 
 @Repository
-public class MenuScoreDaoImpl implements MenuScoreDao, MenuScoreService {
+public class MenuScoreDaoImpl implements MenuScoreDao {
 
 	@Autowired
 	private SqlSession session;

@@ -23,7 +23,7 @@ import com.pcwk.ehr.menuselect.MenuSelectVO;
 import com.pcwk.ehr.notice.vo.NoticeVO;
 
 @Repository
-public class MenuSelectDaoImpl implements MenuSelectDao, MenuSelectService {
+public class MenuSelectDaoImpl implements MenuSelectDao{
 
 	@Autowired
 	private SqlSession session;

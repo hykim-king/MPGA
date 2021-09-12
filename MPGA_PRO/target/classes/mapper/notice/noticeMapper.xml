@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.notice">
 
-<resultMap type="NoticeVO" id="noticeResultMap" >
+<resultMap type="NoticeVO" id="noticeResultType" >
     <id     property="seq"       column="seq" />
     <result property="title"     column="title" />
     <result property="contents"  column="contents" />
@@ -13,8 +13,8 @@
     <result property="board_cfc" column="board_cfc" />
 </resultMap>   
    <!-- 공지사항 글 작성 -->
-<insert id="noticeInsert" parameterType="NoticeVO" >
-insert into notice(
+<insert id="doInsert" parameterType="NoticeVO" >
+insert into notice(   
     seq,
     title,
     contents,
@@ -30,7 +30,22 @@ values
     #{board_cfc}
   )
 </insert>
-<select id="noticeRead" parameterType="NoticeVO" resultMap="noticeResultMap">
+<select id="doRead" resultMap="noticeResultType">
+
+select    
+    seq,
+    title,
+    contents,
+
+    reg_num,
+    board_cfc                
+from 
+    notice
+where seq = #{seq}
+
+</select>
+
+<select id="doSelect01" resultMap="noticeResultType">
 select    
     seq,
     title,
@@ -40,26 +55,40 @@ select
     board_cfc                
 from 
     notice
-where seq = #{seq}
+where board_cfc = 1
 </select>
 
-<update id="noticeUpdate" parameterType="NoticeVO" >
-update notice set title = #{title}, content = #{contents}
-where seq = #{seq}
-</update>
-
-<delete id="noticeDelete" parameterType="NoticeVO" >
-delete from notice where seq = #{seq}
-</delete>
-                                                  
-<select id="noticeListAll" parameterType="NoticeVO" resultMap="noticeResultMap">    
-<![CDATA[
-  
-select
+<select id="doSelect02" resultMap="noticeResultType">
+select    
     seq,
     title,
     contents,
     reg_dt,
+    reg_num,
+    board_cfc                   
+from 
+    notice
+where board_cfc = 2
+</select>
+
+
+
+<update id="doUpdate" parameterType="NoticeVO" >
+update notice set title = #{title}, contents = #{contents}
+where seq = #{seq}
+</update>
+
+<delete id="doDelete" parameterType="NoticeVO" >
+delete from notice where seq = #{seq}
+</delete>
+                                                  
+<select id="getAll" parameterType="NoticeVO" resultMap="noticeResultType">    
+<![CDATA[        
+select
+    seq,
+    title,
+    contents,
+    reg_dt, 
     reg_num,
     board_cfc  
 from

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.notice.dao.NoticeDAO;
-import com.pcwk.ehr.notice.domain.NoticeVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	@Autowired

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.notice.domain.NoticeVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 
 
 public interface NoticeService {

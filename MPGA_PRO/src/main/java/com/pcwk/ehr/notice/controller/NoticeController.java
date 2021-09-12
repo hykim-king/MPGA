@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pcwk.ehr.notice.domain.NoticeVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 import com.pcwk.ehr.notice.dao.NoticeDAO;
 import com.pcwk.ehr.notice.service.NoticeService;
 @Controller
@@ -35,7 +35,7 @@ public class NoticeController {
 		model.addAttribute("doSelect01", noticeService.doSelect01());
 		model.addAttribute("doSelect02", noticeService.doSelect02());
 		return "/WEB-INF/views/notice/noticeGetAll";
-	}
+	}  
 
 	//공지사항 게시판 관리페이지
 	@RequestMapping(value = "/noticeListManage.do", method = RequestMethod.GET)

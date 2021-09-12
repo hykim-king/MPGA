@@ -1,4 +1,4 @@
-package com.pcwk.ehr.notice.domain;
+package com.pcwk.ehr.notice.vo;
 
 
 public class NoticeVO {

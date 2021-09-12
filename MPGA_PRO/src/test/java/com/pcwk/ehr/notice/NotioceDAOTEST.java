@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.notice.dao.NoticeDAO;
-import com.pcwk.ehr.notice.domain.NoticeVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -44,22 +44,22 @@ public class NotioceDAOTEST {
 	
 	
 	/*자료 목록 보기 테스트 */
-//	@Test
-//	public void testGetAll() {
-//		
-//		List<NoticeVO> list;
-//		try {
-//			list = dao.getAll();
-//			for(Object a : list) {
-//				log.info("" + a);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			log.debug("실패!");
-//		}
-//		
-//
-//	}
+	@Test
+	public void testGetAll() {
+		
+		List<NoticeVO> list;
+		try {
+			list = dao.getAll();
+			for(Object a : list) {
+				log.info("" + a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.debug("실패!");
+		}
+		
+
+	}
 	
 //	@Test
 //	public void testDoUpdate() {
@@ -78,14 +78,14 @@ public class NotioceDAOTEST {
 //	
 //	}
 	
-	@Test
-	public void testDoDelete() {
-		try {
-			dao.doDelete(202);
-			log.info("성공하였습니다.");
-		} catch (Exception e) {
-			log.info("실패하였습니다.");
-			e.printStackTrace();
-		}
-	}
+//	@Test
+//	public void testDoDelete() {
+//		try {
+//			dao.doDelete(202);
+//			log.info("성공하였습니다.");
+//		} catch (Exception e) {
+//			log.info("실패하였습니다.");
+//			e.printStackTrace();
+//		}
+//	}
 }

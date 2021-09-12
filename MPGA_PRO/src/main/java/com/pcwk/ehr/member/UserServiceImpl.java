@@ -21,6 +21,8 @@ public class UserServiceImpl implements UserService {
 
 	public UserServiceImpl() {
 	}
+	
+	
 
 	@Override
 	public int add(UserVO user) throws ClassNotFoundException, SQLException {
@@ -76,6 +78,7 @@ public class UserServiceImpl implements UserService {
 		} 
 		
 	}
+	
 
 	@Override
 	public UserVO doSelectOne(UserVO inVO) throws ClassNotFoundException, SQLException {
@@ -105,6 +108,33 @@ public class UserServiceImpl implements UserService {
 	public List<?> doRetrieve(SearchVO search) throws SQLException {
 		
 		return userDao.doRetrieve(search);
+	}
+
+
+
+	@Override
+	public int sameIdCheck(UserVO user) throws Exception {
+		int flag = userDao.sameIdCheck(user);
+		
+		return flag;
+	}
+
+
+
+	@Override
+	public int samePWCheck(UserVO user) throws Exception {
+		int flag = userDao.samePWCheck(user);
+		
+		return flag;
+	}
+
+
+
+	@Override
+	public int sameNickCheck(UserVO user) throws Exception {
+		int flag = userDao.sameNickCheck(user);
+		
+		return flag;
 	}
 
 }

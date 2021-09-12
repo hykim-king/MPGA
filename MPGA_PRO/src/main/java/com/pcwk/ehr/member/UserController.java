@@ -39,9 +39,50 @@ public class UserController {
 
 	public UserController() {
 	}
+	
+	@RequestMapping(value = "member/sameIdCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int sameIdCheck(UserVO user) throws Exception{
+		int result = service.sameIdCheck(user);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "member/samePWCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int samePWCheck(UserVO user) throws Exception{
+		int result = service.samePWCheck(user);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "member/sameNickCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int sameNickCheck(UserVO user) throws Exception{
+		int result = service.sameNickCheck(user);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "member/sameNickCheck.do", method = RequestMethod.POST)
+	public String doInsert(UserVO user) throws Exception{
+		int result = service.sameIdCheck(user);
+		try {
+			if(result == 1) {
+				return "/member/doInsert";
+			}else if(result == 0) {
+				service.doInsert(user);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		return "redirect:/";
+	}
+	
 
 	// member.doSelectOne.do?uId=pcwk_01
 	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET)
+	@ResponseBody
 	public String doSelectOne(UserVO inVO, Model model) throws ClassNotFoundException, SQLException {
 		LOG.debug("=============================");
 		LOG.debug("=doSelectOne=");
@@ -67,7 +108,7 @@ public class UserController {
 		inVO.setSeq(Integer.valueOf("seqStr"));
 		
 		inVO.setId(req.getParameter("id"));
-		inVO.setNickName(req.getParameter("nickname"));
+		inVO.setNickName(req.getParameter("nickName"));
 		inVO.setPhoneNum(req.getParameter("phoneNum"));
 		inVO.setEmail(req.getParameter("email"));
 		inVO.setPw(req.getParameter("pw"));
@@ -79,7 +120,7 @@ public class UserController {
 		inVO.setRegNum(Integer.valueOf("regNumStr"));
 		
 
-		String mRankStr = StringUtil.nvl(req.getParameter("level"), "1");
+		String mRankStr = StringUtil.nvl(req.getParameter("rank"), "1");
 		inVO.setRank(Rank.valueOf(mRankStr)); // 등급 : Default : 1
 		
 
@@ -119,7 +160,7 @@ public class UserController {
 		LOG.debug("=doDelete=");
 		LOG.debug("=param=" + user);
 		LOG.debug("=============================");
-		String userId = req.getParameter("uId");
+		String userId = req.getParameter("id");
 		inVO.setId(userId);
 		LOG.debug("=param=" + inVO);
 		int flag = this.service.doDelete(inVO);
@@ -181,8 +222,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value="member/doRetrieve.do"
-			,method=RequestMethod.GET
-			,produces="application/json;charset=UTF-8")
+					,method=RequestMethod.GET
+					,produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String doRetrieve(SearchVO search) throws SQLException{
 		

@@ -8,43 +8,52 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.notice.dao.NoticeDAO;
-import com.pcwk.ehr.notice.vo.NoticeVO;
+import com.pcwk.ehr.notice.domain.NoticeVO;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private final NoticeDAO noticeDAO;
-	   
-	   
+	
+	
 	public NoticeServiceImpl(NoticeDAO noticeDAO) {
 		this.noticeDAO = noticeDAO;
 	}
 	@Override
-	public void noticeInsert(NoticeVO noticeVO) throws Exception {
-		noticeDAO.noticeInsert(noticeVO);
+	public void doInsert(NoticeVO noticeVO) throws Exception {
+		noticeDAO.doInsert(noticeVO);
 	}
   
 	@Override
-	public NoticeVO noticeRead(Integer seq) throws Exception {
-		noticeDAO.noticeRead(seq);
-		return null;
-	}
-
-	@Override
-	public void noticeUpdate(NoticeVO noticeVO) throws Exception {
-		noticeDAO.noticeUpdate(noticeVO);
-
-	}
-
-	@Override
-	public void noticeDelete(Integer seq) throws Exception {
-		noticeDAO.noticeDelete(seq);
-
-	}
-
-	@Override
-	public List<NoticeVO> noticeListAll() throws Exception {
+	public NoticeVO doRead(Integer seq) throws Exception {
 		
-		return noticeDAO.noticeListAll();
+		return noticeDAO.doRead(seq);
 	}
 
+	@Override
+	public void doUpdate(NoticeVO noticeVO) throws Exception {
+		noticeDAO.doUpdate(noticeVO);
+
+	}
+
+	@Override
+	public void doDelete(Integer seq) throws Exception {
+		noticeDAO.doDelete(seq);
+
+	}
+
+	@Override
+	public List<NoticeVO> getAll() throws Exception {
+		
+		return noticeDAO.getAll();
+	}
+	@Override
+	public List<NoticeVO> doSelect01() throws Exception {
+		return noticeDAO.doSelect01();
+	}
+	
+	@Override
+	public List<NoticeVO> doSelect02() throws Exception {
+		return noticeDAO.doSelect02();
+	}
+	
 }

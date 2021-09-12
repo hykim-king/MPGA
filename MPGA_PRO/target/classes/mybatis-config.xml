@@ -6,6 +6,7 @@
 
     <!-- DTO에 별칭 -->
     <typeAliases>
+        <typeAlias type="com.pcwk.ehr.commentlike.CommentLikeVO" alias="CommentLikeVO"/>
         <typeAlias type="com.pcwk.ehr.member.UserVO" alias="UserVO"/>
         <typeAlias type="com.pcwk.ehr.brand.BrandVO" alias="BrandVO"/>
         <typeAlias type="com.pcwk.ehr.SearchVO" alias="SearchVO"/>

@@ -10,7 +10,9 @@
 
 
 ### 01. 프로젝트 기획서  
-[PROJECT.pdf](https://github.com/hykim-king/MPGA/blob/main/PROJECT.pdf "PROJECT.pdf")  
+[![프로젝트기획서](MPGA_PRO/src/main/webapp/resources/redmee/클릭.png)](https://github.com/hykim-king/MPGA/blob/main/MPGA_PRO/src/main/webapp/resources/redmee/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%88%98%EC%A0%95-2.pdf)       
+
+
 
 
 ### 02. 개발환경
@@ -22,20 +24,22 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 
 
 ### 03. WBS  
-![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  
+![WBS](MPGA_PRO/src/main/webapp/resources/redmee/WBS.PNG)  
 
 
 ### 04. 요구사항 정의서  
-![WANT](https://github.com/hykim-king/MPGA/blob/main/WANT.png "WANT")  
+![WANT](MPGA_PRO/src/main/webapp/resources/redmee/요구사항정의서1.PNG)   
+
 
 
 ### 05. EXERD  
-![EXERD](https://github.com/hykim-king/MPGA/blob/main/EXERD.png "EXERD")  
+![EXERD](MPGA_PRO/src/main/webapp/resources/redmee/untitled2.png)  
  
 
 ### 06. 팀 소개  
-> 조장: 김동현  
-> 조원: 강석화, 김소연, 김정훈, 김혜수, 조봉준  
+![TEAM](https://github.com/hykim-king/MPGA/blob/main/MPGA_PRO/src/main/webapp/resources/redmee/%EB%A6%AC%EB%93%9C%EB%AF%B811.png)  
+![TEAM2](https://github.com/hykim-king/MPGA/blob/main/MPGA_PRO/src/main/webapp/resources/redmee/redmee222222.png)   
+
 
 
 ### 07.담당 개발 업무 (과정중입니다.)   

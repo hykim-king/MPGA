@@ -1,23 +1,17 @@
 package com.pcwk.ehr.member;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-
-import javax.sql.DataSource;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.SearchVO;
-import com.pcwk.ehr.member.UserVO;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
@@ -30,10 +24,75 @@ public class UserDaoImpl implements UserDao {
 
 	public UserDaoImpl() {
 	}
-	
-	
+		
 
+	/**
+	 * 닉네임 중복 확인
+	 * @param user
+	 * @return flag
+	 * @throws SQLException
+	 */
+	public int SameNickCheck(UserVO user) throws SQLException {
+		int flag = 0;
+		
+		String statement = this.NAMESPACE+".doSameNickCheck";
+		
+		LOG.debug("==================================");
+		LOG.debug("=statement="+user);
+		LOG.debug("=statement="+statement);
+		LOG.debug("==================================");
+		
+		flag = this.sqlSessionTemplate.selectOne(statement, user);
+		LOG.debug("=flag="+flag);
+		
+		return flag;
+	}
 	
+	
+	/**
+	 * 아이디 중복 확인
+	 * @param user
+	 * @return flag
+	 * @throws SQLException
+	 */
+	public int SameIdCheck(UserVO user) throws SQLException {
+		int flag = 0;
+		
+		String statement = this.NAMESPACE+".doSameIdCheck";
+		
+		LOG.debug("==================================");
+		LOG.debug("=statement="+user);
+		LOG.debug("=statement="+statement);
+		LOG.debug("==================================");
+		
+		flag = this.sqlSessionTemplate.selectOne(statement, user);
+		LOG.debug("=flag="+flag);
+		
+		return flag;
+	}
+	
+	
+	/**
+	 * 동일 비밀번호 입력 확인
+	 * @param user
+	 * @return flag
+	 * @throws SQLException
+	 */
+	public int SamePasswdCheck(UserVO user) throws SQLException {
+		int flag = 0;
+		
+		String statement = this.NAMESPACE+".doSamePasswdCheck";
+		
+		LOG.debug("==================================");
+		LOG.debug("=statement="+user);
+		LOG.debug("=statement="+statement);
+		LOG.debug("==================================");
+		
+		flag = this.sqlSessionTemplate.selectOne(statement, user);
+		LOG.debug("=flag="+flag);
+		
+		return flag;
+	}
 
 	@Override
 	public int doInsert(final UserVO user) throws ClassNotFoundException, SQLException {

@@ -59,7 +59,7 @@ public class JUserDaoTest {
 		//public UserVO(String uId, String name, String passwd, Level level, int login, int recommend) {
 		//	public UserVO(String uId, String name, String passwd, Level level, int login, int recommend, String email,
 		//  String regDt) {
-		user01 = new UserVO(1,1,"pcwk_01","balmong","01012345678","jamesol@naver.com","pcwk1234","2012.09.22","1","",1,Rank.BASIC);
+		user01 = new UserVO(1,1,"pcwk_01","balmong","01012345678","jamesol@naver.com","pcwk1234","2012.09.22","1","",1,Rank.BASIC,0);
 	
 		LOG.debug("=========================");
 		LOG.debug("=context="+context);

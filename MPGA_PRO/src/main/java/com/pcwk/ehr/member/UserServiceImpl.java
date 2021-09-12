@@ -6,16 +6,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.MailSender;
-
+import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.Rank;
 import com.pcwk.ehr.SearchVO;
-import com.pcwk.ehr.commentlike.CommentLikeVO;
-import com.pcwk.ehr.member.UserDao;
-import com.pcwk.ehr.member.UserVO;
 
+@Service
 public class UserServiceImpl implements UserService {
 	
 	final Logger LOG = LoggerFactory.getLogger(getClass());

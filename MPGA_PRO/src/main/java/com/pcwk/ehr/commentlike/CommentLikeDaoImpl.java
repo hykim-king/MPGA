@@ -1,6 +1,5 @@
 package com.pcwk.ehr.commentlike;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +10,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import com.pcwk.ehr.member.UserVO;
-import com.pcwk.ehr.commentlike.CommentLikeVO;
 
 public class CommentLikeDaoImpl implements CommentLikeDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
 	@Autowired
 	SqlSessionTemplate sqlsessiontemplate;
 	
@@ -121,6 +113,22 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	public void setDataSource(DataSource dataSource) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public Object getCount() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

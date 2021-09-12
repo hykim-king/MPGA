@@ -17,8 +17,31 @@
      <result   property="sex"       column="SEX"/>
      <result   property="modDt"       column="MOD_DT"/>
      <result   property="regNum"       column="REG_NUM"/>
-     <result   property="Rank"       column="M_RANK"/>
+     <result   property="rank"       column="M_RANK"/>
     </resultMap>
+    
+    <!-- SamePasswdCheck -->
+	<select resultType="int" parameterType="UserVO" id="SamePasswdCheck">
+	    SELECT COUNT(*) cnt
+	    FROM MEMBER
+	    WHERE MEMBER_NUM = #{memberNum}
+	    AND pw = #{pw} 
+	</select>
+	
+	<!-- SameNickCheck -->	
+	<select resultType="int" parameterType="UserVO" id="SameNickCheck">
+	    SELECT COUNT(*) cnt
+	    FROM MEMBER
+	    WHERE NICKNAME = #{nickName} 
+	</select>
+	
+	<!-- SameIdCheck -->	
+	<select resultType="int" parameterType="UserVO" id="SameIDCheck">
+	    SELECT COUNT(*) cnt
+	    FROM MEMBER
+	    WHERE MEMBER_NUM = #{memberNum} 
+	</select>
+    
     
     <update id="doRankingSystem" parameterType="com.pcwk.ehr.member.UserVO">
 	    INSERT INTO MEMBER 
@@ -37,7 +60,7 @@
     <!-- insert -->
     <insert id="doInsert" parameterType="com.pcwk.ehr.member.UserVO">
         INSERT INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM, M_RANK )
-        VALUES (#{memberNum},#{seq},#{id},#{nickName},#{phoneNum},#{email},#{pw},#{birthday},#{sex},sysdate,#{regNum},#{Rank})
+        VALUES (#{memberNum},#{seq},#{id},#{nickName},#{phoneNum},#{email},#{pw},#{birthday},#{sex},sysdate,#{regNum},#{rank})
     </insert>
     
     <!--부등호 사용시 문자 그대로 해석이 필요한 경우 사용 <![CDATA[]]> -->
@@ -51,7 +74,7 @@
               PW,
               BIRTHDAY,
               SEX,
-              TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') MOD_DT,
+              TO_CHAR(MOD_DT,'YYYY/MM/DD HH24MISS') MOD_DT,
               REG_NUM,
               M_RANK
        FROM member
@@ -59,9 +82,8 @@
     </select>
     
     <update id="doUpdate" parameterType="UserVO">
-       UPDATE hr_member
+       UPDATE member
        SET
-            MEMBER_NUM = #{memberNum},
             SEQ        = #{seq},
             ID         = #{id},   
             NICKNAME   = #{nickName},
@@ -72,7 +94,7 @@
             SEX        = #{sex},
             MOD_DT     = sysdate,
             REG_NUM    = #{regNum},
-            M_RANK     = #{Rank}
+            M_RANK     = #{rank}
        WHERE MEMBER_NUM = #{memberNum} 
     </update> 
     
@@ -94,7 +116,7 @@
               PW,
               BIRTHDAY,
               SEX,
-              TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') MOD_DT,
+              TO_CHAR(MOD_DT,'YYYY/MM/DD HH24MISS') MOD_DT,
               REG_NUM,
               M_RANK
        FROM member
@@ -105,10 +127,10 @@
         <where>
             <choose>
                 <when test=" '10' == searchDiv">
-                     u_id  LIKE #{searchWord} ||'%'
+                     MEMBER_NUM  LIKE #{searchWord} ||'%'
                 </when>
                 <when test=" '20' == searchDiv">
-                     name  LIKE #{searchWord} ||'%'
+                     NICKNAME  LIKE #{searchWord} ||'%'
                 </when> 
                 <when test=" '30' == searchDiv">
                      email  LIKE #{searchWord} ||'%'
@@ -121,24 +143,24 @@
         SELECT A.* , B.*
         FROM(
                 SELECT t2.rnum as num,
-                       t2.u_id as "uId",
-                       t2.passwd,
-                       t2.name,
-                       t2.u_level as intLevel,
-                       t2.login,
-                       t2.recommend,
+                       t2.MEMBER_NUM as "memberNum",
+                       t2.pw,
+                       t2.NICKNAME,
+                       t2.M_RANK as Rank,
+                       t2.BIRTHDAY,
+                       t2.SEX,
                        t2.email,
                        --당일이면 시분, 년월일
-                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.reg_dt,'YYYYMMDD')
-                                                          ,TO_CHAR(t2.reg_dt,'HH24:MI')
-                                                          ,TO_CHAR(t2.reg_dt,'YYYY/MM/DD') ) regDt
+                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.MOD_DT,'YYYYMMDD')
+                                                          ,TO_CHAR(t2.MOD_DT,'HH24:MI')
+                                                          ,TO_CHAR(t2.MOD_DT,'YYYY/MM/DD') ) modDt
                 FROM(
                     SELECT rownum rnum,t1.*
                     FROM(
                         SELECT *
-                        FROM hr_member
+                        FROM member
                         <include refid="searchCondition"/>
-                        ORDER BY reg_dt desc
+                        ORDER BY MOD_DT desc
                     )t1
                 )t2
                 WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  
@@ -147,7 +169,7 @@
             CROSS JOIN
             (
                 SELECT COUNT(*) totalCnt       
-                FROM hr_member
+                FROM member
                 <include refid="searchCondition"/>
             )B   
     </select>

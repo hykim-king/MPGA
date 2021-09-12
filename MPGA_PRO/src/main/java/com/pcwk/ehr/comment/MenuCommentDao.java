@@ -25,4 +25,10 @@ public interface MenuCommentDao {
 
 	List<MenuCommentVO> getAll();
 
+
+	void deleteAll();
+
+
+	Object getCount();
+
 }

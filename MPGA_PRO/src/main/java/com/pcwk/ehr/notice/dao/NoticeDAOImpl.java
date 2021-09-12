@@ -1,3 +1,4 @@
+
 package com.pcwk.ehr.notice.dao;
 
 import java.util.List;
@@ -15,35 +16,44 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Autowired
 	private SqlSession session;
 	static String namespace = "com.pcwk.ehr.notice";
+	@Override
+	public void doInsert(NoticeVO noticeVO) throws Exception {
+		session.insert(namespace+".doInsert", noticeVO);
+
+	}
+
+	@Override
+	public NoticeVO doRead(Integer seq) throws Exception {
+		
+		return session.selectOne(namespace+".doRead", seq);
+	}
+
+	@Override
+	public void doUpdate(NoticeVO noticeVO)  throws Exception {
+		session.update(namespace+".doUpdate", noticeVO);
+
+	}
+
+	@Override
+	public void doDelete(Integer seq) throws Exception {
+		session.delete(namespace+".doDelete", seq);
+
+	}
+
+	@Override
+	public List<NoticeVO> getAll() throws Exception {
+		return session.selectList(namespace+".getAll");
+		
+	}
+	@Override
+	public List<NoticeVO> doSelect01() throws Exception {
+		return session.selectList(namespace+".doSelect01");
+	}
 	
 	@Override
-	public void noticeInsert(NoticeVO noticeVO) throws Exception {
-		session.insert(namespace+".noticeInsert", noticeVO);
-
-	}
-
-	@Override
-	public NoticeVO noticeRead(Integer seq) throws Exception {
-		
-		return session.selectOne(namespace+".noticeRead", seq);
-	}
-
-	@Override
-	public void noticeUpdate(NoticeVO noticeVO)  throws Exception {
-		session.update(namespace+".noticeUpdate", noticeVO);
-
-	}
-
-	@Override
-	public void noticeDelete(Integer seq) throws Exception {
-		session.delete(namespace+".noticeDelete", seq);
-
-	}
-
-	@Override
-	public List<NoticeVO> noticeListAll() throws Exception {
-		return session.selectList(namespace+".noticeListAll");
-		
+	public List<NoticeVO> doSelect02() throws Exception {
+		return session.selectList(namespace+".doSelect02");
 	}
 
 }
+

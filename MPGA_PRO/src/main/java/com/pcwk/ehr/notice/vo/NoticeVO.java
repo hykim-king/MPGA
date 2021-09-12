@@ -54,6 +54,10 @@ public class NoticeVO {
 		return "NoticeVO [seq=" + seq + ", title=" + title + ", contents=" + contents + ", reg_dt=" + reg_dt
 				+ ", reg_num=" + reg_num + ", board_cfc=" + board_cfc + "]";
 	}
+	public NoticeVO() {
+		
+	}
+	
 	public NoticeVO(Integer seq, String title, String contents, String reg_dt, Integer reg_num, Integer board_cfc) {
 		
 		this.seq = seq;

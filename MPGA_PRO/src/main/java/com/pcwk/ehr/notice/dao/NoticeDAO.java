@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 import com.pcwk.ehr.notice.vo.NoticeVO;
 @Mapper
 public interface NoticeDAO {
-	public void noticeInsert(NoticeVO noticeVO) throws Exception;
-	public NoticeVO noticeRead(Integer seq) throws Exception;
-	public void noticeUpdate(NoticeVO noticeVO) throws Exception;
-	public void noticeDelete(Integer seq) throws Exception;
-	public List<NoticeVO> noticeListAll() throws Exception;
+	public void doInsert(NoticeVO noticeVO) throws Exception;
+	public NoticeVO doRead(Integer seq) throws Exception;
+	public void doUpdate(NoticeVO noticeVO) throws Exception;
+	public void doDelete(Integer seq) throws Exception;
+	public List<NoticeVO> getAll() throws Exception;
+	public List<NoticeVO> doSelect01() throws Exception;
+	public List<NoticeVO> doSelect02() throws Exception;
 
 }

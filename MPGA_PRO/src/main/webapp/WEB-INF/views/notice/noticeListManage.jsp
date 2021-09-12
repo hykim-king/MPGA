@@ -11,13 +11,37 @@
 <script type="text/javascript" src="/resources/jquery.min.js"></script>
 
 <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="/resources/css/notice.css" rel="stylesheet"/> 
+<script>
+// function del(seq) {
+//     var chk = confirm("정말 삭제하시겠습니까?");
+//     if (chk) {
+//         location.href='noticeDoDelete.do?seq='+seq;
+//     }
+// }   
+
+</script>
+
+
+<style>
+a.a-edit {
+text-decoration: none; border: rgba(75, 112, 253, 0.3) solid; border-width: 0 0 6px 0;
+
+}
+
+a.a-delete {
+text-decoration: none; border: rgba(360, 83, 48, 0.39) solid; border-width: 0 0 6px 0;
+text-color: red;
+
+
+}
+</style>
+
+
 <title>Insert title here</title>
 </head>
-
+<h3><a href="/home.do">홈으로</a></h3>
 <body>
-<form method="get" name="form"><!--  action = "/noticeWrite.do" method = "get" -->
+<!--  action = "/noticeWrite.do" method = "get" -->
 
     <div class="container">
         <div class="row">
@@ -32,15 +56,18 @@
                                     <b>공지사항데이터리스트</b>
                                 </h3>
                             </div>
+                            <form method="get" name="form">
                             <div class="col col-xs-6 text-right">
-                                <button type="submit" class="btn btn-sm btn-primary btn-create" value="write" onclick="javascript: form.action='/noticeWrite.do';" >작성
+                                <button type="submit" class="btn btn-sm btn-primary btn-create" value="write" onclick="javascript: form.action='/noticeDoInsert.do';" >작성
                                     
                                 </button>
                             </div>
+                            </form>
                         </div>
                     </div>
+                    <form method="GET" name="form_01">
                     <div class="panel-body">
-                        <table class="table table-striped table-bordered table-list">
+                        <table class="table table-striped table-bordered table-list" id="tempList">
                             <thead>
                                 <tr>
                                     <th><em class="glyphicon glyphicon-cog"></em></th>
@@ -52,27 +79,25 @@
                                     
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach items="${noticeListAll}" var="noticeVO">
+                            <tbody class = "noticeTable">
+                                <c:forEach items="${getAll}" var="noticeVO" varStatus="status">  
                                     <tr>
 
                                         <td align="center">
                                         
-                                        <button class="btn btn-default" ><em class="glyphicon glyphicon-pencil"></em></button> 
-                                        
-                                        <button class="btn btn-danger" type="submit" value="delete" 
-                                        onclick="javascript: form.action='/noticeDelete.do';" >
-                                        <em class="glyphicon glyphicon-trash" ></em></button>
-                                        
+<!--                                         <input value = "Edit" id="doUpdateBt" name="doUpdateBt" onclick="location.href='/noticeDoUpdate.do?seq={noticeVO.seq}'" /> -->
+                                        <a href = "/noticeDoUpdate.do?seq=${noticeVO.seq}" class = "a-edit">Edit</a>
+                                        &nbsp;&nbsp;
+                                        <a href = "/noticeDoDelete.do?seq=${noticeVO.seq}" class = "a-delete">Delete</a>
 
+	   
+	                                    </td>
 
-                                            </td>
-
-                                        <td id="seq"><c:out value ="${noticeVO.seq}" /></td>
-                                        <td id="title"><c:out value ="${noticeVO.title}" /></td>
-                                        <td id="reg_dt"><c:out value ="${noticeVO.reg_dt}" /></td>
-                                        <td id="reg_num"><c:out value ="${noticeVO.reg_num}" /></td>
-                                        <td id="board_cfc"><c:out value ="${noticeVO.board_cfc}" /></td>
+                                        <td class="seq">${noticeVO.seq}</td>
+                                        <td class="title">${noticeVO.title}</td>
+                                        <td class="reg_dt">${noticeVO.reg_dt}</td>
+                                        <td class="reg_num">${noticeVO.reg_num} </td>
+                                        <td class="board_cfc">${noticeVO.board_cfc}</td>
 
                                     </tr>
 
@@ -82,6 +107,7 @@
                         </table>
 
                     </div>
+                    </form>
                     <div class="panel-footer">
                         <div class="row">
 
@@ -108,10 +134,10 @@
 
 			</div> 
     </div>
-</form>
 
 </body>
-
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/notice.css" rel="stylesheet"/> 
 <!-- 모든 컴파일된 플러그인을 포함합니다  bootstrap js -->
 
 

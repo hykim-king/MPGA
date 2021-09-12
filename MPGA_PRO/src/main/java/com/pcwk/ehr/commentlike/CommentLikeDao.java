@@ -19,4 +19,8 @@ public interface CommentLikeDao {
 
 	List<CommentLikeVO> getAll();
 
+	void deleteAll();
+
+	Object getCount();
+
 }

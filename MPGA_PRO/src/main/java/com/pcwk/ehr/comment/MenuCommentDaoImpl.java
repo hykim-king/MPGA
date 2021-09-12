@@ -11,10 +11,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
-import com.pcwk.ehr.commentlike.CommentLikeVO;
 
 public class MenuCommentDaoImpl implements MenuCommentDao {
 
@@ -126,6 +122,20 @@ public class MenuCommentDaoImpl implements MenuCommentDao {
 
 	@Override
 	public MenuCommentVO SelectOne(MenuCommentVO inVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Object getCount() {
 		// TODO Auto-generated method stub
 		return null;
 	}

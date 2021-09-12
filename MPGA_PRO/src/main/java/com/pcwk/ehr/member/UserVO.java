@@ -1,13 +1,10 @@
 package com.pcwk.ehr.member;
 
 import com.pcwk.ehr.Rank;
-import com.pcwk.ehr.cmn.DTO;
-
-import java.util.logging.Level;
 
 
 
-public class UserVO extends DTO {
+public class UserVO extends com.pcwk.ehr.DTO {
 	
 	private int memberNum;
 	private int seq;

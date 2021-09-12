@@ -1,64 +1,97 @@
 package com.pcwk.ehr.notice.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pcwk.ehr.notice.vo.NoticeVO;
+import com.pcwk.ehr.notice.dao.NoticeDAO;
 import com.pcwk.ehr.notice.service.NoticeService;
 @Controller
 public class NoticeController {
 	
-	
+	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+
 	@Autowired
 	private NoticeService noticeService;
 	
-//	@RequestMapping("home")
-//	public String home(Model model)throws Exception {
-//		return "/home";
-//	}
-	@RequestMapping(value = "/noticeListAll.do", method = RequestMethod.GET)
-	public String noticeListAll(Model model) throws Exception {
-		model.addAttribute("noticeListAll",noticeService.noticeListAll());
-		return "/WEB-INF/views/notice/noticeListAll";
-	}
 	
+
+	//공지사항 FAQ / 새소식
+	@RequestMapping(value = "/noticeGetAll.do", method = RequestMethod.GET)
+	public String noticeGetAll(Model model) throws Exception {
+		model.addAttribute("doSelect01", noticeService.doSelect01());
+		model.addAttribute("doSelect02", noticeService.doSelect02());
+		return "/WEB-INF/views/notice/noticeGetAll";
+	}  
+
+	//공지사항 게시판 관리페이지
 	@RequestMapping(value = "/noticeListManage.do", method = RequestMethod.GET)
 	public String noticeListManage(Model model) throws Exception {
-		model.addAttribute("noticeListAll",noticeService.noticeListAll());
+		model.addAttribute("getAll",noticeService.getAll());
 		return "/WEB-INF/views/notice/noticeListManage";
 	}
 	
-	
-	@RequestMapping(value = "/noticeWrite.do", method = RequestMethod.GET) // GET방식으로 불러오기
-	  public String noticeWriteGET(NoticeVO noticeVO, Model model) throws Exception {	   
-		return "/WEB-INF/views/notice/noticeWrite";
+	//게시글 작성
+	@RequestMapping(value = "/noticeDoInsert.do", method = RequestMethod.GET) // GET방식으로 불러오기
+	  public String noticeDoInsertGET(NoticeVO noticeVO, Model model) throws Exception {	   
+		return "/WEB-INF/views/notice/noticeDoInsert";
 	}
 	
-	
-	@RequestMapping(value = "/noticeWrite.do", method = RequestMethod.POST) // POST방식으로 내용 전송
-	  public String noticeWritePOST(NoticeVO noticeVO, RedirectAttributes rttr) throws Exception { // 인자값으로 REDIRECT 사용 	   
-		noticeService.noticeInsert(noticeVO); // 글작성 서비스 호출	    	    
+	//게시글 작성 후 제출
+	@RequestMapping(value = "/noticeDoInsert.do", method = RequestMethod.POST) // POST방식으로 내용 전송
+	  public String noticeDoInsert(NoticeVO noticeVO, RedirectAttributes rttr) throws Exception { // 인자값으로 REDIRECT 사용 	   
+		noticeService.doInsert(noticeVO); // 글작성 서비스 호출	    	    
 	    return "redirect:/noticeListManage.do"; // 작성이 완료된 후, 목록페이지로 리턴
 	}
-
-	@RequestMapping(value = "/noticeFAQRead.do", method = RequestMethod.GET)
-		public String noticeRead(NoticeVO noticeVO, Model model) throws Exception{
-		model.addAttribute("noticeFAQRead", noticeService.noticeRead(noticeVO.getSeq()));
+	//게시글 조회
+	@RequestMapping(value = "/noticeDoRead.do", method = {RequestMethod.GET})
+		public String noticeDoRead(@RequestParam("seq") Integer seq, Model model) throws Exception{
+		logger.info("noticeRead....");
 		
-		return "/WEB-INF/views/notice/noticeFAQView";
-	}
+		model.addAttribute("doRead", noticeService.doRead(seq));
+
+		return "/WEB-INF/views/notice/noticeDoRead";
+	} 
 	
-	@RequestMapping(value = "/noticeDelete.do", method = RequestMethod.GET) 
-	  public String noticeDelete(NoticeVO noticeVO) throws Exception {  	   
-		noticeService.noticeDelete(noticeVO.getSeq()); 	    	    
+ 
+	//게시글 삭제
+	@RequestMapping(value = "/noticeDoDelete.do", method = RequestMethod.GET) 
+	  public String noticeDoDelete(NoticeVO noticeVO) throws Exception {  	   
+		noticeService.doDelete(noticeVO.getSeq()); 	    	    
 	    return "redirect:/noticeListManage.do"; // 작성이 완료된 후, 목록페이지로 리턴
 	}
-	//@RequestParam("seq")Integer seq, RedirectAttributes rttrm
+	
+	//게시글 수정
+	@RequestMapping(value = "/noticeDoUpdate.do", method = RequestMethod.GET)
+	public String noticeUpdateGet(@RequestParam("seq") Integer seq, Model model) throws Exception{
+		model.addAttribute("doRead", noticeService.doRead(seq));
+		return "/WEB-INF/views/notice/noticeDoUpdate";
+	}
+	
+	@RequestMapping(value = "/noticeDoUpdate.do", method = RequestMethod.POST)
+	public String noticeUpdateGet(NoticeVO noticeVO, RedirectAttributes rttr) throws Exception{
+		noticeService.doUpdate(noticeVO);
+		return "redirect:/noticeListManage.do";
+	}
+//	@RequestMapping(value = "/noticeDoUpdate.do", method = RequestMethod.POST)
+//	
+//	public String noticeUpdate(NoticeVO noticeVO, RedirectAttributes rttr) throws Exception{
+//		noticeService.doUpdate(noticeVO);
+//		return "redirect:/noticeListManage.do";
+//	}  
+
 }
 	

@@ -10,7 +10,7 @@
 
 
 ### 01. 프로젝트 기획서  
-[![프로젝트기획서](MPGA_PRO/src/main/webapp/resources/redmee/클릭.png)](https://github.com/hykim-king/MPGA/blob/main/MPGA_PRO/src/main/webapp/resources/redmee/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B8%B0%ED%9A%8D%EC%84%9C-2.pdf)       
+[![프로젝트기획서](MPGA_PRO/src/main/webapp/resources/redmee/클릭.png)](https://github.com/hykim-king/MPGA/blob/main/MPGA_PRO/src/main/webapp/resources/redmee/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%88%98%EC%A0%95-2.pdf)       
 
 
 

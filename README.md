@@ -30,7 +30,7 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 
 
 ### 05. EXERD  
-![EXERD](https://github.com/hykim-king/MPGA/blob/main/EXERD.png "EXERD")  
+![EXERD](MPGA_PRO/src/main/webapp/resources/redmee/untitled2.png)  
  
 
 ### 06. 팀 소개  

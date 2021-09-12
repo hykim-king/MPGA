@@ -30,7 +30,6 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 ### 04. 요구사항 정의서  
 ![WANT](MPGA_PRO/src/main/webapp/resources/redmee/요구사항정의서1.PNG)   
 
-![image](https://user-images.githubusercontent.com/89445641/132989172-6b6c14f2-1225-4e3d-9cc0-aa399a4cd012.png)
 
 
 ### 05. EXERD  

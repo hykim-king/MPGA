@@ -1,4 +1,7 @@
-#### MakeProgramGreatAgain(MPGA)조
+
+
+
+![header](https://capsule-render.vercel.app/api?type=wave&color=97DBAE&height=300&section=header&text=Hello,%20MPGA!%20&&fontSize=70)
 
 ### 00. 프로젝트 목표
 + OracleDB와 DBMS를 사용하여 데이터 구성하고 관리함.
@@ -30,7 +33,7 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 ![EXERD](https://github.com/hykim-king/MPGA/blob/main/EXERD.png "EXERD")  
  
 
-### 06. 조원 /조장  
+### 06. 팀 소개  
 > 조장: 김동현  
 > 조원: 강석화, 김소연, 김정훈, 김혜수, 조봉준  
 
@@ -44,3 +47,8 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 |4     |김정훈 | 로그인 페이지, 공지사항     |
 |5     |김혜수 | 브랜드 메뉴     |
 |6     |조봉준 | 찜, 메뉴별점    |
+
+
+
+![footer](https://capsule-render.vercel.app/api?section=footer&color=75BDE0&height=200)
+

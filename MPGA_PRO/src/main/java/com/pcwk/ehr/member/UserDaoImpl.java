@@ -2,125 +2,167 @@ package com.pcwk.ehr.member;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.member.UserVO;
 
 public class UserDaoImpl implements UserDao {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
-	private DataSource dataSource;
-
-	private JdbcTemplate jdbcTemplate;
-
-	RowMapper<UserVO> rowMapper = new RowMapper<UserVO>() {
-
-		public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			UserVO tmpVO = new UserVO();
-
-			tmpVO.setId(rs.getString("u_id"));
-			tmpVO.setNickName(rs.getString("name"));
-			
-			return tmpVO;
-		}
-
-	};
+	@Autowired
+	SqlSessionTemplate   sqlSessionTemplate;
+	
+	final String NAMESPACE = "com.pcwk.ehr.member";
+	
 
 	public UserDaoImpl() {
 	}
+	
+	
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	
 
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-
-	public int doInsert(final UserVO user) {
+	@Override
+	public int doInsert(final UserVO user) throws ClassNotFoundException, SQLException {
 		int flag = 0;
+		
+		LOG.debug("=========================================");
+		LOG.debug("param=" + user.toString());
+		LOG.debug("=========================================");
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(" INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM, ) \n");
-		sb.append(" VALUES (?,?,?,?,?,?,?,?,?,sysdate,?) \n");
+		//NAMESPACE +"."+id
+		String statement = NAMESPACE + ".doInsert";
 
-		Object[] args = { user.getMemberNum(), user.getSeq(), user.getId(), user.getNickName(), user.getPhoneNum(),
-				user.getEmail(), user.getPw(), user.getBirthday(), user.getSex(), user.getModDt(), user.getRegNum() };
-
-		flag = this.jdbcTemplate.update(sb.toString(), args);
+		flag = sqlSessionTemplate.insert(statement, user);
+		LOG.debug("flag=" + flag);
 
 		return flag;
 	}
 	
 	//쓸필요가 없다.
+	@Override
 	@SuppressWarnings("deprecation")
 	public UserVO doSelectOne(UserVO inVO) throws ClassNotFoundException, SQLException {
 		UserVO outVO = null;
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(" SELECT id, 	 	 	\n");
-		sb.append("        nickname  	\n");		
-		sb.append(" FROM member 	 	\n");
-		sb.append(" WHERE  id = ? 	 	\n");
-		sb.append(" 	   nickname = ? \n");
-		LOG.debug("==============================================");
-		LOG.debug("=sql=\n" + sb.toString());
+		String statement = this.NAMESPACE+".doSelectOne";
 		
-		Object[] args = { inVO.getId() };
-		LOG.debug("=args=" + args);
-		LOG.debug("==============================================");
-		outVO = this.jdbcTemplate.queryForObject(sb.toString(), args, rowMapper);
-		LOG.debug("==============================================");
-		LOG.debug("=outVO=\n" + outVO.toString());
-		LOG.debug("==============================================");
+		
+		LOG.debug("=========================================");
+		LOG.debug("inVO=" + inVO.toString());
+		LOG.debug("statement=" + statement);
+		LOG.debug("=========================================");
 
+		outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("outVO=" + outVO);
 		return outVO;
 	}
 	
 	//아이디, 닉네임 인증시 데이터 비교할때 사용.
 	@Override
-	public List<?> doRetrieve(UserVO user) throws SQLException {
+	public List<?> doRetrieve(SearchVO searchVO) throws SQLException {
+		List<UserVO>   list = new ArrayList<UserVO>();
 		
-		return null;
+		String statement = this.NAMESPACE +".doRetrieve";
+		LOG.debug("=========================================");
+		LOG.debug("statement" + statement);
+		LOG.debug("searchVO" + searchVO);
+		LOG.debug("=========================================");		
+		
+		list = this.sqlSessionTemplate.selectList(statement, searchVO);
+		
+		for (UserVO vo : list) {
+			LOG.debug("vo:" + vo);
+		}		
+		return list;
 	}
 
 	@Override
+	@SuppressWarnings({ "deprecation" })
 	public List<UserVO> getAll() {
+		List<UserVO> list = new ArrayList<UserVO>();
 		
-		return null;
+		String statement = this.NAMESPACE +".getAll";
+		
+		list = this.sqlSessionTemplate.selectList(statement);
+		
+		for (UserVO vo : list) {
+			LOG.debug("vo:" + vo);
+		}
+
+		return list;
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public int getCount() throws ClassNotFoundException, SQLException {
+		int cnt = 0;
+
+		String statement = this.NAMESPACE +".getCount";
 		
-		return 0;
+		cnt = this.sqlSessionTemplate.selectOne(statement);
+		LOG.debug("=========================================");
+		LOG.debug("cnt=" + cnt);
+		LOG.debug("=========================================");
+
+		return cnt;
 	}
 
 	@Override
 	public void deleteAll() throws SQLException {
-		
-		
+
+		//NAMESPACE +"."+id
+		String statement = NAMESPACE + ".deleteAll";
+		int flag = sqlSessionTemplate.delete(statement);
+		LOG.debug("=========================================");
+		LOG.debug("flag=" + flag);
+		LOG.debug("=========================================");		
 	}
 
 	@Override
 	public int doDelete(UserVO user) throws SQLException {
+		int flag = 0;
+
+		LOG.debug("=========================================");
+		LOG.debug("param=" + user.toString());
+		LOG.debug("=========================================");
+		//com.pcwk.ehr.member.doDelete
+		//com.pcwk.ehr.member
+		//NAMESPACE +"."+id
+		String statement = NAMESPACE + ".doDelete";
 		
-		return 0;
+		
+		flag = this.sqlSessionTemplate.delete(statement, user);
+		
+		LOG.debug("flag=" + flag);
+		return flag;
 	}
 
 	@Override
 	public int doUpdate(UserVO user) throws SQLException {
-		
-		return 0;
+        int flag = 0;
+        
+		LOG.debug("=========================================");
+		LOG.debug("param=" + user.toString());
+		LOG.debug("=========================================");		
+		String statement  = NAMESPACE +".doUpdate";
+		flag = sqlSessionTemplate.update(statement, user);
+		LOG.debug("flag=" + flag);
+		return flag;
 	}
-
 	
 
 	

@@ -1,6 +1,7 @@
 package com.pcwk.ehr.member;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.member.UserVO;
 import com.google.gson.Gson;
-import com.pcwk.ehr.M_Rank.Rank;
+
 import com.pcwk.ehr.MessageVO;
+import com.pcwk.ehr.Rank;
+import com.pcwk.ehr.SearchVO;
 import com.pcwk.ehr.StringUtil;
 import com.pcwk.ehr.member.UserService;
 
@@ -77,7 +80,7 @@ public class UserController {
 		
 
 		String mRankStr = StringUtil.nvl(req.getParameter("level"), "1");
-		inVO.setmRank(Rank.valueOf(mRankStr)); // 등급 : Default : 1
+		inVO.setRank(Rank.valueOf(mRankStr)); // 등급 : Default : 1
 		
 
 		
@@ -141,14 +144,78 @@ public class UserController {
 
 	}
 
-	public String doUpdate(UserVO user) throws SQLException {
-
-		return "";
+	@RequestMapping(value="member/doUpdate.do"
+			,method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8"
+			)
+	@ResponseBody
+	public String doUpdate(UserVO user) throws SQLException{
+        MessageVO  messageVO = new MessageVO();
+		LOG.debug("=====================================");
+		LOG.debug("=user="+user);
+		LOG.debug("=====================================");	
+		
+		if(null == user.getRank()) {
+			user.setRank(Rank.BASIC);
+		}
+		
+		int flag  = this.service.doUpdate(user);
+		
+		String messageStr = "";
+		
+		if(1==flag) {
+			messageStr = "수정 되었습니다.";
+		}else {
+			messageStr = "수정 실패";
+		}
+		messageVO.setMsgId(String.valueOf(flag));
+		messageVO.setMsgContents(messageStr);
+		LOG.debug("=====================================");
+		LOG.debug("=messageVO="+messageVO);
+		LOG.debug("=====================================");	
+		
+		Gson gson=new Gson();
+		String jsonStr = gson.toJson(messageVO);
+		LOG.debug("=jsonStr="+jsonStr);
+		return jsonStr;
 	}
 
-	public String doRetrieve(UserVO user) throws SQLException {
-
-		return "";
-	}
+	@RequestMapping(value="member/doRetrieve.do"
+			,method=RequestMethod.GET
+			,produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String doRetrieve(SearchVO search) throws SQLException{
+		
+		//Default: pageSize=10, pageNum=1
+		//페이지 Num
+		if(0==search.getPageNum()) {
+			search.setPageNum(1);
+		}
+		      
+		//pageSize
+		if(0==search.getPageSize()) {
+			search.setPageSize(10);
+		}		
+		
+		LOG.debug("=====================================");
+		LOG.debug("=search=");
+		LOG.debug("=search="+search);
+		LOG.debug("=====================================");		
+		
+		List<UserVO> list = (List<UserVO>) this.service.doRetrieve(search);
+		
+		for(UserVO vo   :list) {
+			LOG.debug("=vo="+vo);
+		}
+		
+		Gson gson=new Gson();
+		String jsonList = gson.toJson(list);
+		LOG.debug("=====================================");
+		LOG.debug("=jsonList="+jsonList);
+		LOG.debug("=====================================");				
+		
+		
+		return jsonList;
+	}	
 
 }

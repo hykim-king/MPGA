@@ -2,84 +2,105 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.member">
+
     <!-- resultmap 
          column Alias TO VO
     -->
     <resultMap type="UserVO" id="userResultMap">
-     <id       property="uId"         column="u_id"/>
-     <result   property="name"        column="name"/>
-     <result   property="passwd"      column="passwd"/>
-     <result   property="intLevel"    column="u_level"/> 
-     <result   property="recommend"   column="recommend"/>
-     <result   property="email"       column="email"/>
-     <result   property="login"       column="login"/>
-     <result   property="regDt"       column="reg_dt"/>
+     <id       property="memberNum"         column="MEMBER_NUM"/>
+     <result   property="seq"        column="SEQ"/>
+     <result   property="id"      column="ID"/>
+     <result   property="nickName"    column="NICKNAME"/> 
+     <result   property="phoneNum"   column="PHONE_NUM"/>
+     <result   property="email"       column="EMAIL"/>
+     <result   property="pw"       column="PW"/>
+     <result   property="sex"       column="SEX"/>
+     <result   property="modDt"       column="MOD_DT"/>
+     <result   property="regNum"       column="REG_NUM"/>
+     <result   property="Rank"       column="M_RANK"/>
     </resultMap>
     
+    <update id="doRankingSystem" parameterType="com.pcwk.ehr.member.UserVO">
+	    INSERT INTO MEMBER 
+	    SELECT COUNTLIKE
+	    FROM(SELECT COUNT(t2.c_like) COUNTLIKE
+	         FROM member t1, comment_like t2
+	         WHERE t1.member_num = t2.member_num)
+    </update>
+    
     <!-- delete -->
-    <delete id="doDelete" parameterType="UserVO">
-       DELETE FROM hr_member
-       WHERE u_id = #{uId}
+    <delete id="doDelete" parameterType="com.pcwk.ehr.member.UserVO">
+        DELETE FROM member
+        WHERE MEMBER_NUM = #{memberNum}
     </delete>
-
-    <insert id="doInsert" parameterType="UserVO">
-       INSERT INTO HR_MEMBER ( u_id,name,passwd,u_level,login,recommend,email,reg_dt     )
-       VALUES (#{uId},#{name},#{passwd},#{intLevel},#{login},#{recommend}, #{email},sysdate)   
+    
+    <!-- insert -->
+    <insert id="doInsert" parameterType="com.pcwk.ehr.member.UserVO">
+        INSERT INTO MEMBER (MEMBER_NUM, SEQ, ID, NICKNAME, PHONE_NUM, EMAIL, PW, BIRTHDAY, SEX, MOD_DT, REG_NUM, M_RANK )
+        VALUES (#{memberNum},#{seq},#{id},#{nickName},#{phoneNum},#{email},#{pw},#{birthday},#{sex},sysdate,#{regNum},#{Rank})
     </insert>
-
+    
     <!--부등호 사용시 문자 그대로 해석이 필요한 경우 사용 <![CDATA[]]> -->
     <select id="doSelectOne" parameterType="UserVO"  resultMap="userResultMap">
-       SELECT u_id,
-              name,
-              passwd,   
-              u_level,
-              recommend,  
-              email,  
-              login,
-              TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') reg_dt
-       FROM hr_member
-       WHERE u_id  <![CDATA[ = ]]> #{uId}
+       SELECT MEMBER_NUM,
+              SEQ,
+              ID,   
+              NICKNAME,
+              PHONE_NUM,  
+              EMAIL, 
+              PW,
+              BIRTHDAY,
+              SEX,
+              TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') MOD_DT,
+              REG_NUM,
+              M_RANK
+       FROM member
+       WHERE MEMBER_NUM  <![CDATA[ = ]]> #{memberNum}
     </select>
-
-
+    
     <update id="doUpdate" parameterType="UserVO">
        UPDATE hr_member
        SET
-          name      = #{name},
-          passwd    = #{passwd},
-          u_level   = #{intLevel},
-          login     = #{login},
-          recommend = #{recommend},
-          email     = #{email},
-          reg_dt    = sysdate
-       WHERE u_id = #{uId} 
+            MEMBER_NUM = #{memberNum},
+            SEQ        = #{seq},
+            ID         = #{id},   
+            NICKNAME   = #{nickName},
+            PHONE_NUM  = #{phoneNum},  
+            EMAIL      = #{email}, 
+            PW         = #{pw},
+            BIRTHDAY   = #{birthday},
+            SEX        = #{sex},
+            MOD_DT     = sysdate,
+            REG_NUM    = #{regNum},
+            M_RANK     = #{Rank}
+       WHERE MEMBER_NUM = #{memberNum} 
     </update> 
-
-
+    
     <delete id="deleteAll">
-        DELETE FROM hr_member
+        DELETE FROM member
     </delete>
     
     <select id="getCount" resultType="int">
-       SELECT COUNT(*) cnt FROM hr_member
+       SELECT COUNT(*) cnt FROM member
     </select>
     
     <select id="getAll"  resultMap="userResultMap">
-       SELECT u_id,
-              name,
-              passwd,
-              u_level,
-              login,
-              recommend,
-              email,
-              TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') reg_dt
-       FROM hr_member
-       ORDER BY u_id              
+       SELECT MEMBER_NUM,
+              SEQ,
+              ID,   
+              NICKNAME,
+              PHONE_NUM,  
+              EMAIL, 
+              PW,
+              BIRTHDAY,
+              SEX,
+              TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') MOD_DT,
+              REG_NUM,
+              M_RANK
+       FROM member
+       ORDER BY MEMBER_NUM              
     </select>
-    <!-- sql 이 엘리먼트 다른 구문에서 재사용가능한 SQL구문을 정의할 때 사용된다.  -->
-    <!-- where 엘리먼트는 태그에 의해 컨텐츠가 리턴되면 단순히 “WHERE”만을 추가한다. 
-    게다가 컨텐츠가 “AND”나 “OR”로 시작한다면 그 “AND”나 “OR”를 지워버린다. -->    
-    <!-- u_id=10, name=20, email=30-->
+    
     <sql id="searchCondition">
         <where>
             <choose>
@@ -96,49 +117,39 @@
         </where>
     </sql>
     
-    <select id="doRetrieve" parameterType="SearchVO" resultMap="userResultMap">
-		SELECT A.* , B.*
-		FROM(
-			    SELECT t2.rnum,
-			           t2.u_id,
-			           t2.passwd,
-			           t2.name,
-			           t2.u_level,
-			           t2.login,
-			           t2.recommend,
-			           t2.email,
-			           --당일이면 시분, 년월일
-			           DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.reg_dt,'YYYYMMDD')
-			                                              ,TO_CHAR(t2.reg_dt,'HH24:MI')
-			                                              ,TO_CHAR(t2.reg_dt,'YYYY/MM/DD') ) reg_dt
-			    FROM(
-			        SELECT rownum rnum,t1.*
-			        FROM(
-			            SELECT *
-			            FROM hr_member
-			            <include refid="searchCondition"/>
-			            ORDER BY reg_dt desc
-			        )t1
-			    )t2
-			    WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  
-			                   AND #{pageSize}*(#{pageNum} -1) + #{pageSize}
-		    )A
-		    CROSS JOIN
-		    (
-			    SELECT COUNT(*) total_cnt
-			    FROM hr_member
-			    <include refid="searchCondition"/>
-		    )B   
+    <select id="doRetrieve" parameterType="SearchVO" resultType="UserVO">
+        SELECT A.* , B.*
+        FROM(
+                SELECT t2.rnum as num,
+                       t2.u_id as "uId",
+                       t2.passwd,
+                       t2.name,
+                       t2.u_level as intLevel,
+                       t2.login,
+                       t2.recommend,
+                       t2.email,
+                       --당일이면 시분, 년월일
+                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.reg_dt,'YYYYMMDD')
+                                                          ,TO_CHAR(t2.reg_dt,'HH24:MI')
+                                                          ,TO_CHAR(t2.reg_dt,'YYYY/MM/DD') ) regDt
+                FROM(
+                    SELECT rownum rnum,t1.*
+                    FROM(
+                        SELECT *
+                        FROM hr_member
+                        <include refid="searchCondition"/>
+                        ORDER BY reg_dt desc
+                    )t1
+                )t2
+                WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  
+                               AND #{pageSize}*(#{pageNum} -1) + #{pageSize}
+            )A
+            CROSS JOIN
+            (
+                SELECT COUNT(*) totalCnt       
+                FROM hr_member
+                <include refid="searchCondition"/>
+            )B   
     </select>
     
-    
-    
-    
-    
-
-
-
-
-
-
 </mapper>

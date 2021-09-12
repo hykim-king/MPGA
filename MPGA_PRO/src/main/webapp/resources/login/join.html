@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<style type="text/css">
+body, header, h1, h2, a, div, ul, li, form, input, button, span {
+    margin: 0; 
+    padding: 0;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 75px;
+	padding: 1rem;
+	color: white;
+	background: teal;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+body {
+	padding-top: 75px;
+	background: #EEE;
+}
+ul{
+	list-style:none;
+}
+ .join_container {
+ 	margin: 10%;
+ 	padding: 10px;
+	background: #FFFFFF;
+	font-weight: bold;
+}
+
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<h1><a href="#" class="moveToMain">청바치</a></h1>
+		<div id="topMenu" class="topMenu">
+			<ul>
+				<li><a href="#">공지사항</a></li>
+			</ul>
+		</div>
+	</header>
+	<div id="join_container" class="join_container">
+		<h2>회원가입</h2>	
+			<form id="join_insert" name="join_insert" autocomplete="off" method="POST" action="" onsubmit="">
+				<div id="idFrms" class="form_group has-feedback has-error">
+			    	<input type="text" name="isert_id" class="form-control" id="isert_id" placeholder="아이디"/>
+			  	 	<button type="button" class="chk_btn">
+					<span class="btn_text">중복확인</span></button>
+			    	<span id="idStatus" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+			    	<div id="idMsg" class="text-danger">아이디를 입력해 주세요.</div>
+			    </div>
+			    <div id="pwFrms" class="form-group has-feedback has-error">
+		            <input type="password" name="frm[pro_tx_password]" class="form-control" id="tx_passwd" onblur="chkPasswd1()" onkeyup="chkShiftUp(event)" onkeypress="chkCapslock(event)" onkeydown="chkShiftDown(event)" placeholder="비밀번호">
+		            <span id="pwStatus" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+		            <div id="pwMsg" class="text-danger">비밀번호를 입력해주세요.</div>
+		        </div>
+				<div id="pwFrms2" class="form-group has-feedback mag_b_10">
+		            <input type="password" name="tx_passwd_con" class="form-control" id="tx_passwd_con" onblur="chkPasswd2()" placeholder="비밀번호확인">
+		            <span id="pwStatus2" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+		            <div id="pwMsg2" class="text-danger">비밀번호 확인을 입력해주세요.</div>
+		        </div>
+		        <div id="nickFrms" class="form-group has-feedback">
+		            <input type="text" name="frm[pro_nm_user]" class="form-control" id="nm_user" onblur="chkNick()" placeholder="닉네임">
+		            <span id="nickStatus" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+		        </div>
+				<div id="phoneNumFrms" class="form-group has-feedback">
+		            <input type="text" name="frm[pro_id_phoneNum]" class="form-control" id="id_phoneNum" onblur="chkNumSSL()" placeholder="전화번호">
+		            <span id="phoneNum" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+		        </div>
+				<div id="emailFrms" class="form-group has-feedback">
+		            <input type="text" name="frm[pro_id_email]" class="form-control" id="id_email" onblur="chkEmailSSL()" placeholder="이메일">
+		            <span id="emailStatus" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+		        </div>
+				<div id="birthFrms" class="form-group has-feedback">
+		            <input type="text" name="frm[pro_id_birth]" class="form-control" id="id_birth"placeholder="생일   ex)900101">
+		            <span id="birthStatus" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+		        	<div class="form-group has-feedback">
+			            <div class="btn_gender">
+					        <span class="input-group-btn">
+					        	<button type="button" id="tg_male" class="btn btn-sm btn-default" onclick="chkGender('m')">남자</button>
+						    </span>
+						    <span class="input-group-btn">
+						    	<button type="button" id="tg_female" class="btn btn-sm btn-default" onclick="chkGender('f')">여자</button>
+						    </span>
+						 </div>
+				    </div>
+			     </div>
+		</form>
+		<button type="submit" class="btn_join">
+			<span class="btn_text">회원가입</span>
+		</button>
+	</div>
+</body>
+</html>

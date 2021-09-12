@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.brandmenu">
+    <!-- resultmap 
+         column Alias TO VO
+    -->
+    <resultMap type="BrandMenuVO"           id="brandMenuResultMap">
+     <id       property="menuNum"           column="menu_num"/>
+     <result   property="bCode"             column="b_code"/>
+     <result   property="menuName"          column="menu_name"/>
+     <result   property="menuInfo"          column="menu_info"/> 
+     <result   property="menuImg"           column="menu_img"/>
+     <result   property="menuRegDate"       column="menu_reg_date"/>
+     <result   property="modDt"             column="mod_dt"/>
+     <result   property="regNum"            column="reg_num"/>
+     
+    </resultMap>
+
+
+    <delete id="doDelete" parameterType="BrandMenuVO">
+	       DELETE FROM BRAND_MENU
+	       WHERE menu_num = #{menuNum}
+    </delete>
+
+
+    <insert id="doInsert" parameterType="BrandMenuVO">
+	       INSERT INTO BRAND_MENU(menu_num,b_code,menu_name,menu_info,menu_img,menu_reg_date,mod_dt,reg_num)
+	       VALUES (#{menuNum},#{bCode},#{menuName},#{menuInfo},#{menuImg},sysdate,sysdate,#{regNum})   
+    </insert>
+
+
+    <select id="doSelectOne" parameterType="BrandMenuVO"  resultMap="brandMenuResultMap">
+	       SELECT menu_num,
+	              b_code,
+	              menu_name,   
+	              menu_info,
+	              menu_img,
+	              TO_CHAR(menu_reg_date,'YYYY/MM/DD HH24MISS') menu_reg_date,
+	              TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') mod_dt,  
+	              reg_num
+	       FROM BRAND_MENU
+	       WHERE menu_num  <![CDATA[ = ]]> #{menuNum}
+    </select>
+
+
+    <update id="doUpdate" parameterType="BrandMenuVO">
+	       UPDATE BRAND_MENU
+	       SET   b_code        = #{bCode},
+		         menu_name    = #{menuName},
+		         menu_info         = #{menuInfo},
+		         menu_img         = #{menuImg},
+		         reg_num       = #{regNum}
+	       WHERE menu_num        = #{menuNum} 
+    </update> 
+    
+    
+    <delete id="deleteAll">
+            DELETE FROM BRAND_MENU
+    </delete>
+    
+    
+    <select id="getCount" resultType="int">
+            SELECT COUNT(*) cnt FROM BRAND_MENU
+    </select>
+    
+    
+    <select id="getAll"  resultMap="brandMenuResultMap">
+		    SELECT menu_num,
+		    	   b_code,
+		           menu_name,
+		           menu_info,
+		           menu_img,
+		           TO_CHAR(menu_reg_date,'YYYY/MM/DD HH24MISS') menu_reg_date,
+                   TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') mod_dt,
+		           reg_num
+		    FROM BRAND_MENU
+		    ORDER BY menu_num              
+    </select>
+        <sql id="searchCondition">
+        <where>
+            <choose>
+                <when test=" '10' == searchDiv">
+                     u_id  LIKE #{searchWord} ||'%'
+                </when>
+                <when test=" '20' == searchDiv">
+                     name  LIKE #{searchWord} ||'%'
+                </when> 
+                <when test=" '30' == searchDiv">
+                     email  LIKE #{searchWord} ||'%'
+                </when>                               
+            </choose>
+        </where>
+    </sql>
+    
+    <select id="doRetrieve" parameterType="SearchVO" resultType="BrandMenuVO">
+        SELECT A.* , B.*
+        FROM(
+                SELECT t2.rnum           as num,
+                	   t2.menu_num       as "menuNum",
+                       t2.b_code         as "bCode",
+                       t2.menu_name      as "menuName",
+                       t2.menu_info      as "menuInfo",
+                       t2.menu_img       as "menuImg",
+                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.menu_reg_date,'YYYYMMDD')
+                                                          ,TO_CHAR(t2.menu_reg_date,'HH24:MI')
+                                                          ,TO_CHAR(t2.menu_reg_date,'YYYY/MM/DD') ) menu_reg_date,
+                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.mod_dt,'YYYYMMDD')
+                                                          ,TO_CHAR(t2.mod_dt,'HH24:MI')
+                                                          ,TO_CHAR(t2.mod_dt,'YYYY/MM/DD') ) modDt,
+                       t2.reg_num        as "regNum"
+                FROM(
+                    SELECT rownum rnum,t1.*
+                    FROM(
+                        SELECT *
+                        FROM BRAND_MENU
+                        <include refid="searchCondition"/>
+                        ORDER BY mod_dt desc
+                    )t1
+                )t2
+                WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  
+                               AND #{pageSize}*(#{pageNum} -1) + #{pageSize}
+            )A
+            CROSS JOIN
+            (
+                SELECT COUNT(*) totalCnt       
+                FROM BRAND_MENU
+                <include refid="searchCondition"/>
+            )B   
+    </select>
+    
+
+
+</mapper>

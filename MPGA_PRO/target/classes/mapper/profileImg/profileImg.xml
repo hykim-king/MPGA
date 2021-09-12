@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.profileImg">
+    <!-- resultmap 
+         column Alias TO VO
+    -->
+    <resultMap type="ProfileImgVO" id="profileImgResultMap">
+     <id       property="seq"           column="seq"/>
+     <result   property="proImgPath"    column="pro_img_path"/>
+     <result   property="modDt"         column="mod_dt"/>
+     <result   property="regNum"        column="reg_num"/> 
+    </resultMap>
+
+
+    <delete id="doDelete" parameterType="ProfileImgVO">
+	       DELETE FROM profile_img
+	       WHERE seq = #{seq}
+    </delete>
+
+
+    <insert id="doInsert" parameterType="ProfileImgVO">
+	       INSERT INTO profile_img(seq,pro_img_path,mod_dt,reg_num)
+	       VALUES (#{seq},#{proImgPath},sysdate,#{regNum})   
+    </insert>
+
+
+    <select id="doSelectOne" parameterType="ProfileImgVO"  resultMap="profileImgResultMap">
+	       SELECT seq,
+	              pro_img_path,
+	              TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') mod_dt,  
+	              reg_num
+	       FROM profile_img
+	       WHERE seq  <![CDATA[ = ]]> #{seq}
+    </select>
+
+
+    <update id="doUpdate" parameterType="ProfileImgVO">
+	       UPDATE profile_img
+	       SET   seq             = #{seq},
+		         pro_img_path    = #{proImgPath},
+		         mod_dt          = sysdate,
+		         reg_num         = #{regNum}
+	       WHERE seq             = #{seq} 
+    </update> 
+    
+    
+    <delete id="deleteAll">
+            DELETE FROM profile_img
+    </delete>
+    
+    
+    <select id="getCount" resultType="int">
+            SELECT COUNT(*) cnt FROM profile_img
+    </select>
+    
+    
+    <select id="getAll"  resultMap="profileImgResultMap">
+		    SELECT seq,
+		           pro_img_path,
+		           TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') mod_dt,
+		           reg_num
+		    FROM profile_img
+		    ORDER BY seq              
+    </select>
+        <sql id="searchCondition">
+        <where>
+            <choose>
+                <when test=" '10' == searchDiv">
+                     u_id  LIKE #{searchWord} ||'%'
+                </when>
+                <when test=" '20' == searchDiv">
+                     name  LIKE #{searchWord} ||'%'
+                </when> 
+                <when test=" '30' == searchDiv">
+                     email  LIKE #{searchWord} ||'%'
+                </when>                               
+            </choose>
+        </where>
+    </sql>
+     
+    <select id="doRetrieve" parameterType="SearchVO" resultType="ProfileImgVO"> 
+        SELECT A.* , B.*
+        FROM(
+                SELECT t2.rnum          as num,
+                       t2.seq           as "seq",
+                       t2.pro_img_path  as "proImgPath",
+                       DECODE( TO_CHAR(sysdate,'YYYYMMDD'),TO_CHAR(t2.mod_dt,'YYYYMMDD')
+                                                          ,TO_CHAR(t2.mod_dt,'HH24:MI')
+                                                          ,TO_CHAR(t2.mod_dt,'YYYY/MM/DD') ) modDt,
+                        
+                       t2.reg_num       as "regNum"
+                FROM(
+                    SELECT rownum rnum,t1.*
+                    FROM(
+                        SELECT *
+                        FROM profile_img
+                        <include refid="searchCondition"/>
+                        ORDER BY reg_dt desc
+                    )t1
+                )t2
+                WHERE rnum BETWEEN #{pageSize}*(#{pageNum} -1) + 1  
+                               AND #{pageSize}*(#{pageNum} -1) + #{pageSize}
+            )A
+            CROSS JOIN
+            (
+                SELECT COUNT(*) totalCnt       
+                FROM profile_img
+                <include refid="searchCondition"/>
+            )B   
+    </select>
+    
+
+
+</mapper>

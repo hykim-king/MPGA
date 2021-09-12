@@ -20,7 +20,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.M_Rank.Rank;
+
 import com.pcwk.ehr.member.UserDao;
 import com.pcwk.ehr.member.UserVO;
 

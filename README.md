@@ -26,7 +26,7 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 
 
 ### 04. 요구사항 정의서  
-![WANT](https://github.com/hykim-king/MPGA/blob/main/WANT.png "WANT")  
+![WANT](MPGA_PRO/src/main/webapp/resources/redmee/WBS.PNG)  
 
 
 ### 05. EXERD  

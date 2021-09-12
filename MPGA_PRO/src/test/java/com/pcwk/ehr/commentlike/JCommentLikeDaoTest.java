@@ -21,10 +21,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.SearchVO;
-import com.pcwk.ehr.brand.BrandVO;
-import com.pcwk.ehr.comment.MenuCommentDao;
-import com.pcwk.ehr.comment.MenuCommentVO;
 
 //메소드 수행 순서: method ASCENDING ex)a~z
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

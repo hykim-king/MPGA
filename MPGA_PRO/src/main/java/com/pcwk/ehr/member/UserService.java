@@ -24,5 +24,11 @@ public interface UserService {
 	int doUpdate(UserVO user) throws SQLException;
 
 	List<?> doRetrieve(SearchVO search) throws SQLException;
+	
+	int sameIdCheck(UserVO vo) throws Exception;
+	
+	int samePWCheck(UserVO vo) throws Exception;
+	
+	int sameNickCheck(UserVO vo) throws Exception;
 
 }

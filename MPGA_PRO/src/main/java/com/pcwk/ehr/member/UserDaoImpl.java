@@ -32,66 +32,28 @@ public class UserDaoImpl implements UserDao {
 	 * @return flag
 	 * @throws SQLException
 	 */
-	public int SameNickCheck(UserVO user) throws SQLException {
-		int flag = 0;
+	public int sameNickCheck(UserVO user) throws Exception{
+		int flag = sqlSessionTemplate.selectOne("user.SameNickCheck", user);
 		
-		String statement = this.NAMESPACE+".doSameNickCheck";
-		
-		LOG.debug("==================================");
-		LOG.debug("=statement="+user);
-		LOG.debug("=statement="+statement);
-		LOG.debug("==================================");
-		
-		flag = this.sqlSessionTemplate.selectOne(statement, user);
-		LOG.debug("=flag="+flag);
-		
-		return flag;
+		return flag;		
 	}
-	
-	
+		
 	/**
 	 * 아이디 중복 확인
 	 * @param user
 	 * @return flag
 	 * @throws SQLException
 	 */
-	public int SameIdCheck(UserVO user) throws SQLException {
-		int flag = 0;
+	public int sameIdCheck(UserVO user) throws Exception{
+		int flag = sqlSessionTemplate.selectOne("user.SameIDCheck", user);
 		
-		String statement = this.NAMESPACE+".doSameIdCheck";
-		
-		LOG.debug("==================================");
-		LOG.debug("=statement="+user);
-		LOG.debug("=statement="+statement);
-		LOG.debug("==================================");
-		
-		flag = this.sqlSessionTemplate.selectOne(statement, user);
-		LOG.debug("=flag="+flag);
-		
-		return flag;
+		return flag;		
 	}
 	
-	
-	/**
-	 * 동일 비밀번호 입력 확인
-	 * @param user
-	 * @return flag
-	 * @throws SQLException
-	 */
-	public int SamePasswdCheck(UserVO user) throws SQLException {
-		int flag = 0;
+	public int samePWCheck(UserVO user) throws Exception{
+		int flag = sqlSessionTemplate.selectOne("user.SamePWCheck", user);
 		
-		String statement = this.NAMESPACE+".doSamePasswdCheck";
-		
-		LOG.debug("==================================");
-		LOG.debug("=statement="+user);
-		LOG.debug("=statement="+statement);
-		LOG.debug("==================================");
-		
-		flag = this.sqlSessionTemplate.selectOne(statement, user);
-		LOG.debug("=flag="+flag);
-		
-		return flag;
+		return flag;		
 	}
 
 	@Override
@@ -118,8 +80,7 @@ public class UserDaoImpl implements UserDao {
 		UserVO outVO = null;
 
 		String statement = this.NAMESPACE+".doSelectOne";
-		
-		
+				
 		LOG.debug("=========================================");
 		LOG.debug("inVO=" + inVO.toString());
 		LOG.debug("statement=" + statement);

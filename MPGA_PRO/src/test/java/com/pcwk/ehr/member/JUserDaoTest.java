@@ -78,7 +78,7 @@ public class JUserDaoTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void mybatisDelete() throws ClassNotFoundException, SQLException {
 //		int flag = 0;
 //		flag =dao.doInsert(user01);

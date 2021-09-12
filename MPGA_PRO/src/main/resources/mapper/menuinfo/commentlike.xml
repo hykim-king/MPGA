@@ -19,7 +19,7 @@
     </select>
 
 
-    <select id="doSelectOne" parameterType="CommentLikeVO" resultType="CommentLikeVOMap">
+    <select id="doSelectOne" parameterType="CommentLikeVO" resultMap="CommentLikeVOMap">
         SELECT seq,
                member_num,
                c_like,

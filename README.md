@@ -22,7 +22,7 @@ COLLABORATION-TOOL SLACK, ZOOM, ONEDRIVE
 
 
 ### 03. WBS  
-![WBS](https://github.com/hykim-king/MPGA/blob/main/WBS.png "WBS")  
+![WBS](MPGA_PRO/src/main/webapp/resources/redmee/WBS.PNG)  
 
 
 ### 04. 요구사항 정의서  

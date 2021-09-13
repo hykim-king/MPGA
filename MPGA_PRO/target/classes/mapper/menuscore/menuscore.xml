@@ -12,7 +12,7 @@
     
     <insert id="MenuScoreInsert" parameterType="MenuScoreVO">
         INSERT INTO menu_score (MEMBER_NUM,MENU_NUM,SCORE,SCORE_DT)
-        VALUES (#{memberNum, #{menuNum}, #{score}, SYSDATE)
+        VALUES (#{memberNum}, #{menuNum}, #{score}, SYSDATE)
     </insert>
     
     <delete id="MenuScoreDelete" parameterType="MenuScoreVO">

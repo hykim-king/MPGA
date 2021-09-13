@@ -112,29 +112,25 @@ public class UserServiceImpl implements UserService {
 
 
 
-	@Override
-	public int sameIdCheck(UserVO user) throws Exception {
-		int flag = userDao.sameIdCheck(user);
-		
-		return flag;
-	}
-
-
-
-	@Override
-	public int samePWCheck(UserVO user) throws Exception {
-		int flag = userDao.samePWCheck(user);
-		
-		return flag;
-	}
-
-
-
-	@Override
-	public int sameNickCheck(UserVO user) throws Exception {
-		int flag = userDao.sameNickCheck(user);
-		
-		return flag;
-	}
+	/*
+	 * @Override public int sameIdCheck(UserVO user) throws Exception { int flag =
+	 * userDao.sameIdCheck(user);
+	 * 
+	 * return flag; }
+	 * 
+	 * 
+	 * 
+	 * @Override public int samePWCheck(UserVO user) throws Exception { int flag =
+	 * userDao.samePWCheck(user);
+	 * 
+	 * return flag; }
+	 * 
+	 * 
+	 * 
+	 * @Override public int sameNickCheck(UserVO user) throws Exception { int flag =
+	 * userDao.sameNickCheck(user);
+	 * 
+	 * return flag; }
+	 */
 
 }

@@ -139,7 +139,7 @@ public class JUserDaoTest {
 	
 	//-통과
 	@Test
-	//@Ignore
+	@Ignore
 	public void getAllTest() throws SQLException, ClassNotFoundException {
 		//1.전체 삭제
 		//2.데이터 입력(3건)
@@ -166,7 +166,7 @@ public class JUserDaoTest {
 	
 	//비교표현식 - 통과
 	@Test
-	//@Ignore
+	@Ignore
 	public void testAssert() {
 		LOG.debug("=========================");
 		LOG.debug("=testAssert()=");
@@ -201,7 +201,7 @@ public class JUserDaoTest {
 	
 	//failures: 1 통과?
 	@Test(expected = EmptyResultDataAccessException.class)
-	//@Ignore
+	@Ignore
 	public void getFailure() throws ClassNotFoundException, SQLException {
 		LOG.debug("=========================");
 		LOG.debug("=getFailure()=");
@@ -215,7 +215,7 @@ public class JUserDaoTest {
 	
 	//-통과
 	@Test
-	//@Ignore
+	@Ignore
 	public void doDelete() throws SQLException, ClassNotFoundException {
 		//1.기존 데이터 삭제
 		//2.데이터 입력
@@ -243,7 +243,7 @@ public class JUserDaoTest {
 	//통과
 	// 1/1000초
 	@Test(timeout = 20000)
-	//@Ignore
+	@Ignore
 	public void addAndGet() {
 
 		try {

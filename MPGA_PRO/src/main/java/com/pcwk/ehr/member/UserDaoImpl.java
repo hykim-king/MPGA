@@ -17,54 +17,53 @@ public class UserDaoImpl implements UserDao {
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	SqlSessionTemplate   sqlSessionTemplate;
-	
+	SqlSessionTemplate sqlSessionTemplate;
+
 	final String NAMESPACE = "com.pcwk.ehr.member";
-	
 
 	public UserDaoImpl() {
 	}
-		
 
 	/**
 	 * 닉네임 중복 확인
+	 * 
 	 * @param user
 	 * @return flag
 	 * @throws SQLException
 	 */
-	public int sameNickCheck(UserVO user) throws Exception{
-		int flag = sqlSessionTemplate.selectOne("user.SameNickCheck", user);
-		
-		return flag;		
-	}
-		
-	/**
-	 * 아이디 중복 확인
-	 * @param user
-	 * @return flag
-	 * @throws SQLException
-	 */
-	public int sameIdCheck(UserVO user) throws Exception{
-		int flag = sqlSessionTemplate.selectOne("user.SameIDCheck", user);
-		
-		return flag;		
-	}
-	
-	public int samePWCheck(UserVO user) throws Exception{
-		int flag = sqlSessionTemplate.selectOne("user.SamePWCheck", user);
-		
-		return flag;		
-	}
+	/*
+	 * public int sameNickCheck(UserVO user) throws Exception{ int flag =
+	 * sqlSessionTemplate.selectOne("user.SameNickCheck", user);
+	 * 
+	 * return flag; }
+	 * 
+	 *//**
+		 * 아이디 중복 확인
+		 * 
+		 * @param user
+		 * @return flag
+		 * @throws SQLException
+		 *//*
+			 * public int sameIdCheck(UserVO user) throws Exception{ int flag =
+			 * sqlSessionTemplate.selectOne("user.SameIDCheck", user);
+			 * 
+			 * return flag; }
+			 * 
+			 * public int samePWCheck(UserVO user) throws Exception{ int flag =
+			 * sqlSessionTemplate.selectOne("user.SamePWCheck", user);
+			 * 
+			 * return flag; }
+			 */
 
 	@Override
 	public int doInsert(final UserVO user) throws ClassNotFoundException, SQLException {
 		int flag = 0;
-		
+
 		LOG.debug("=========================================");
 		LOG.debug("param=" + user.toString());
 		LOG.debug("=========================================");
 
-		//NAMESPACE +"."+id
+		// NAMESPACE +"."+id
 		String statement = NAMESPACE + ".doInsert";
 
 		flag = sqlSessionTemplate.insert(statement, user);
@@ -72,15 +71,15 @@ public class UserDaoImpl implements UserDao {
 
 		return flag;
 	}
-	
-	//쓸필요가 없다.
+
+	// 쓸필요가 없다.
 	@Override
 	@SuppressWarnings("deprecation")
 	public UserVO doSelectOne(UserVO inVO) throws ClassNotFoundException, SQLException {
 		UserVO outVO = null;
 
-		String statement = this.NAMESPACE+".doSelectOne";
-				
+		String statement = this.NAMESPACE + ".doSelectOne";
+
 		LOG.debug("=========================================");
 		LOG.debug("inVO=" + inVO.toString());
 		LOG.debug("statement=" + statement);
@@ -90,23 +89,23 @@ public class UserDaoImpl implements UserDao {
 		LOG.debug("outVO=" + outVO);
 		return outVO;
 	}
-	
-	//아이디, 닉네임 인증시 데이터 비교할때 사용.
+
+	// 아이디, 닉네임 인증시 데이터 비교할때 사용.
 	@Override
 	public List<?> doRetrieve(SearchVO searchVO) throws SQLException {
-		List<UserVO>   list = new ArrayList<UserVO>();
-		
-		String statement = this.NAMESPACE +".doRetrieve";
+		List<UserVO> list = new ArrayList<UserVO>();
+
+		String statement = this.NAMESPACE + ".doRetrieve";
 		LOG.debug("=========================================");
 		LOG.debug("statement" + statement);
 		LOG.debug("searchVO" + searchVO);
-		LOG.debug("=========================================");		
-		
+		LOG.debug("=========================================");
+
 		list = this.sqlSessionTemplate.selectList(statement, searchVO);
-		
+
 		for (UserVO vo : list) {
 			LOG.debug("vo:" + vo);
-		}		
+		}
 		return list;
 	}
 
@@ -114,11 +113,11 @@ public class UserDaoImpl implements UserDao {
 	@SuppressWarnings({ "deprecation" })
 	public List<UserVO> getAll() {
 		List<UserVO> list = new ArrayList<UserVO>();
-		
-		String statement = this.NAMESPACE +".getAll";
-		
+
+		String statement = this.NAMESPACE + ".getAll";
+
 		list = this.sqlSessionTemplate.selectList(statement);
-		
+
 		for (UserVO vo : list) {
 			LOG.debug("vo:" + vo);
 		}
@@ -131,8 +130,8 @@ public class UserDaoImpl implements UserDao {
 	public int getCount() throws ClassNotFoundException, SQLException {
 		int cnt = 0;
 
-		String statement = this.NAMESPACE +".getCount";
-		
+		String statement = this.NAMESPACE + ".getCount";
+
 		cnt = this.sqlSessionTemplate.selectOne(statement);
 		LOG.debug("=========================================");
 		LOG.debug("cnt=" + cnt);
@@ -144,12 +143,12 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void deleteAll() throws SQLException {
 
-		//NAMESPACE +"."+id
+		// NAMESPACE +"."+id
 		String statement = NAMESPACE + ".deleteAll";
 		int flag = sqlSessionTemplate.delete(statement);
 		LOG.debug("=========================================");
 		LOG.debug("flag=" + flag);
-		LOG.debug("=========================================");		
+		LOG.debug("=========================================");
 	}
 
 	@Override
@@ -159,33 +158,28 @@ public class UserDaoImpl implements UserDao {
 		LOG.debug("=========================================");
 		LOG.debug("param=" + user.toString());
 		LOG.debug("=========================================");
-		//com.pcwk.ehr.member.doDelete
-		//com.pcwk.ehr.member
-		//NAMESPACE +"."+id
+		// com.pcwk.ehr.member.doDelete
+		// com.pcwk.ehr.member
+		// NAMESPACE +"."+id
 		String statement = NAMESPACE + ".doDelete";
-		
-		
+
 		flag = this.sqlSessionTemplate.delete(statement, user);
-		
+
 		LOG.debug("flag=" + flag);
 		return flag;
 	}
 
 	@Override
 	public int doUpdate(UserVO user) throws SQLException {
-        int flag = 0;
-        
+		int flag = 0;
+
 		LOG.debug("=========================================");
 		LOG.debug("param=" + user.toString());
-		LOG.debug("=========================================");		
-		String statement  = NAMESPACE +".doUpdate";
+		LOG.debug("=========================================");
+		String statement = NAMESPACE + ".doUpdate";
 		flag = sqlSessionTemplate.update(statement, user);
 		LOG.debug("flag=" + flag);
 		return flag;
 	}
-	
-
-	
-	  
 
 }

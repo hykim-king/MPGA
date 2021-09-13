@@ -7,11 +7,13 @@ import com.pcwk.ehr.SearchVO;
 
 public interface UserDao {
 	
-	public int sameNickCheck(UserVO vo) throws Exception;
-	
-	public int sameIdCheck(UserVO vo) throws Exception;
-	
-	public int samePWCheck(UserVO vo) throws Exception;
+	/*
+	 * public int sameNickCheck(UserVO vo) throws Exception;
+	 * 
+	 * public int sameIdCheck(UserVO vo) throws Exception;
+	 * 
+	 * public int samePWCheck(UserVO vo) throws Exception;
+	 */
 
 	int doInsert(UserVO user) throws ClassNotFoundException, SQLException;
 

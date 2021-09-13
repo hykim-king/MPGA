@@ -25,10 +25,12 @@ public interface UserService {
 
 	List<?> doRetrieve(SearchVO search) throws SQLException;
 	
-	int sameIdCheck(UserVO vo) throws Exception;
-	
-	int samePWCheck(UserVO vo) throws Exception;
-	
-	int sameNickCheck(UserVO vo) throws Exception;
+	/*
+	 * int sameIdCheck(UserVO vo) throws Exception;
+	 * 
+	 * int samePWCheck(UserVO vo) throws Exception;
+	 * 
+	 * int sameNickCheck(UserVO vo) throws Exception;
+	 */
 
 }

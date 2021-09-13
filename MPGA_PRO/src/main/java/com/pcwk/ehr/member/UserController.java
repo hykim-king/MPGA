@@ -40,48 +40,43 @@ public class UserController {
 	public UserController() {
 	}
 	
-	@RequestMapping(value = "member/sameIdCheck.do", method = RequestMethod.POST)
-	@ResponseBody
-	public int sameIdCheck(UserVO user) throws Exception{
-		int result = service.sameIdCheck(user);
-		
-		return result;
-	}
+	/*
+	 * @RequestMapping(value = "member/sameIdCheck.do", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public int sameIdCheck(UserVO user) throws Exception{ int
+	 * result = service.sameIdCheck(user);
+	 * 
+	 * return result; }
+	 * 
+	 * @RequestMapping(value = "member/samePWCheck.do", method = RequestMethod.POST,
+	 * produces = "application/json; charset = utf-8")
+	 * 
+	 * @ResponseBody public int samePWCheck(UserVO user) throws Exception{ int
+	 * result = service.samePWCheck(user);
+	 * 
+	 * return result; }
+	 * 
+	 * @RequestMapping(value = "member/sameNickCheck.do", method =
+	 * RequestMethod.POST, produces = "application/json; charset = utf-8")
+	 * 
+	 * @ResponseBody public int sameNickCheck(UserVO user) throws Exception{ int
+	 * result = service.sameNickCheck(user);
+	 * 
+	 * return result; }
+	 */
 	
-	@RequestMapping(value = "member/samePWCheck.do", method = RequestMethod.POST)
-	@ResponseBody
-	public int samePWCheck(UserVO user) throws Exception{
-		int result = service.samePWCheck(user);
-		
-		return result;
-	}
-	
-	@RequestMapping(value = "member/sameNickCheck.do", method = RequestMethod.POST)
-	@ResponseBody
-	public int sameNickCheck(UserVO user) throws Exception{
-		int result = service.sameNickCheck(user);
-		
-		return result;
-	}
-	
-	@RequestMapping(value = "member/sameNickCheck.do", method = RequestMethod.POST)
-	public String doInsert(UserVO user) throws Exception{
-		int result = service.sameIdCheck(user);
-		try {
-			if(result == 1) {
-				return "/member/doInsert";
-			}else if(result == 0) {
-				service.doInsert(user);
-			}
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-		return "redirect:/";
-	}
+	/*
+	 * @RequestMapping(value = "member/sameNickCheck.do", method =
+	 * RequestMethod.POST, produces = "application/json; charset = utf-8") public
+	 * String doInsert(UserVO user) throws Exception{ int result =
+	 * service.sameIdCheck(user); try { if(result == 1) { return "/member/doInsert";
+	 * }else if(result == 0) { service.doInsert(user); } } catch (Exception e) {
+	 * throw new RuntimeException(); } return "redirect:/"; }
+	 */
 	
 
 	// member.doSelectOne.do?uId=pcwk_01
-	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET)
+	@RequestMapping(value = "member/doSelectOne.do", method = RequestMethod.GET, produces = "application/json; charset = utf-8")
 	@ResponseBody
 	public String doSelectOne(UserVO inVO, Model model) throws ClassNotFoundException, SQLException {
 		LOG.debug("=============================");

@@ -47,7 +47,7 @@
           member_num      = #{memberNum}, 
           contents        = #{contents}, 
           reg_dt          = sysdate
-        WHERE seq =       #{seq}
+        WHERE seq         = #{seq}
     </update>
     
         <delete id="deleteAll">

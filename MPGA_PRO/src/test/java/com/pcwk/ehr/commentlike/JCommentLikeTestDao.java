@@ -60,7 +60,7 @@ public class JCommentLikeTestDao {
 	
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException, ClassNotFoundException {
 		int flag = 0;
 
@@ -86,7 +86,7 @@ public class JCommentLikeTestDao {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void getAllTest() throws SQLException, ClassNotFoundException {
 		// 전체 데이터 삭제
 		dao.deleteAll();
@@ -112,7 +112,7 @@ public class JCommentLikeTestDao {
 	
 	
 	@Test(expected = EmptyResultDataAccessException.class)
-	@Ignore
+	//@Ignore
 	public void getFailure() throws ClassNotFoundException, SQLException {
 		LOG.debug("=========================");
 		LOG.debug("=getFailure()=");
@@ -152,7 +152,7 @@ public class JCommentLikeTestDao {
 	
 	// 1/1000초
 	@Test(timeout = 20000)
-	@Ignore
+	//@Ignore
 	public void addAndGet() {
 
 		try {

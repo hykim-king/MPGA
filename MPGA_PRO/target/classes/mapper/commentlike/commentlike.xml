@@ -38,12 +38,12 @@
         UPDATE comment_like
         SET        
             c_like = #{cLike}
-       WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum}, seq <![CDATA[=]]> #{seq}
+        WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum}, seq <![CDATA[=]]> #{seq}
    
     </select>
     
     <delete id="deleteAll">
-            DELETE FROM BRAND_MENU
+            DELETE FROM comment_like
     </delete>
     
     <select id="getCount" resultType="int">

@@ -23,7 +23,7 @@ import com.pcwk.ehr.menuselect.MenuSelectVO;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/resources/mybatis-config.xml" })
 public class MenuSelectDaoTest {
-	private final Logger log = LoggerFactory.getLogger(MenuSelectControllerTest.class);
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private MenuSelectDao dao;

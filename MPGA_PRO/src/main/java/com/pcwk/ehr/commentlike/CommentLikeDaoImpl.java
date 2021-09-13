@@ -10,9 +10,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-
-public class CommentLikeDaoImpl implements CommentLikeDao {
+@Repository
+public class CommentLikeDaoImpl implements CommentLikeDao  {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 	@Autowired
@@ -23,66 +24,91 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 	public CommentLikeDaoImpl() {
 			
 	}
+
 	
-	
-	
+
+	 
 	@Override
 	@SuppressWarnings({ "deprecation" })
 	public List<CommentLikeVO> getAll() {
 		List<CommentLikeVO> list = new ArrayList<CommentLikeVO>();
-
-		String statement = NAMESPACE + ".getAll";
-
+		
+		String statement = this.NAMESPACE +".getAll";
+		
 		list = this.sqlsessiontemplate.selectList(statement);
-
+		
 		for (CommentLikeVO vo : list) {
-			LOG.debug("vo" + vo);
+			LOG.debug("vo:" + vo);
 		}
 
 		return list;
 	}
 	
-	
-	//등록!
-	@SuppressWarnings("deprecation")
+	 
 	@Override
-	public CommentLikeVO doSelectOne(CommentLikeVO inVO)throws SQLException {
-	CommentLikeVO outVO = null;
+	@SuppressWarnings("deprecation")
+	public int getCount() throws ClassNotFoundException, SQLException {
+		int cnt = 0;
 
-	String statement = NAMESPACE + ".doSelectOne";
+		String statement = this.NAMESPACE +".getCount";
+		
+		cnt = this.sqlsessiontemplate.selectOne(statement);
+		LOG.debug("=========================================");
+		LOG.debug("cnt=" + cnt);
+		LOG.debug("=========================================");
 
-	LOG.debug("=========================================");
-	LOG.debug("inVO=" + inVO.toString());
-	LOG.debug("statement=" + statement);
-	LOG.debug("=========================================");
-	
-	outVO = this.sqlsessiontemplate.selectOne(statement, inVO);
-	LOG.debug("outVO=" + outVO);
+		return cnt;
+	}
+	 
+	 
+	 
+	@Override
+	public int getLikeCount() throws SQLException {
+		int cnt = 0;
 
-	return outVO;
-	
+		String statement = this.NAMESPACE +".getLikeCount";
+		
+		cnt = this.sqlsessiontemplate.selectOne(statement);
+		LOG.debug("=========================================");
+		LOG.debug("cnt=" + cnt);
+		LOG.debug("=========================================");
+
+		return cnt;
 	}
 	
-	//카운트!
+	 
 	@Override
-	public CommentLikeVO doReadCnt (CommentLikeVO inVO) {
+	@SuppressWarnings("deprecation")
+	public CommentLikeVO doSelectOne(CommentLikeVO inVO) throws ClassNotFoundException, SQLException {
 		CommentLikeVO outVO = null;
+
+		String statement = this.NAMESPACE+".doSelectOne";
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT COUNT(*)cnt FROM comment_like");
+		
+		LOG.debug("=========================================");
+		LOG.debug("inVO=" + inVO.toString());
+		LOG.debug("statement=" + statement);
+		LOG.debug("=========================================");
+
+		outVO = this.sqlsessiontemplate.selectOne(statement, inVO);
+		LOG.debug("outVO=" + outVO);
 		return outVO;
 	}
 	
+	
+	 
+	 
+	 
 	@Override
-	public int doDelete(CommentLikeVO commentLike) throws SQLException {
+	public int doUpdate(CommentLikeVO commentLike) throws SQLException {
 		int flag = 0;
 		StringBuilder sb = new StringBuilder();
 		LOG.debug("=========================================");
 		LOG.debug("param=" + commentLike.toString());
 		LOG.debug("=========================================");
 	
-		String statement = NAMESPACE + ".doDelete";
-		flag = this.sqlsessiontemplate.delete(statement, commentLike);
+		String statement = NAMESPACE + ".doUpdate";
+		flag = this.sqlsessiontemplate.update(statement, commentLike);
 		
 		LOG.debug("flag=" + flag);
 		return flag;
@@ -91,6 +117,9 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 
 	
 
+	 
+	 
+	 
 	@Override
 	public int doInsert(CommentLikeVO commentLike) throws SQLException {
 		int flag = 0;
@@ -106,31 +135,34 @@ public class CommentLikeDaoImpl implements CommentLikeDao {
 		LOG.debug("flag=" + flag);
 		return flag;
 	}
-
-
-
+	
+	 
 	@Override
-	public void setDataSource(DataSource dataSource) {
-		// TODO Auto-generated method stub
+	public int doDelete(CommentLikeVO commentLike) throws SQLException {
+		int flag = 0;
+		LOG.debug("=========================================");
+		LOG.debug("param=" + commentLike.toString());
+		LOG.debug("=========================================");
 		
-	}
-
-
-
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
+		String statement = NAMESPACE + ".doDelete";
 		
-	}
-
-
-
-	@Override
-	public Object getCount() {
-		// TODO Auto-generated method stub
-		return null;
+		flag = this.sqlsessiontemplate.delete(statement, commentLike);
+		
+		LOG.debug("flag=" + flag);
+		return flag;
 	}
 	
-	
+
+	 
+	@Override
+	public void deleteAll() throws SQLException {
+
+		//NAMESPACE +"."+id
+		String statement = NAMESPACE + ".deleteAll";
+		int flag = sqlsessiontemplate.delete(statement);
+		LOG.debug("=========================================");
+		LOG.debug("flag=" + flag);
+		LOG.debug("=========================================");		
+	}
 }
 

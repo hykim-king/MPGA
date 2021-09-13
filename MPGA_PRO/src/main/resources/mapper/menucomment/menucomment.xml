@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pcwk.ehr.comment">
-    <resultMap type="MenuCommentVO" id="menucommentVOMap">
+<mapper namespace="com.pcwk.ehr.menucomment">
+    <resultMap type="MenuCommentVO" id="menucommentResultMap">
         <id property="seq"          column="seq"/>
         <id property="menuNum"      column="menu_num"/>
-        <id property="regDt"        column="reg_dt"/>
         <id property="memberNum"    column="member_num"/>
         <id property="contents"     column="contents"/> 
+        <id property="regDt"        column="reg_dt"/>
     </resultMap>
     
-    <select id="getAll" resultMap="commentResultMap">
+    <select id="getAll" resultMap="menucommentResultMap">
         SELECT  seq,
                 member_num,
                 menu_num,
                 contents,
-                reg_dt
+                TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') reg_dt
         FROM    menu_comment
         ORDER   BY seq
     </select>
@@ -30,14 +30,14 @@
         VALUES (#{seq},#{menuNum},#{memberNum},#{contents},sysdate)
     </insert>
     
-    <select id="doSelectOne" parameterType="MenuCommentVO" resultType="menucommentVOMap">
+    <select id="doSelectOne" parameterType="MenuCommentVO" resultMap="menucommentResultMap">
         SELECT seq,
                menu_num,
-               TO_CHAR(mod_dt,'YYYY/MM/DD HH24MISS') reg_dt,
                member_num,
-               contents
+               contents,
+               TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') reg_dt
                FROM menu_comment
-               WHERE seq = #{seq}
+               WHERE seq  <![CDATA[ = ]]>  #{seq}
     </select>
     
     <update id="doUpdate" parameterType="MenuCommentVO">
@@ -50,5 +50,11 @@
         WHERE seq =       #{seq}
     </update>
     
+        <delete id="deleteAll">
+            DELETE FROM menu_comment
+    </delete>
     
+        <select id="getCount" resultType="int">
+            SELECT COUNT(*) cnt FROM menu_comment
+    </select>
 </mapper>   

@@ -1,4 +1,4 @@
-package com.pcwk.ehr.commentlike;
+package com.pcwk.ehr.Menucomment;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -21,6 +21,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pcwk.ehr.SearchVO;
+import com.pcwk.ehr.menucomment.MenuCommentDao;
+import com.pcwk.ehr.menucomment.MenuCommentVO;
 
 //메소드 수행 순서: method ASCENDING ex)a~z
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -28,7 +31,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" }) /// applicationContext.xml 설정파일 read
 
-public class JCommentLikeDaoTest {
+public class JCommentDaoTest {
 
 	final Logger LOG = LoggerFactory.getLogger(getClass());
 	
@@ -36,17 +39,17 @@ public class JCommentLikeDaoTest {
 	ApplicationContext context;
 
 	@Autowired
-	CommentLikeDao dao;
+	MenuCommentDao dao;
 	
-	CommentLikeVO commentlike01;
-	CommentLikeVO commentlike02;
-	CommentLikeVO commentlike03;
-
+	MenuCommentVO menucomment01;
+	MenuCommentVO menucomment02;
+	MenuCommentVO menucomment03;
+	
 	@Before
 	public void setUp() throws Exception {
-		commentlike01 = new CommentLikeVO(1, 1, "1", "");
-		commentlike02 = new CommentLikeVO(2, 2, "2", "");
-		commentlike03 = new CommentLikeVO(3, 3, "3", "");
+		menucomment01 = new MenuCommentVO(1, "LOGO_01", 1, "comment01", "");
+		menucomment02 = new MenuCommentVO(2, "LOGO_02", 2, "comment02", "");
+		menucomment03 = new MenuCommentVO(3, "LOGO_03", 3, "comment03", "");
 
 		LOG.debug("=========================");
 		LOG.debug("=context="+context);
@@ -54,12 +57,15 @@ public class JCommentLikeDaoTest {
 		LOG.debug("=========================");		
 
 	}
-
+	
+	
 	@After
 	public void tearDown() throws Exception {
+		LOG.debug("================");
+		LOG.debug("=@After tearDown()=");
+		LOG.debug("================");
 	}
-
-
+	
 	@Test
 	//@Ignore
 	public void doUpdate() throws SQLException, ClassNotFoundException {
@@ -69,14 +75,14 @@ public class JCommentLikeDaoTest {
 		dao.deleteAll();
 
 		// 등록
-		flag = dao.doInsert(commentlike01);
+		flag = dao.doInsert(menucomment01);
 		assertThat(flag, is(1));
 
 		// 수정 + 업데이트
-		commentlike01.setMemberNum(commentlike01.getMemberNum());
-		commentlike01.setSeq(commentlike01.getSeq());
-		commentlike01.setcLike(commentlike01.getcLike() + "_U");
-		commentlike01.setcLikeDate(commentlike01.getcLikeDate() + "_U");
+		menucomment01.setMenuNum(menucomment01.getMenuNum() + "_U");
+		menucomment01.setMemberNum(2);
+		menucomment01.setContents(menucomment01.getContents() + "_U");
+		menucomment01.setRegDt(menucomment01.getRegDt());
 		
 	}
 
@@ -87,17 +93,17 @@ public class JCommentLikeDaoTest {
 		dao.deleteAll();
 
 		// 데이터 입력(3건)
-		int flag = dao.doInsert(commentlike01);
+		int flag = dao.doInsert(menucomment01);
 		assertThat(flag, is(1));
 
-		flag += dao.doInsert(commentlike02);
+		flag += dao.doInsert(menucomment02);
 		assertThat(flag, is(2));
 
-		flag += dao.doInsert(commentlike03);
+		flag += dao.doInsert(menucomment03);
 		assertThat(flag, is(3));
 
 		// 데이터 조회(데이터 3개)
-		List<CommentLikeVO> list = dao.getAll();
+		List<MenuCommentVO> list = dao.getAll();
 
 		assertThat(list.size(), is(3));
 	}
@@ -114,6 +120,8 @@ public class JCommentLikeDaoTest {
 		assertArrayEquals(names,anotherNames);
 	}
 	
+	
+	
 	@Test(expected = EmptyResultDataAccessException.class)
 	@Ignore
 	public void getFailure() throws ClassNotFoundException, SQLException {
@@ -123,7 +131,7 @@ public class JCommentLikeDaoTest {
 		// 삭제
 		dao.deleteAll();
 
-		dao.doSelectOne(commentlike01);
+		dao.doSelectOne(menucomment01);
 
 	}
 
@@ -136,13 +144,16 @@ public class JCommentLikeDaoTest {
 		dao.deleteAll();
 
 		// 데이터 입력
-		flag = dao.doInsert(commentlike01);
+		flag = dao.doInsert(menucomment01);
 		assertThat(flag, is(1));
 
 		// 삭제
-		flag = dao.doDelete(commentlike01);
+		flag = dao.doDelete(menucomment01);
 		assertThat(flag, is(1));
-		
+
+		// 남은 데이터 건수 확인
+		int cnt = dao.getCount();
+		assertThat(cnt, is(0));
 
 	}
 
@@ -154,52 +165,51 @@ public class JCommentLikeDaoTest {
 		try {
 			// 전체삭제
 			dao.deleteAll();
-			// dao.doDelete(brand01);
-			// dao.doDelete(brand02);
-			// dao.doDelete(brand03);
 
 			// 등록
-			int flag = dao.doInsert(commentlike01);
+			int flag = dao.doInsert(menucomment01);
 			assertThat(flag, is(1));
 
 			// 1건등록 확인
 			assertThat(dao.getCount(), is(1));
 
 			// 2건등록
-			flag = dao.doInsert(commentlike02);
+			flag = dao.doInsert(menucomment02);
 			assertThat(flag, is(1));
 
 			// 2건등록 확인
 			assertThat(dao.getCount(), is(2));
 
 			// 3건등록
-			flag = dao.doInsert(commentlike03);
+			flag = dao.doInsert(menucomment03);
 			assertThat(flag, is(1));
 			assertThat(dao.getCount(), is(3));
 
 			// 한건 조회
-			CommentLikeVO outVO_01 = dao.doSelectOne(commentlike01);
+			MenuCommentVO outVO_01 = dao.doSelectOne(menucomment01);
 
-			isSameCommentLike(outVO_01, commentlike01);
-
-			// 한건 조회
-			CommentLikeVO outVO_02 = dao.doSelectOne(commentlike02);
-			isSameCommentLike(outVO_02, commentlike02);
+			isSameMenuComment(outVO_01, menucomment01);
 
 			// 한건 조회
-			CommentLikeVO outVO_03 = dao.doSelectOne(commentlike03);
-			isSameCommentLike(outVO_03, commentlike03);
+			MenuCommentVO outVO_02 = dao.doSelectOne(menucomment02);
+			isSameMenuComment(outVO_02, menucomment02);
 
+			// 한건 조회
+			MenuCommentVO outVO_03 = dao.doSelectOne(menucomment03);
+			isSameMenuComment(outVO_03, menucomment03);
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void isSameCommentLike(CommentLikeVO outVO, CommentLikeVO commentlike) {
-		assertThat(outVO.getMemberNum(), is(commentlike.getMemberNum()));
-		assertThat(outVO.getSeq(), is(commentlike.getSeq()));
-		assertThat(outVO.getcLike(), is(commentlike.getcLike()));
-		assertThat(outVO.getcLikeDate(), is(commentlike.getcLikeDate()));
+	public void isSameMenuComment(MenuCommentVO outVO, MenuCommentVO menucomment) {
+		assertThat(outVO.getMenuNum(), is(menucomment.getMenuNum()));
+		assertThat(outVO.getMemberNum(), is(menucomment.getMemberNum()));
+		assertThat(outVO.getContents(), is(menucomment.getContents()));
+		assertThat(outVO.getRegDt(), is(menucomment.getRegDt()));
 
 	}
 

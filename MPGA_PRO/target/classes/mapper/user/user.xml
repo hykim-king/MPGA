@@ -8,39 +8,39 @@
     -->
     <resultMap type="UserVO" id="userResultMap">
      <id       property="memberNum"         column="MEMBER_NUM"/>
-     <result   property="seq"               column="SEQ"/>
-     <result   property="id"                column="ID"/>
-     <result   property="nickName"          column="NICKNAME"/> 
-     <result   property="phoneNum"          column="PHONE_NUM"/>
-     <result   property="email"             column="EMAIL"/>
-     <result   property="pw"                column="PW"/>
-     <result   property="sex"               column="SEX"/>
-     <result   property="modDt"             column="MOD_DT"/>
-     <result   property="regNum"            column="REG_NUM"/>
-     <result   property="rank"              column="M_RANK"/>
+     <result   property="seq"        column="SEQ"/>
+     <result   property="id"      column="ID"/>
+     <result   property="nickName"    column="NICKNAME"/> 
+     <result   property="phoneNum"   column="PHONE_NUM"/>
+     <result   property="email"       column="EMAIL"/>
+     <result   property="pw"       column="PW"/>
+     <result   property="sex"       column="SEX"/>
+     <result   property="modDt"       column="MOD_DT"/>
+     <result   property="regNum"       column="REG_NUM"/>
+     <result   property="rank"       column="M_RANK"/>
     </resultMap>
+    
+    <!-- SamePasswdCheck -->
+	<select resultType="int" parameterType="UserVO" id="SamePasswdCheck">
+	    SELECT COUNT(*) cnt
+	    FROM MEMBER
+	    WHERE MEMBER_NUM = #{memberNum}
+	    AND pw = #{pw} 
+	</select>
 	
 	<!-- SameNickCheck -->	
 	<select resultType="int" parameterType="UserVO" id="SameNickCheck">
-	    SELECT COUNT(*)
+	    SELECT COUNT(*) cnt
 	    FROM MEMBER
-	    WHERE NICKNAME = #{nickName}	     
+	    WHERE NICKNAME = #{nickName} 
 	</select>
 	
 	<!-- SameIdCheck -->	
 	<select resultType="int" parameterType="UserVO" id="SameIDCheck">
-	    SELECT COUNT(*)
-        FROM MEMBER
-        WHERE ID = #{id}     
+	    SELECT COUNT(*) cnt
+	    FROM MEMBER
+	    WHERE MEMBER_NUM = #{memberNum} 
 	</select>
-	
-	<!-- SameIdCheck -->   
-    <select resultType="int" parameterType="UserVO" id="SamePWCheck">
-        SELECT COUNT(*)
-        FROM MEMBER
-        WHERE ID = #{id}
-        AND   PW = #{pw}
-    </select>
     
     
     <update id="doRankingSystem" parameterType="com.pcwk.ehr.member.UserVO">

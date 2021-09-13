@@ -38,7 +38,8 @@
         UPDATE comment_like
         SET        
             c_like = #{cLike}
-        WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum}, seq <![CDATA[=]]> #{seq}
+        WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum} 
+        AND   seq <![CDATA[=]]> #{seq}
    
     </select>
     
@@ -51,6 +52,7 @@
     </select>
     
     <select id="getLikeCount" resultType="int">
-        SELECT COUNT(c_like) count_clike FROM comment_like
+        SELECT COUNT(c_like) count_clike 
+        FROM comment_like
     </select>
 </mapper>

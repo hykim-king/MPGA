@@ -112,7 +112,7 @@ public class JCommentLikeTestDao {
 	
 	
 	@Test(expected = EmptyResultDataAccessException.class)
-	//@Ignore
+	@Ignore
 	public void getFailure() throws ClassNotFoundException, SQLException {
 		LOG.debug("=========================");
 		LOG.debug("=getFailure()=");

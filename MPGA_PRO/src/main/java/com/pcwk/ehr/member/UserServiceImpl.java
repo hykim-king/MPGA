@@ -113,7 +113,8 @@ public class UserServiceImpl implements UserService {
 
 
 	/*
-	 * @Override public int sameIdCheck(UserVO user) throws Exception { int flag =
+	 * @Override public int sameIdCheck(UserVO user) throws Exception { 
+	 * int flag =
 	 * userDao.sameIdCheck(user);
 	 * 
 	 * return flag; }

@@ -1,4 +1,4 @@
-package com.pcwk.ehr.Menucomment;
+package com.pcwk.ehr.menucomment;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;

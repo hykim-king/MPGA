@@ -31,14 +31,14 @@ public class MenuSelectDaoImpl implements MenuSelectDao{
 
 	//찜 등록
 	@Override
-	public void menuSelectInsert(final MenuSelectVO select) throws Exception {
-		session.insert(namespace+".menuSelectInsert", select);
+	public int menuSelectInsert(final MenuSelectVO select) throws Exception {
+		return session.insert(namespace+".menuSelectInsert", select);
 	}
 	
 	//찜 취소
 	@Override
-	public void menuSelectDelete(MenuSelectVO select) throws Exception {
-		session.delete(namespace+".menuSelectInsert", select);	
+	public int menuSelectDelete(MenuSelectVO select) throws Exception {
+		return session.delete(namespace+".menuSelectInsert", select);	
 	}	
 
 	// 메뉴찜 테이블을 최신순으로 리스트로 뽑아낸다.

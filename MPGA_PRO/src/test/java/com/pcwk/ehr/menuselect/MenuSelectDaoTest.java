@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.menuselect.MenuSelectService;
+import com.pcwk.ehr.menuscore.MenuScoreVO;
 import com.pcwk.ehr.menuselect.MenuSelectDao;
 import com.pcwk.ehr.menuselect.MenuSelectVO;
 
@@ -23,43 +24,47 @@ import com.pcwk.ehr.menuselect.MenuSelectVO;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/resources/mybatis-config.xml" })
 public class MenuSelectDaoTest {
-	private final Logger log = LoggerFactory.getLogger(MenuSelectControllerTest.class);
+	private final Logger log = LoggerFactory.getLogger(MenuSelectDaoTest.class);
 
 	@Autowired
 	private MenuSelectDao dao;
-
-	@Autowired
-	ApplicationContext context;
-
-	@Autowired
+	
 	MenuSelectVO user01;
-	MenuSelectVO user02;
-	MenuSelectVO user03;
+	
 
 	// 등록 테스트
-	@Test
-	public void testDoInsert() {
-
-		user01.setMemberNum(1234);
-		user01.setMenuNum("123456");
-
-		try {
-			dao.menuSelectInsert(user01);
-		} catch (Exception e) {
-			log.debug("실패!");
-			e.printStackTrace();
+		@Test
+		
+		public void testDoInsert() throws Exception {
+			user01 = new MenuSelectVO();
+			user01.setMemberNum(1234);
+			user01.setMenuNum("123456");
+			
+			
+			try {
+				dao.menuSelectInsert(user01);
+			} catch (Exception e) {
+				log.debug("실패!");
+				e.printStackTrace();
+			}
 		}
-	}
+
+
 
 	// 삭제 테스트
-	@Test
-	public void testDoDelete() {
-		try {
-			dao.menuSelectDelete(user01);
-			log.info("성공하였습니다.");
-		} catch (Exception e) {
-			log.info("실패하였습니다.");
-			e.printStackTrace();
+		@Test
+		
+		public void testDoDelete() {
+			user01 = new MenuSelectVO();
+			user01.setMemberNum(1234);
+			user01.setMenuNum("123456");
+
+			try {
+				dao.menuSelectDelete(user01);
+				log.info("성공하였습니다.");
+			} catch (Exception e) {
+				log.info("실패하였습니다.");
+				e.printStackTrace();
+			}
 		}
-	}
 }

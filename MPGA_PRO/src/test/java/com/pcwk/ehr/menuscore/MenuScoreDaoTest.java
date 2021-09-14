@@ -6,14 +6,19 @@ import static org.junit.Assert.assertThat;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.annotation.Order;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pcwk.ehr.menuscore.MenuScoreService;
 import com.pcwk.ehr.menuscore.MenuScoreVO;
@@ -28,22 +33,19 @@ public class MenuScoreDaoTest {
 	@Autowired
 	private MenuScoreDao dao;
 
-	@Autowired
-	ApplicationContext context;
-
-	@Autowired
 	MenuScoreVO user01;
-	MenuScoreVO user02;
-	MenuScoreVO user03;
+
+
 
 	// 등록 테스트
 	@Test
-	public void testDoInsert() {
-
+	
+	public void testDoInsert() throws Exception {
+		user01 = new MenuScoreVO();
 		user01.setMemberNum(1234);
 		user01.setMenuNum("123456");
 		user01.setScore(5);
-
+		
 		try {
 			dao.menuScoreInsert(user01);
 		} catch (Exception e) {
@@ -52,10 +54,12 @@ public class MenuScoreDaoTest {
 		}
 	}
 
-	// 업데이트 테스트
+// 업데이트 테스트
 	@Test
 	public void testDoUpdate() throws SQLException, ClassNotFoundException {
-
+		user01 = new MenuScoreVO();
+		user01.setMemberNum(1234);
+		user01.setMenuNum("123456");
 		user01.setScore(1);
 		try {
 			dao.menuScoreUpdate(user01);
@@ -65,9 +69,14 @@ public class MenuScoreDaoTest {
 		}
 	}
 
-	// 삭제 테스트
+// 삭제 테스트
 	@Test
+	
 	public void testDoDelete() {
+		user01 = new MenuScoreVO();
+		user01.setMemberNum(1234);
+		user01.setMenuNum("123456");
+
 		try {
 			dao.menuScoreDelete(user01);
 			log.info("성공하였습니다.");

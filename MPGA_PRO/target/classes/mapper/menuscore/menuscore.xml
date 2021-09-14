@@ -10,28 +10,28 @@
         <result property="scoreDt" column="SCORE_DT" />
     </resultMap>
     
-    <insert id="MenuScoreInsert" parameterType="MenuScoreVO">
+    <insert id="menuScoreInsert" parameterType="MenuScoreVO" >
         INSERT INTO menu_score (MEMBER_NUM,MENU_NUM,SCORE,SCORE_DT)
-        VALUES (#{memberNum}, #{menuNum}, #{score}, SYSDATE)
+        VALUES (#{memberNum}, #{menuNum}, #{score}, sysdate)
     </insert>
     
-    <delete id="MenuScoreDelete" parameterType="MenuScoreVO">
+    <delete id="menuScoreDelete" parameterType="MenuScoreVO">
         DELETE FROM menu_score
-        WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum} , MENU_NUM <![CDATA[=]]> #{menuNum}
+        WHERE MEMBER_NUM = #{memberNum} AND MENU_NUM = #{menuNum}
     </delete>
     
-    <update id="MenuScoreUpdate" parameterType="MenuScoreVO">
+    <update id="menuScoreUpdate" parameterType="MenuScoreVO" >
        UPDATE menu_score
        SET
             SCORE   = #{score},
             SCORE_DT= SYSDATE         
-       WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum}, MENU_NUM <![CDATA[=]]> #{menuNum}
+       WHERE MEMBER_NUM = #{memberNum} AND MENU_NUM = #{menuNum}
     </update> 
     
     <select id="menuScoreAvg" resultType="int">
        SELECT TRUNC(AVG(score),1) avg_score        
        FROM menu_score
-       WHERE MENU_NUM <![CDATA[=]]> #{menuNum}
+       WHERE MENU_NUM = #{menuNum}
     </select>
     
     <select id="menuScoreCount" resultType="int">

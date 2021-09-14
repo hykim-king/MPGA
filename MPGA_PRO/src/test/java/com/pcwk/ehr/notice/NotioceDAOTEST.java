@@ -22,25 +22,25 @@ public class NotioceDAOTEST {
 	private NoticeDAO dao;
 	
 	/*자료 등록 테스트 */
-//	@Test
-//	public void testDoInsert() {
-//		NoticeVO vo = new NoticeVO();
-//		
-//		vo.setBoard_cfc(1);
-//		vo.setContents("dao Test Contents");
-//		vo.setReg_dt("2021-09-12");
-//		vo.setReg_num(111);
-//	
-//		vo.setSeq(202);
-//		vo.setTitle("dao Test Title");
-//		
-//		try {
-//			dao.doInsert(vo);
-//		} catch (Exception e) {
-//			log.debug("실패!");
-//			e.printStackTrace();
-//		}
-//	}
+@Test
+public void testDoInsert() {
+	NoticeVO vo = new NoticeVO();
+	
+	vo.setBoard_cfc(1);
+	vo.setContents("dao Test Contents");
+	vo.setReg_dt("2021-09-12");
+	vo.setReg_num(111);
+
+	vo.setSeq(202);
+	vo.setTitle("dao Test Title");
+	
+	try {
+		dao.doInsert(vo);
+	} catch (Exception e) {
+		log.debug("실패!");
+		e.printStackTrace();
+	}
+}
 	
 	
 	/*자료 목록 보기 테스트 */

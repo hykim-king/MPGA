@@ -22,7 +22,7 @@
 	
 	<delete id="menuSelectDelete" parameterType="MenuSelectVO">
 		DELETE FROM menu_select
-		WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum} , MENU_NUM <![CDATA[=]]> #{menuNum}
+		WHERE MEMBER_NUM = #{memberNum} AND MENU_NUM = #{menuNum}
 	</delete>
     
 	<select id="menuSelectRead" parameterType="MenuSelectVO" resultMap="menuselectResultMap">
@@ -30,7 +30,7 @@
               SELECT_DT
        FROM menu_select
        ORDER BY SELECT_DT DESC
-       WHERE MEMBER_NUM <![CDATA[=]]> #{memberNum}
+       WHERE MEMBER_NUM = #{memberNum}
 	</select>
 	
 </mapper>

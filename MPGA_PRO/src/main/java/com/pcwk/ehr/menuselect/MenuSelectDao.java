@@ -6,10 +6,10 @@ import java.util.List;
 public interface MenuSelectDao {
 
 
-	public void menuSelectInsert(MenuSelectVO select) throws Exception;
+	int menuSelectInsert(MenuSelectVO select) throws Exception;
 
-	public void menuSelectDelete(MenuSelectVO select) throws Exception;
+	int menuSelectDelete(MenuSelectVO select) throws Exception;
 
-    public List<MenuSelectVO> menuSelectRead(MenuSelectVO select) throws Exception;
+    List<MenuSelectVO> menuSelectRead(MenuSelectVO select) throws Exception;
 
 }

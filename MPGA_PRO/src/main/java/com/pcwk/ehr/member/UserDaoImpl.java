@@ -31,29 +31,24 @@ public class UserDaoImpl implements UserDao {
 	 * @return flag
 	 * @throws SQLException
 	 */
-	/*
-	 * public int sameNickCheck(UserVO user) throws Exception{ int flag =
-	 * sqlSessionTemplate.selectOne("user.SameNickCheck", user);
-	 * 
-	 * return flag; }
-	 * 
-	 *//**
-		 * 아이디 중복 확인
-		 * 
-		 * @param user
-		 * @return flag
-		 * @throws SQLException
-		 *//*
-			 * public int sameIdCheck(UserVO user) throws Exception{ int flag =
-			 * sqlSessionTemplate.selectOne("user.SameIDCheck", user);
-			 * 
-			 * return flag; }
-			 * 
-			 * public int samePWCheck(UserVO user) throws Exception{ int flag =
-			 * sqlSessionTemplate.selectOne("user.SamePWCheck", user);
-			 * 
-			 * return flag; }
-			 */
+
+	public int sameNickCheck(UserVO user) throws Exception {
+		int flag = sqlSessionTemplate.selectOne("user.SameNickCheck", user);
+
+		return flag;
+	}
+
+	public int sameIdCheck(UserVO user) throws Exception {
+		int flag = sqlSessionTemplate.selectOne("user.SameIDCheck", user);
+
+		return flag;
+	}
+
+	public int samePWCheck(UserVO user) throws Exception {
+		int flag = sqlSessionTemplate.selectOne("user.SamePWCheck", user);
+
+		return flag;
+	}
 
 	@Override
 	public int doInsert(final UserVO user) throws ClassNotFoundException, SQLException {

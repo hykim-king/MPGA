@@ -102,7 +102,7 @@ public class CommentLikeDaoImpl implements CommentLikeDao  {
 	@Override
 	public int doUpdate(CommentLikeVO commentLike) throws SQLException {
 		int flag = 0;
-		StringBuilder sb = new StringBuilder();
+		
 		LOG.debug("=========================================");
 		LOG.debug("param=" + commentLike.toString());
 		LOG.debug("=========================================");

@@ -1,4 +1,4 @@
-package com.pcwk.ehr.Menucomment;
+package com.pcwk.ehr.menucomment;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -49,7 +49,7 @@ public class JCommentDaoTest {
 	public void setUp() throws Exception {
 		menucomment01 = new MenuCommentVO(1, "LOGO_01", 1, "comment01", "");
 		menucomment02 = new MenuCommentVO(2, "LOGO_02", 2, "comment02", "");
-		menucomment03 = new MenuCommentVO(3, "LOGO_03", 3, "comment03", "");
+		menucomment03 = new MenuCommentVO(3, "LOGO_03", 3, "comment03", "");       
 
 		LOG.debug("=========================");
 		LOG.debug("=context="+context);
@@ -83,6 +83,14 @@ public class JCommentDaoTest {
 		menucomment01.setMemberNum(2);
 		menucomment01.setContents(menucomment01.getContents() + "_U");
 		menucomment01.setRegDt(menucomment01.getRegDt());
+		
+		/*
+		 * flag = dao.doUpdate(menucomment01); assertThat(flag, is(1));
+		 * 
+		 * MenuCommentVO vsVO = dao.doSelectOne(menucomment01);
+		 * 
+		 * isSameMenuComment(vsVO, menucomment01);
+		 */
 		
 	}
 
@@ -186,17 +194,17 @@ public class JCommentDaoTest {
 			assertThat(dao.getCount(), is(3));
 
 			// 한건 조회
-			MenuCommentVO outVO_01 = dao.doSelectOne(menucomment01);
-
-			isSameMenuComment(outVO_01, menucomment01);
-
-			// 한건 조회
-			MenuCommentVO outVO_02 = dao.doSelectOne(menucomment02);
-			isSameMenuComment(outVO_02, menucomment02);
-
-			// 한건 조회
-			MenuCommentVO outVO_03 = dao.doSelectOne(menucomment03);
-			isSameMenuComment(outVO_03, menucomment03);
+			/*
+			 * MenuCommentVO outVO_01 = dao.doSelectOne(menucomment01);
+			 * 
+			 * isSameMenuComment(outVO_01, menucomment01);
+			 * 
+			 * // 한건 조회 MenuCommentVO outVO_02 = dao.doSelectOne(menucomment02);
+			 * isSameMenuComment(outVO_02, menucomment02);
+			 * 
+			 * // 한건 조회 MenuCommentVO outVO_03 = dao.doSelectOne(menucomment03);
+			 * isSameMenuComment(outVO_03, menucomment03);
+			 */
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -206,6 +214,7 @@ public class JCommentDaoTest {
 	}
 
 	public void isSameMenuComment(MenuCommentVO outVO, MenuCommentVO menucomment) {
+		assertThat(outVO.getSeq(), is(menucomment.getSeq()));
 		assertThat(outVO.getMenuNum(), is(menucomment.getMenuNum()));
 		assertThat(outVO.getMemberNum(), is(menucomment.getMemberNum()));
 		assertThat(outVO.getContents(), is(menucomment.getContents()));

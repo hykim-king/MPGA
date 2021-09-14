@@ -86,6 +86,10 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> branch 'main' of https://github.com/hykim-king/MPGA.git
     <context:component-scan base-package="com.pcwk.ehr" />
      
 </beans>

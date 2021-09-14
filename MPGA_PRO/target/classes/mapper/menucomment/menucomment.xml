@@ -26,7 +26,7 @@
     </delete>
     
     <insert id="doInsert" parameterType="MenuCommentVO">
-        INSERT INTO menu_comment(seq,menu_num,member_num,contents,reg_dt)
+        INSERT INTO menu_comment (seq,menu_num,member_num,contents,reg_dt)
         VALUES (#{seq},#{menuNum},#{memberNum},#{contents},sysdate)
     </insert>
     
@@ -36,8 +36,8 @@
                member_num,
                contents,
                TO_CHAR(reg_dt,'YYYY/MM/DD HH24MISS') reg_dt
-               FROM menu_comment
-               WHERE seq  <![CDATA[ = ]]>  #{seq}
+        FROM menu_comment
+        WHERE seq  <![CDATA[ = ]]>  #{seq}
     </select>
     
     <update id="doUpdate" parameterType="MenuCommentVO">
@@ -47,14 +47,15 @@
           member_num      = #{memberNum}, 
           contents        = #{contents}, 
           reg_dt          = sysdate
-        WHERE seq =       #{seq}
+        WHERE seq         = #{seq}
     </update>
     
-        <delete id="deleteAll">
-            DELETE FROM menu_comment
+    <delete id="deleteAll">
+        DELETE FROM menu_comment
     </delete>
     
-        <select id="getCount" resultType="int">
-            SELECT COUNT(*) cnt FROM menu_comment
+	<select id="getCount" resultType="int">
+	    SELECT COUNT(*) cnt 
+	    FROM menu_comment
     </select>
 </mapper>   

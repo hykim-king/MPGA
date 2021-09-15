@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.pcwk.ehr.notice.domain.NoticeVO;
 import com.pcwk.ehr.notice.util.NoticePagingVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 @Mapper
 public interface NoticeDAO {
 	public void doInsert(NoticeVO noticeVO) throws Exception;

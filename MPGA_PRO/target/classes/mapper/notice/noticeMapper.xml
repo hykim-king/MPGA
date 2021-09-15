@@ -98,6 +98,24 @@ order by seq
 ]]>
 </select>
 
+<select id="doCountFAQ" resultType="int">
+    select count(*) from notice where board_cfc = 1
+</select>
+
+<!-- 페이징 처리 후 게시글 조회 -->
+<select id="doSelectFAQ" resultMap="noticeResultType">
+    select * 
+        from (
+            select rownum rn, a.* 
+                from (
+                        select * 
+                        from notice 
+                        where board_cfc = 1
+                        order by seq 
+                        ) a
+                )
+    where rn between #{start} and #{end}
+</select>
   
 
 </mapper>

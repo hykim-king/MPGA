@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pcwk.ehr.notice.domain.NoticeVO;
 import com.pcwk.ehr.notice.dao.NoticeDAO;
 import com.pcwk.ehr.notice.service.NoticeService;
 import com.pcwk.ehr.notice.util.NoticePagingVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 @Controller
 public class NoticeController {
 	

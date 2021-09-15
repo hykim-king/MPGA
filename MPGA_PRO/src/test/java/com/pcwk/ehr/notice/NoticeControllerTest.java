@@ -44,8 +44,8 @@ import org.springframework.web.context.WebApplicationContext;
 import com.google.gson.Gson;
 import com.pcwk.ehr.notice.controller.NoticeController;
 import com.pcwk.ehr.notice.dao.NoticeDAO;
-import com.pcwk.ehr.notice.vo.NoticeVO;
 import com.pcwk.ehr.notice.service.NoticeService;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml",
 									"file:src/main/resources/mybatis-config.xml",

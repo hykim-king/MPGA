@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.notice.domain.NoticeVO;
 import com.pcwk.ehr.notice.util.NoticePagingVO;
+import com.pcwk.ehr.notice.vo.NoticeVO;
 @Repository
 public class NoticeDAOImpl implements NoticeDAO {
   
